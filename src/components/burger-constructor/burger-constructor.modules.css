@@ -1,0 +1,58 @@
+body {
+    overflow:hidden;
+}
+
+.constructor {
+    overflow-y: scroll;  
+    height:55vh;
+}
+
+.column-1 {
+    width: 582px;
+    display: inline-block;
+    gap: 10px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.total-price {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 400;
+    gap: 5px;
+}
+
+.check-out-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    border: 1px ;
+    background: #2F2F37;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #8585AD; 
+    border-radius: 10px;
+    border: 3px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8585AD; 
+  }

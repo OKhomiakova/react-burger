@@ -1,0 +1,55 @@
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    overflow:hidden;
+
+}
+
+.heading-wrapper {
+    font-weight: 700;
+}
+
+.ingredients {
+    overflow-y: scroll; 
+    height:60vh; 
+}
+
+.card-wrapper{
+    position: relative;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    width: 272px;
+    height: 208px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.price-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 5px;
+}
+
+.column-2 {
+    width: 600px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border-radius: 3px;
+}
+
+.group-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: stretch;
+    gap: 24px;
+  }
