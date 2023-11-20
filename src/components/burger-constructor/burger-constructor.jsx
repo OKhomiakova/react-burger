@@ -1,28 +1,28 @@
 import { CurrencyIcon, Button, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
 import Constructor from './constructor';
 import data from '../../utils/data';
-import styles from './burger-constructor.modules.css';
+import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
 
 function BurgerConstructor() {
+  const bun = data.find(function (item) {
+    return item._id === '60666c42cc7b410027a1a9b1';
+  });
   return (
-    <div className='column-1 pt-25'>
-        <div className='constructor'>
-            {data.map((ingredient, index) => {
-              const type = index === 0
-                ? "top" // первый элемент
-                : index === data.length - 1
-                ? "bottom" // последний элемент
-                : undefined; // остальные элементы
-              return (<Constructor key={ingredient.id} data={ingredient} type={type} />);
+    <section className={`${styles.column} pt-25`}>
+        <Constructor data={bun} type='top' className={styles.edge}/>
+        <div className={styles.constructor}>
+            {data.map((ingredient) => {
+              return (<Constructor key={ingredient._id} data={ingredient} />);
             })}
         </div>
-        <div className='check-out-wrapper pt-10 '>
-          <div className='total-price pr-10'>
-            <p className='text text_type_digits-medium '>
+        <Constructor data={bun} type='bottom' className={styles.edge}/>
+        <div className={`${styles.checkout} pt-10`}>
+          <div className={`${styles.total} pr-10`}>
+            <p className={`text text_type_digits-medium`}>
               610
             </p>
-            <div className='icon'>
+            <div className={styles.icon}>
               <CurrencyIcon />
             </div>
           </div>
@@ -30,23 +30,8 @@ function BurgerConstructor() {
               Оформить заказ
           </Button>
         </div>
-    </div>
+    </section>
   );
 }
 
 export default BurgerConstructor;
-
-BurgerConstructor.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  proteins: PropTypes.number, 
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  calories: PropTypes.number,
-  price: PropTypes.number,
-  image: PropTypes.string,
-  image_mobile: PropTypes.string,
-  image_large: PropTypes.string,
-  __v: PropTypes.number,
-}; 

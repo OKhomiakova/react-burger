@@ -1,14 +1,15 @@
 import IngredientCard from './ingredient-card';
-import styles from './burger-ingredients.modules.css';
-import data from '../../utils/data';
+import styles from './burger-ingredients.module.css';
+import PropTypes from 'prop-types';
+import ingredientType from '../../utils/types';
 
 function IngredientGroup({ title, data }) {
     return (
       <div>
-        <h2 className='text text_type_main-medium mt-10 mb-6'>{title}</h2>
-        <div className="group-wrapper mr-4 ml-4">
+        <h2 className={`text text_type_main-medium mt-10 mb-6`}>{title}</h2>
+        <div className={`${styles.group} mr-4 ml-4`}>
           {data.map((ingredient) => (
-            <div key={ingredient.id} className="ingredient-column">
+            <div key={ingredient._id}>
               <IngredientCard data={ingredient} />
             </div>
           ))}
@@ -18,3 +19,9 @@ function IngredientGroup({ title, data }) {
 }
 
 export default IngredientGroup;
+
+
+IngredientGroup.propTypes = {
+  title: PropTypes.string,
+  data: PropTypes.arrayOf(ingredientType).isRequired,
+}; 

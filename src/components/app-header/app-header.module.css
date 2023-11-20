@@ -5,13 +5,14 @@
     justify-content: space-between;
     padding-left: 15%;
     padding-right: 15%;
+    min-width: 1000px;
 }
 
-.logo-wrapper {
+.logo {
     display: flex;
 }
 
-.wrapper-2 {
+.link {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -30,19 +31,7 @@
     width: 176px;
 }
 
-.wrapper-3 {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 24px;
-    justify-self: end;
-}
-
-.color-transparent {
-    color: transparent;
-}
-
-.button-text {
+.text {
     color: #8585AD;
     background-color: #1C1C21;
     border-width: 0px;

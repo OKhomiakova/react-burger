@@ -7,8 +7,17 @@ body {
 
 }
 
-.heading-wrapper {
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.heading {
     font-weight: 700;
+}
+
+.tab {
+    display: flex;
 }
 
 .ingredients {
@@ -16,7 +25,7 @@ body {
     height:60vh; 
 }
 
-.card-wrapper{
+.card{
     position: relative;
     text-align: center;
     padding: 0px;
@@ -30,7 +39,7 @@ body {
     align-items: center;
 }
 
-.price-wrapper{
+.price{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +47,7 @@ body {
     gap: 5px;
 }
 
-.column-2 {
+.column {
     width: 600px;
 }
 
@@ -47,9 +56,9 @@ body {
     border-radius: 3px;
 }
 
-.group-wrapper {
+.group {
     display: grid;
     grid-template-columns: auto auto;
     align-items: stretch;
     gap: 24px;
-  }
+}

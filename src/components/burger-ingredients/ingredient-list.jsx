@@ -1,4 +1,7 @@
 import IngredientGroup from './ingredient-group';
+import ingredientType from '../../utils/types';
+import PropTypes from 'prop-types';
+
 
 function IngredientsList({ ingredients }) {
     const groupedIngredients = ingredients.reduce((groups, ingredient) => {
@@ -26,3 +29,7 @@ function IngredientsList({ ingredients }) {
 }
 
 export default IngredientsList;
+
+IngredientsList.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+}; 

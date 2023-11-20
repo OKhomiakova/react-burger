@@ -1,6 +1,8 @@
+import styles from './app-header.module.css';
+
 function NavBar({children}) {
     return (
-      <header className='header p-4 m-15'>
+      <header className={`${styles.header} p-4 m-15`}>
         {children}
       </header>
     );
