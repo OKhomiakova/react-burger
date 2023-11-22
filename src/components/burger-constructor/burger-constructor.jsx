@@ -2,9 +2,8 @@ import { CurrencyIcon, Button, Typography, Box } from '@ya.praktikum/react-devel
 import Constructor from './constructor';
 import data from '../../utils/data';
 import styles from './burger-constructor.module.css';
-import PropTypes from 'prop-types';
 
-function BurgerConstructor() {
+const BurgerConstructor = () => {
   const bun = data.find(function (item) {
     return item._id === '60666c42cc7b410027a1a9b1';
   });

@@ -2,7 +2,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import styles from './burger-ingredients.module.css';
 
-function IngredientsTabs() {
+const IngredientsTabs = () => {
     const [current, setCurrent] = React.useState('one')
     return (
         <div className={styles.tab}>

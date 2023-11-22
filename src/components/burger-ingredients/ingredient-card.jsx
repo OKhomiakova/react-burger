@@ -4,7 +4,7 @@ import styles from './burger-ingredients.module.css';
 import { useState } from 'react';
 import ingredientType from '../../utils/types';
 
-function IngredientCard({data}) {
+const IngredientCard = ({data}) => {
     const [count, setCount] = useState(0);
     const handleCardClick = () => {
         setCount(count + 1);

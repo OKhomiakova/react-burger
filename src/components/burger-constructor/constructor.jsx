@@ -3,7 +3,7 @@ import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
 import ingredientType from '../../utils/types';
 
-function Constructor({data, type}) {
+const Constructor = ({data, type}) => {
   const isTopOrBottom = type === 'top' || type === 'bottom';
   const showDragIcon = !isTopOrBottom;
   const showAppendix = type === 'top' ? data.name + " (верх)" : type === 'bottom' ? data.name + " (низ)" : data.name;
