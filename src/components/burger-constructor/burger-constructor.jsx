@@ -20,15 +20,15 @@ const BurgerConstructor = ({ ingredients }) => {
     setVisible(false);
   };
 
-  console.log('visible', visible, Date.now());
-
   return (
     <section className={`${styles.column} pt-25`}>
         <Constructor data={bun} type='top' className={styles.edge}/>
         <div className={styles.constructor}>
-            {ingredients.map((ingredient) => {
-              return (<Constructor key={ingredient._id} data={ingredient} />);
-            })}
+          {ingredients
+            .filter((ingredient) => ingredient.type !== 'bun')
+            .map((ingredient) => (
+                <Constructor key={ingredient._id} data={ingredient} />
+          ))}
         </div>
         <Constructor data={bun} type='bottom' className={styles.edge}/>
         <div className={`${styles.checkout} pt-10`}>

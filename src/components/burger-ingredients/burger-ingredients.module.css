@@ -62,3 +62,28 @@ h1 {
     align-items: stretch;
     gap: 24px;
 }
+
+.ingredientDetails {
+    align-content: center;
+}
+
+.ingredientDetailsName {
+    text-align: center;
+}
+
+.nutrients {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.nutrient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nutrient > p {
+    margin: 0px;
+}

@@ -11,7 +11,6 @@ const App = () => {
   useEffect(() => {
     fetch(DOMAIN_URL)
       .then(response => {
-        console.log(response)
         return response.json();
       })
       .then(response => {
@@ -24,9 +23,7 @@ const App = () => {
 
   return (
     <div>
-      <header>
-        <AppHeader />
-      </header>
+      <AppHeader />
       <main className={styles.page}>
         {ingredients.length !== 0 && (
           <>
