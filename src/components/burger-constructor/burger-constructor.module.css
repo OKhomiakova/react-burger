@@ -38,6 +38,12 @@ body {
     align-items: center;
 }
 
+.order{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 8px;

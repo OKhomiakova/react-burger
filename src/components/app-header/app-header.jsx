@@ -3,7 +3,7 @@ import NavBar from './nav-bar';
 import NavBarItem from './nav-bar-item';
 import styles from './app-header.module.css';
 
-const AppHeader  = () => (
+const AppHeader = () => (
     <NavBar>
         <a className={`${styles.link} pr-2`}>
             <div className={`${styles.icon} pl-5 pr-2`}>

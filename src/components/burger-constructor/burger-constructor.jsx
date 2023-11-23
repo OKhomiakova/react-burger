@@ -1,17 +1,32 @@
 import { CurrencyIcon, Button, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
 import Constructor from './constructor';
-import data from '../../utils/data';
 import styles from './burger-constructor.module.css';
+import Modal from '../modal/modal';
+import { useState } from 'react';
+import OrderDetails from './order-details';
 
-const BurgerConstructor = () => {
-  const bun = data.find(function (item) {
-    return item._id === '60666c42cc7b410027a1a9b1';
+const BurgerConstructor = ({ ingredients }) => {
+  const bun = ingredients.find((item) => {
+    return item._id === '643d69a5c3f7b9001cfa093c';
   });
+
+  const [visible, setVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setVisible(false);
+  };
+
+  console.log('visible', visible, Date.now());
+
   return (
     <section className={`${styles.column} pt-25`}>
         <Constructor data={bun} type='top' className={styles.edge}/>
         <div className={styles.constructor}>
-            {data.map((ingredient) => {
+            {ingredients.map((ingredient) => {
               return (<Constructor key={ingredient._id} data={ingredient} />);
             })}
         </div>
@@ -25,9 +40,15 @@ const BurgerConstructor = () => {
               <CurrencyIcon />
             </div>
           </div>
-          <Button htmlType="button" type="primary" size="large">
-              Оформить заказ
-          </Button>
+          <div style={{overflow: 'hidden'}}>
+            <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>
+                Оформить заказ
+            </Button>
+            {visible && 
+            <Modal onClose={handleCloseModal}>
+              <OrderDetails/>
+            </Modal>}
+          </div>
         </div>
     </section>
   );
