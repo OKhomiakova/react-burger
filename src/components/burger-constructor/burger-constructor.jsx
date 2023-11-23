@@ -2,23 +2,17 @@ import { CurrencyIcon, Button, Typography, Box } from '@ya.praktikum/react-devel
 import Constructor from './constructor';
 import styles from './burger-constructor.module.css';
 import Modal from '../modal/modal';
-import { useState } from 'react';
 import OrderDetails from './order-details';
+import ingredientType from '../../utils/types';
+import PropTypes from 'prop-types';
+import useModal from '../../hooks/useModal';
 
 const BurgerConstructor = ({ ingredients }) => {
   const bun = ingredients.find((item) => {
     return item._id === '643d69a5c3f7b9001cfa093c';
   });
 
-  const [visible, setVisible] = useState(false);
-
-  const handleOpenModal = () => {
-    setVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setVisible(false);
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <section className={`${styles.column} pt-25`}>
@@ -40,12 +34,12 @@ const BurgerConstructor = ({ ingredients }) => {
               <CurrencyIcon />
             </div>
           </div>
-          <div style={{overflow: 'hidden'}}>
-            <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>
+          <div className={styles.buttonWrapper}>
+            <Button htmlType="button" type="primary" size="large" onClick={openModal}>
                 Оформить заказ
             </Button>
-            {visible && 
-            <Modal onClose={handleCloseModal}>
+            {isModalOpen && 
+            <Modal onClose={closeModal}>
               <OrderDetails/>
             </Modal>}
           </div>
@@ -55,3 +49,7 @@ const BurgerConstructor = ({ ingredients }) => {
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+}; 

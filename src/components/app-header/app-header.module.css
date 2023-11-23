@@ -8,6 +8,20 @@
     min-width: 1000px;
 }
 
+@media (max-width: 1200px) {
+    .header {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+}
+  
+@media (max-width: 800px) {
+    .header {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+}
+
 .logo {
     display: flex;
 }
@@ -29,6 +43,12 @@
     display: flex;
     justify-content: center;
     width: 176px;
+}
+
+@media (max-width: 800px) {
+    .placeholder {
+      display: none;
+    }
 }
 
 .text {

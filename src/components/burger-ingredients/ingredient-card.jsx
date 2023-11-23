@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ingredientType from '../../utils/types';
 import Modal from '../modal/modal';
 import IngredientDetails from './ingredient-details';
+import useModal from '../../hooks/useModal';
 
 const IngredientCard = ({data}) => {
     // const [count, setCount] = useState(0);
@@ -11,29 +12,21 @@ const IngredientCard = ({data}) => {
     //     setCount(count + 1);
     // };
 
-    const [visible, setVisible] = useState(false);
-
-    const handleOpenModal = () => {
-      setVisible(true);
-    };
-  
-    const handleCloseModal = () => {
-      setVisible(false);
-    };
+    const { isModalOpen, openModal, closeModal } = useModal();
 
     return (
-        <div style={{overflow: 'hidden'}}>
-            <article className={styles.card} onClick={handleOpenModal}>
+        <div className={styles.cardWrapper}>
+            <article className={styles.card} onClick={openModal}>
                 {/* {count > 0 && <Counter count={count} size="default" extraClass="m-1" />} */}
-                <img src={data.image} className={`pr-4 pl-4`} />
+                <img src={data.image} className={`pr-4 pl-4`} alt={data.name} />
                 <div className={`${styles.price} pt-1 pb-1`}>
                     <p className={`text text_type_digits-default`}>{data.price}</p> 
                     <CurrencyIcon className={styles.icon}/>
                 </div>
                 <p className={`text text_type_main-default`}>{data.name}</p>
             </article>
-            {visible && 
-            <Modal title="Детали ингредиента" onClose={handleCloseModal}>
+            {isModalOpen && 
+            <Modal title="Детали ингредиента" onClose={closeModal}>
               <IngredientDetails ingredient={data}/>
             </Modal>}
         </div>

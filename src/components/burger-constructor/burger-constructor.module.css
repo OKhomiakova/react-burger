@@ -44,6 +44,10 @@ body {
     align-items: center;
 }
 
+.buttonWrapper {
+    overflow: 'hidden'
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 8px;

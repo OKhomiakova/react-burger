@@ -11,5 +11,6 @@ const ModalOverlay = ({children, onClick}) => (
 export default ModalOverlay;
 
 ModalOverlay.propTypes = {
+    children: PropTypes.element,
     onClick: PropTypes.func.isRequired,
 }; 

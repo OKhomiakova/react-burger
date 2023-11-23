@@ -2,6 +2,8 @@ import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-compone
 import styles from './burger-ingredients.module.css'
 import IngredientsTabs from './ingredients-tabs';
 import IngredientsList from './ingredient-list';
+import ingredientType from '../../utils/types';
+import PropTypes from 'prop-types';
 
 const BurgerIngredients = ({ ingredients }) => (
   <section className={`${styles.column} pr-10`}>
@@ -16,3 +18,7 @@ const BurgerIngredients = ({ ingredients }) => (
 );
 
 export default BurgerIngredients;
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+}; 

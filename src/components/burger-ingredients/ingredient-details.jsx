@@ -4,7 +4,7 @@ import ingredientType from '../../utils/types';
 
 const IngredientDetails = ({ingredient}) => (
     <div className={`${styles.ingredientDetails} mr-25 ml-25`}>
-        <img src={ingredient.image_large} className={`mb-4`}/>
+        <img src={ingredient.image_large} className={`mb-4`} alt={ingredient.name}/>
         <p className={`${styles.ingredientDetailsName} text text_type_main-medium`}>{ingredient.name}</p>
         <div className={`${styles.nutrients} mt-8 mb-15`}>
             <div className={`${styles.nutrient} text text_type_main-default text_color_inactive`}>

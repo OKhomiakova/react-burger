@@ -29,7 +29,9 @@ const Modal = ({title, onClose, children}) => {
                 <div className={styles.modal}>
                     {title ? (<div className={`${styles.header} mt-10 ml-10 mr-10`}>
                         <p className={`text text_type_main-large`}>{title}</p>
-                        <CloseIcon type="primary" onClick={onClose} />
+                        <div className={styles.icon}>
+                            <CloseIcon type="primary" onClick={onClose} />
+                        </div>
                     </div>) :
                     (<div className={styles.closeIcon}>
                         <CloseIcon type="primary"  onClick={onClose} />
@@ -48,4 +50,5 @@ export default Modal;
 Modal.propTypes = {
     title: PropTypes.string,
     onClose: PropTypes.func.isRequired,
+    children: PropTypes.element.isRequired,
 }; 

@@ -11,7 +11,10 @@ const App = () => {
   useEffect(() => {
     fetch(DOMAIN_URL)
       .then(response => {
-        return response.json();
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
       })
       .then(response => {
         setIngredients(response.data);
@@ -32,8 +35,6 @@ const App = () => {
           </>
         )} 
       </main>
-      <footer>
-      </footer>
     </div>
   );
 }
