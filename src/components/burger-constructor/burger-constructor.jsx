@@ -6,13 +6,32 @@ import OrderDetails from './order-details';
 import ingredientType from '../../utils/types';
 import PropTypes from 'prop-types';
 import useModal from '../../hooks/useModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
+import { createOrder } from '../../services/actions/created-order';
+import { useEffect, useMemo, useState } from 'react';
 
-const BurgerConstructor = ({ ingredients }) => {
+const BurgerConstructor = () => {
+  const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state) => state.burgerIngredients);
+
+  useEffect(() => {
+    const newTotalPrice = ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0);
+    setTotalPrice(newTotalPrice);
+  }, [ingredients]);
+
   const bun = ingredients.find((item) => {
     return item._id === '643d69a5c3f7b9001cfa093c';
   });
 
   const { isModalOpen, openModal, closeModal } = useModal();
+
+  const handleCheckout = () => {
+    dispatch(createOrder());
+  };
+
+  const memoizedTotalPrice = useMemo(() => totalPrice, [totalPrice]);
 
   return (
     <section className={`${styles.column} pt-25`}>
@@ -28,7 +47,7 @@ const BurgerConstructor = ({ ingredients }) => {
         <div className={`${styles.checkout} pt-10`}>
           <div className={`${styles.total} pr-10`}>
             <p className={`text text_type_digits-medium`}>
-              610
+              {memoizedTotalPrice}
             </p>
             <div className={styles.icon}>
               <CurrencyIcon />
@@ -49,7 +68,3 @@ const BurgerConstructor = ({ ingredients }) => {
 }
 
 export default BurgerConstructor;
-
-BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
-}; 
