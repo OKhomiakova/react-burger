@@ -12,7 +12,7 @@ export const deleteBurgerIngredient = (position) => ({
     position,
 });
 
-export const updateBurgerIngredientsOrder = (newOrder) => ({
-    type: UPDATE_BURGER_INGREDIENTS_ORDER,
-    payload: newOrder,
+export const changeOrder = (prevPos, newPos) => ({
+    type: 'change_order',
+    payload: { prevPos, newPos },
 });

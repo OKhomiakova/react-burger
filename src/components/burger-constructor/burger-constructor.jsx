@@ -17,7 +17,7 @@ const BurgerConstructor = () => {
   const bun = useSelector((state) => state.burgerIngredients.bun);
 
   useEffect(() => {
-    const newTotalPrice = ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0) + (bun?.price ?? 0);
+    const newTotalPrice = ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0) + 2 * (bun?.price ?? 0);
     setTotalPrice(newTotalPrice);
   }, [ingredients, bun?.price]);
 

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import ingredientType from '../../utils/types';
 import { useDispatch } from 'react-redux';
 import { deleteBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
+import { useDrop, useDrag } from 'react-dnd';
+import { changeOrder } from '../../services/actions/burger-constructor-ingredients';
 
 const Constructor = ({ data, type, position }) => {
   const dispatch = useDispatch();
@@ -20,8 +22,25 @@ const Constructor = ({ data, type, position }) => {
     [dispatch, position],
   );
 
+  const ref = useRef(null);
+  const [, drop] = useDrop({
+    accept: 'orderItems',
+    drop: (item) => {
+      dispatch(changeOrder(item.position, position));
+    },
+  });
+
+  const [, drag] = useDrag({
+    type: 'orderItems',
+    item: () => {
+      return { data, position };
+    },
+  });
+
+  drag(drop(ref));
+
   return (
-    <article style={{paddingLeft: isTopOrBottom ? '32px' : '0', margin: isTopOrBottom ? '0px' : '10px'}} className={styles.item}>
+    <article ref={ref} style={{paddingLeft: isTopOrBottom ? '32px' : '0', margin: isTopOrBottom ? '0px' : '10px'}} className={styles.item}>
       {showDragIcon && (
         <div className={styles.icon}>
           <DragIcon />

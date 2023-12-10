@@ -31,6 +31,16 @@ const burgerIngredients = (state = initialState, action) => {
             bun: state.bun,
             notBun: action.newNotBun,
           };
+        case 'change_order':
+          const { prevPos, newPos } = action.payload;
+          const notBun = [...state.notBun];
+          const [movedElement] = notBun.splice(prevPos, 1);
+          notBun.splice(newPos, 0, movedElement);
+
+          return {
+            bun: state.bun,
+            notBun,
+          }
         default:
           return state;
       }
