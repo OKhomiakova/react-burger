@@ -49,7 +49,7 @@ const BurgerConstructor = () => {
           {ingredients
             .filter((ingredient) => ingredient.type !== 'bun')
             .map((ingredient, index) => (
-                <Constructor key={`${ingredient._id}+${index}`} data={ingredient} position={index} />
+                <Constructor key={ingredient.uniqueId} data={ingredient} position={index} />
           ))}
         </div>
         {bun && <Constructor data={bun} type='bottom' className={styles.edge}/>}
