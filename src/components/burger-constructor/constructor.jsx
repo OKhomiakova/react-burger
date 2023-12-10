@@ -4,14 +4,22 @@ import PropTypes from 'prop-types';
 import ingredientType from '../../utils/types';
 import { useDispatch } from 'react-redux';
 import { deleteBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
+import { useCallback } from 'react';
 
-const Constructor = ({ data, type }) => {
+const Constructor = ({ data, type, position }) => {
   const dispatch = useDispatch();
   const isTopOrBottom = type === 'top' || type === 'bottom';
   const showDragIcon = !isTopOrBottom;
   const showAppendix = type === 'top' ? data.name + " (верх)" : type === 'bottom' ? data.name + " (низ)" : data.name;
   const isLocked = type === 'top' ? true : type === 'bottom' ? true : false;
   
+  const handleClose = useCallback(
+    () => {
+      dispatch(deleteBurgerIngredient(position));
+    },
+    [dispatch, position],
+  );
+
   return (
     <article style={{paddingLeft: isTopOrBottom ? '32px' : '0', margin: isTopOrBottom ? '0px' : '10px'}} className={styles.item}>
       {showDragIcon && (
@@ -25,7 +33,7 @@ const Constructor = ({ data, type }) => {
           text={showAppendix}
           price={data.price}
           thumbnail={data.image}
-          handleClose={() => dispatch(deleteBurgerIngredient(data))}
+          handleClose={handleClose}
       />
     </article>
   )

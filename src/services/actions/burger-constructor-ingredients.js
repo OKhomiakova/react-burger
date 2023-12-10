@@ -7,9 +7,9 @@ export const addBurgerIngredient = (ingredient) => ({
     ingredient,
 });
 
-export const deleteBurgerIngredient = (ingredient) => ({
+export const deleteBurgerIngredient = (position) => ({
     type: DELETE_BURGER_INGREDIENT,
-    ingredient,
+    position,
 });
 
 export const updateBurgerIngredientsOrder = (newOrder) => ({

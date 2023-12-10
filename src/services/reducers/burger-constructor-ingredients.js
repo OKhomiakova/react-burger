@@ -1,21 +1,36 @@
 import { ADD_BURGER_INGREDIENT, DELETE_BURGER_INGREDIENT } from "../actions/burger-constructor-ingredients";
 
-const initialState = []; 
+const initialState = {
+  bun: undefined,
+  notBun: [],
+}; 
 
 const burgerIngredients = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BURGER_INGREDIENT:
           if (action.ingredient.type === 'bun') {
-            return [...state.filter(x => x.type !== 'bun'), action.ingredient];
+            return {
+              bun: action.ingredient,
+              notBun: state.notBun,
+            };
           }
-          return [
-            ...state, action.ingredient
-          ]
+          return {
+            bun: state.bun,
+            notBun: [...state.notBun, action.ingredient]
+          };
         case DELETE_BURGER_INGREDIENT:
-          const ingredientToDeleteIndex = state.findIndex(x => x.type === action.ingredient.type);
-          return state.filter((_, index) => index !== ingredientToDeleteIndex);
+          return {
+            bun: state.bun,
+            notBun: [
+              ...state.notBun.slice(0, action.position),
+              ...state.notBun.slice(action.position + 1, state.length)
+            ],
+          };
         case 'UPDATE_BURGER_INGREDIENTS_ORDER':
-          return action.payload;
+          return {
+            bun: state.bun,
+            notBun: action.newNotBun,
+          };
         default:
           return state;
       }
