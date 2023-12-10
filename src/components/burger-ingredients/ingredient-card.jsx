@@ -1,14 +1,12 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import ingredientType from '../../utils/types';
-import Modal from '../modal/modal';
-import IngredientDetails from './ingredient-details';
-import useModal from '../../hooks/useModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteIngredientDetails, setIngredientDetails } from '../../services/actions/selected-ingredient';
+import { setIngredientDetails } from '../../services/actions/selected-ingredient';
 import { useDrag } from 'react-dnd';
+import PropTypes from 'prop-types';
 
-const IngredientCard = ({ ingredient }) => {
+const IngredientCard = ({ ingredient, openModal }) => {
     const [, drag] = useDrag({
       type: 'INGREDIENT',
       item: { ingredient },
@@ -20,13 +18,6 @@ const IngredientCard = ({ ingredient }) => {
       dispatch(setIngredientDetails(ingredient));
       openModal();
     }
-
-    const handleOnClose = () => {
-      dispatch(deleteIngredientDetails());
-      closeModal();
-    }
-
-    const { isModalOpen, openModal, closeModal } = useModal();
 
     const ingredientCount = useSelector(state => {
       if (ingredient.type === 'bun') {
@@ -46,10 +37,6 @@ const IngredientCard = ({ ingredient }) => {
                 </div>
                 <p className={`text text_type_main-default`}>{ingredient.name}</p>
             </article>
-            {isModalOpen && 
-            <Modal title="Детали ингредиента" onClose={handleOnClose}>
-              <IngredientDetails />
-            </Modal>}
         </div>
     );
 }
@@ -58,4 +45,5 @@ export default IngredientCard;
 
 IngredientCard.propTypes = {
     ingredient: ingredientType,
+    openModal: PropTypes.func.isRequired,
 }; 
