@@ -1,4 +1,4 @@
-import { ADD_BURGER_INGREDIENT, DELETE_BURGER_INGREDIENT } from "../actions/burger-constructor-ingredients";
+import { ADD_BURGER_INGREDIENT, DELETE_BURGER_INGREDIENT, UPDATE_BURGER_INGREDIENTS_ORDER, CHANGE_ORDER } from "../actions/burger-constructor-ingredients";
 
 const initialState = {
   bun: undefined,
@@ -26,12 +26,12 @@ const burgerIngredients = (state = initialState, action) => {
               ...state.notBun.slice(action.position + 1, state.length)
             ],
           };
-        case 'UPDATE_BURGER_INGREDIENTS_ORDER':
+        case UPDATE_BURGER_INGREDIENTS_ORDER:
           return {
             bun: state.bun,
             notBun: action.newNotBun,
           };
-        case 'change_order':
+        case CHANGE_ORDER:
           const { prevPos, newPos } = action.payload;
           const notBun = [...state.notBun];
           const [movedElement] = notBun.splice(prevPos, 1);

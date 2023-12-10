@@ -1,10 +1,10 @@
-import { DOMAIN_URL } from "../../constants";
+import { BASE_URL } from "../../constants";
 import { SOMETHING_FAILED } from "../middleware/logger";
 
 export const SET_ALL_INGREDIENTS = 'SET_ALL_INGREDIENTS';
 
 export const setAllIngredients = () => (dispatch) => {
-    fetch(DOMAIN_URL)
+    fetch(BASE_URL+'ingredients')
       .then(response => {
         if (response.ok) {
           return response.json();
