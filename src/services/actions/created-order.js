@@ -3,8 +3,13 @@ import { SOMETHING_FAILED } from "../middleware/logger";
 
 export const CREATE_ORDER = 'CREATE_ORDER';
 
-export const createOrder = (dispatch) => {
-    fetch(ORDERS_DOMAIN_URL, { method: 'POST' })
+export const createOrder = (data) => (dispatch) => {
+    dispatch({
+      type: 'clear_order',
+    });
+    fetch(ORDERS_DOMAIN_URL, { method: 'POST', body: JSON.stringify(data), headers: {
+      "Content-Type": "application/json",
+    }})
       .then(response => {
         if (response.ok) {
           return response.json();

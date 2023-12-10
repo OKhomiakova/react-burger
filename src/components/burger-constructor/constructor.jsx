@@ -2,8 +2,11 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
 import ingredientType from '../../utils/types';
+import { useDispatch } from 'react-redux';
+import { deleteBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
 
-const Constructor = ({data, type}) => {
+const Constructor = ({ data, type }) => {
+  const dispatch = useDispatch();
   const isTopOrBottom = type === 'top' || type === 'bottom';
   const showDragIcon = !isTopOrBottom;
   const showAppendix = type === 'top' ? data.name + " (верх)" : type === 'bottom' ? data.name + " (низ)" : data.name;
@@ -22,6 +25,7 @@ const Constructor = ({data, type}) => {
           text={showAppendix}
           price={data.price}
           thumbnail={data.image}
+          handleClose={() => dispatch(deleteBurgerIngredient(data))}
       />
     </article>
   )

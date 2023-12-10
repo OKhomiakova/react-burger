@@ -1,14 +1,18 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
-import { useState } from 'react';
 import ingredientType from '../../utils/types';
 import Modal from '../modal/modal';
 import IngredientDetails from './ingredient-details';
 import useModal from '../../hooks/useModal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteIngredientDetails, setIngredientDetails } from '../../services/actions/selected-ingredient';
+import { useDrag } from 'react-dnd';
 
-const IngredientCard = ({data}) => {
+const IngredientCard = ({ data }) => {
+    const [, drag] = useDrag({
+      type: 'INGREDIENT',
+      item: { ingredient: data },
+    });
     
     const dispatch = useDispatch();
 
@@ -18,21 +22,18 @@ const IngredientCard = ({data}) => {
     }
 
     const handleOnClose = () => {
-        dispatch(deleteIngredientDetails());
-        closeModal();
+      dispatch(deleteIngredientDetails());
+      closeModal();
     }
-
-    // const [count, setCount] = useState(0);
-    // const handleCardClick = () => {
-    //     setCount(count + 1);
-    // };
 
     const { isModalOpen, openModal, closeModal } = useModal();
 
+    const ingredientCount = useSelector(state => state.burgerIngredients.filter(x => x._id === data._id).length);
+
     return (
-        <div className={styles.cardWrapper}>
+        <div className={styles.cardWrapper} ref={drag}>
             <article className={styles.card} onClick={handleOnClick} >
-                {/* {count > 0 && <Counter count={count} size="default" extraClass="m-1" />} */}
+                {ingredientCount > 0 && <Counter count={ingredientCount} size="default" extraClass="m-1" />}
                 <img src={data.image} className={`pr-4 pl-4`} alt={data.name} />
                 <div className={`${styles.price} pt-1 pb-1`}>
                     <p className={`text text_type_digits-default`}>{data.price}</p> 

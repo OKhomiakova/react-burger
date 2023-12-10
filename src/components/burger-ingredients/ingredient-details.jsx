@@ -1,6 +1,4 @@
-import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients.module.css';
-import ingredientType from '../../utils/types';
 import { useSelector } from 'react-redux';
 
 const IngredientDetails = () => {
@@ -41,7 +39,3 @@ const IngredientDetails = () => {
     )};
 
 export default IngredientDetails;
-
-IngredientDetails.propTypes = {
-    ingredient: ingredientType,
-}; 

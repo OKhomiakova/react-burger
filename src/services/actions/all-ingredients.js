@@ -3,7 +3,7 @@ import { SOMETHING_FAILED } from "../middleware/logger";
 
 export const SET_ALL_INGREDIENTS = 'SET_ALL_INGREDIENTS';
 
-export const setAllIngredients = (dispatch) => {
+export const setAllIngredients = () => (dispatch) => {
     fetch(DOMAIN_URL)
       .then(response => {
         if (response.ok) {
