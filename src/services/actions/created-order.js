@@ -1,9 +1,9 @@
-import { BASE_URL } from "../../constants";
 import { SOMETHING_FAILED } from "../middleware/logger";
 import { request } from "../../utils/check-response";
 
 export const CREATE_ORDER = 'CREATE_ORDER';
 export const CLEAR_ORDER = 'CLEAR_ORDER';
+export const CLEAR_BURGER_CONSTRUCTOR = 'CLEAR_BURGER_CONSTRUCTOR';
 
 export const createOrder = (data) => (dispatch) => {
     dispatch({
@@ -17,6 +17,9 @@ export const createOrder = (data) => (dispatch) => {
           type: CREATE_ORDER,
           orderId: response.order.number,
         });
+        dispatch({
+          type: CLEAR_BURGER_CONSTRUCTOR,
+        })
       })
       .catch(error => {
         dispatch({

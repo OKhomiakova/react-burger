@@ -1,4 +1,5 @@
 import { ADD_BURGER_INGREDIENT, DELETE_BURGER_INGREDIENT, UPDATE_BURGER_INGREDIENTS_ORDER, CHANGE_ORDER } from "../actions/burger-constructor-ingredients";
+import { CLEAR_BURGER_CONSTRUCTOR } from "../actions/created-order";
 
 const initialState = {
   bun: undefined,
@@ -40,7 +41,9 @@ const burgerIngredients = (state = initialState, action) => {
           return {
             bun: state.bun,
             notBun,
-          }
+          };
+        case CLEAR_BURGER_CONSTRUCTOR:
+          return initialState;
         default:
           return state;
       }
