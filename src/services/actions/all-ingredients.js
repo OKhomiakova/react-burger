@@ -1,29 +1,21 @@
 import { BASE_URL } from "../../constants";
 import { SOMETHING_FAILED } from "../middleware/logger";
+import { request } from "../../utils/check-response";
 
 export const SET_ALL_INGREDIENTS = 'SET_ALL_INGREDIENTS';
 
 export const setAllIngredients = () => (dispatch) => {
-    fetch(BASE_URL+'ingredients')
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        dispatch({
-            type: SOMETHING_FAILED,
-            status: response.status
-        });
-      })
-      .then(response => {
-        dispatch({
-            type: SET_ALL_INGREDIENTS,
-            ingredients: response.data,
-        });
-      })
-      .catch(error => {
-        dispatch({
-            type: SOMETHING_FAILED,
-            error,
-        });
+  request('ingredients')
+    .then(response => {
+      dispatch({
+        type: SET_ALL_INGREDIENTS,
+          ingredients: response.data,
       });
+    })
+    .catch(error => {
+      dispatch({
+          type: SOMETHING_FAILED,
+          error,
+      });
+    });
 };
