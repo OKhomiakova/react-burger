@@ -1,4 +1,3 @@
-import { Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './modal-overlay.module.css';
 import PropTypes from 'prop-types';
 

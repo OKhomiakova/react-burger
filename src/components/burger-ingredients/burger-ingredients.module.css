@@ -32,6 +32,15 @@ h1 {
     margin: 0px;
     width: 272px;
     height: 208px;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.card:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 .cardWrapper {

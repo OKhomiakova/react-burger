@@ -1,4 +1,4 @@
-import { BurgerIcon, ListIcon, Logo, ProfileIcon, Typography, Box } from '@ya.praktikum/react-developer-burger-ui-components'
+import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import NavBar from './nav-bar';
 import NavBarItem from './nav-bar-item';
 import styles from './app-header.module.css';
