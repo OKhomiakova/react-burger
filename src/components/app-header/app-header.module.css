@@ -37,6 +37,7 @@
 .icon {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .placeholder {
@@ -55,4 +56,5 @@
     color: #8585AD;
     background-color: #1C1C21;
     border-width: 0px;
+    cursor: pointer;
 }

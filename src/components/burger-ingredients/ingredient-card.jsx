@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientDetails } from '../../services/actions/selected-ingredient';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
+import { Link, useLocation } from 'react-router-dom';
 
-const IngredientCard = ({ ingredient, openModal }) => {
+const IngredientCard = ({ ingredient }) => {
     const [, drag] = useDrag({
       type: 'INGREDIENT',
       item: { ingredient },
@@ -16,7 +17,6 @@ const IngredientCard = ({ ingredient, openModal }) => {
 
     const handleOnClick = () => {
       dispatch(setIngredientDetails(ingredient));
-      openModal();
     }
 
     const ingredientCount = useSelector(state => {
@@ -26,7 +26,12 @@ const IngredientCard = ({ ingredient, openModal }) => {
       return state.burgerIngredients.notBun.filter(x => x._id === ingredient._id).length;
     });
 
+    const location = useLocation();
+
+    const ingredientId = ingredient['_id'];
+
     return (
+      <Link key={ingredientId} to={`/ingredients/${ingredientId}`} state={{ background: location }} className={styles.link}>
         <div className={styles.cardWrapper} ref={drag}>
             <article className={styles.card} onClick={handleOnClick} >
                 {ingredientCount > 0 && <Counter count={ingredientCount} size="default" extraClass="m-1" />}
@@ -38,6 +43,7 @@ const IngredientCard = ({ ingredient, openModal }) => {
                 <p className={`text text_type_main-default`}>{ingredient.name}</p>
             </article>
         </div>
+      </Link>
     );
 }
 

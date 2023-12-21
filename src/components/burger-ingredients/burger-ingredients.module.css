@@ -43,6 +43,11 @@ h1 {
     cursor: -webkit-grabbing;
 }
 
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .cardWrapper {
     overflow: 'hidden';
 }
