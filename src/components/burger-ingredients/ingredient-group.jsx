@@ -20,5 +20,4 @@ export default IngredientGroup;
 IngredientGroup.propTypes = {
   title: PropTypes.string,
   data: PropTypes.arrayOf(ingredientType).isRequired,
-  openModal: PropTypes.func.isRequired,
 }; 

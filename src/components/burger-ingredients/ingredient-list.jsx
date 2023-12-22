@@ -31,5 +31,4 @@ export default IngredientsList;
 
 IngredientsList.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientType).isRequired,
-  openModal: PropTypes.func.isRequired,
 }; 

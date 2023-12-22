@@ -9,6 +9,7 @@ import RegisterPage from '../../pages/register/register';
 import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password/reset-password';
 import ProfilePage from '../../pages/profile/profile';
+import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
 
 const App = () => {
   const location = useLocation();
@@ -18,7 +19,10 @@ const App = () => {
   const handleModalClose = () => {
     navigate(-1);
   }
-  
+
+  console.log('background', background);
+  console.log('location', location);
+
   return (
     <>
       <AppHeader />
@@ -29,7 +33,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPasswordPage />}/>
         <Route path="/reset-password" element={<ResetPasswordPage />}/>
         <Route path="/profile" element={<ProfilePage />}/>
-        <Route path="/ingredients/:id" element={<IngredientDetails />}/>
+        <Route path="/ingredients/:id" element={<IngredientDetailsPage />}/>
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
@@ -38,7 +42,7 @@ const App = () => {
 	          path='/ingredients/:id'
 	          element={
 	            <Modal title="Детали ингредиента" onClose={handleModalClose}>
-	              <IngredientDetails />
+	              <IngredientDetails/>
 	            </Modal>
 	          }
 	        />

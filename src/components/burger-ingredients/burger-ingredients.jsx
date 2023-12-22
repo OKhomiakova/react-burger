@@ -4,8 +4,6 @@ import IngredientsList from './ingredient-list';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllIngredients } from '../../services/actions/all-ingredients';
-import IngredientDetails from './ingredient-details';
-import { deleteIngredientDetails } from '../../services/actions/selected-ingredient';
 
 const BurgerIngredients = () => {
 
