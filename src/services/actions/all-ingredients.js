@@ -1,4 +1,3 @@
-import { BASE_URL } from "../../constants";
 import { SOMETHING_FAILED } from "../middleware/logger";
 import { request } from "../../utils/check-response";
 
