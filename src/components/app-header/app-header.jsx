@@ -2,31 +2,44 @@ import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-dev
 import NavBar from './nav-bar';
 import NavBarItem from './nav-bar-item';
 import styles from './app-header.module.css';
+import { NavLink } from 'react-router-dom';
 
 const AppHeader = () => (
     <NavBar>
-        <a className={`${styles.link} pr-2`} href='/'>
-            <div className={`${styles.icon} pl-5 pr-2`}>
-                <BurgerIcon type="secondary" />
-            </div>
-            <NavBarItem text='Конструктор' />
-        </a>
-        <a className={styles.link} href='/profile/orders'>
-            <div className={`${styles.icon} pl-5 pr-2`}>
-                <ListIcon type="secondary" />
-            </div>
-            <NavBarItem text='Лента заказов' />
-        </a>
+        <NavLink className={`${styles.link} pr-2`} to={'/'}>
+            {({ isActive }) => (
+                <>
+                    <div className={`${styles.icon} pl-5`}>
+                        <BurgerIcon type={`${!isActive ? 'secondary' : 'primary'}`} />
+                    </div>
+                    <NavBarItem isActive={isActive} text='Конструктор' />
+                </>
+            )}
+        </NavLink>
+        <NavLink className={styles.link} to={'/profile/orders'}>
+            {({ isActive }) => (
+                <>
+                    <div className={`${styles.icon} pl-5 pr-2`}>
+                        <ListIcon type={`${!isActive ? 'secondary' : 'primary'}`} />
+                    </div>
+                    <NavBarItem isActive={isActive} text='Лента заказов' />
+                </>
+            )}
+        </NavLink>
         <div className={styles.logo}>
             <Logo />
         </div>
-        <a className={styles.placeholder}/>
-        <a className={styles.link} href='/profile'>
-            <div className={`${styles.icon} pl-5 pr-2`}>
-                <ProfileIcon type="secondary" />
-            </div>
-            <NavBarItem text='Личный кабинет' />
-        </a>
+        <NavLink className={styles.placeholder}/>
+        <NavLink className={styles.link} to={'/profile'} end>
+            {({ isActive }) => (
+                <>
+                    <div className={`${styles.icon} pl-5 pr-2`}>
+                        <ProfileIcon type={`${!isActive ? 'secondary' : 'primary'}`} />
+                    </div>
+                    <NavBarItem isActive={isActive} text='Личный кабинет' />
+                </>
+            )}
+        </NavLink>
     </NavBar>
 );
 

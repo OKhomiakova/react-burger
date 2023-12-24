@@ -1,8 +1,7 @@
-import { BASE_URL } from "../constants";
-import { request, checkReponse } from "./check-response";
+import { request, checkResponse } from "./check-response";
 
 export const refreshToken = () => {
-  return fetch(`${BASE_URL}/auth/token`, {
+  return request('auth/token', {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -10,14 +9,16 @@ export const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then(checkReponse);
+  }).then(checkResponse);
 };
 
 export const fetchWithRefresh = async (url, options) => {
   try {
-    const res = await fetch(url, options);
-    return await checkReponse(res);
+    const res = await request(url, options);
+    console.log('fetchWithRefresh res',res);
+    return await checkResponse(res);
   } catch (err) {
+    console.log('fetchWithRefresh err',err);
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {
@@ -26,8 +27,8 @@ export const fetchWithRefresh = async (url, options) => {
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
       options.headers.authorization = refreshData.accessToken;
-      const res = await fetch(url, options); //повторяем запрос
-      return await checkReponse(res);
+      const res = await request(url, options); //повторяем запрос
+      return await checkResponse(res);
     } else {
       return Promise.reject(err);
     }
@@ -35,18 +36,17 @@ export const fetchWithRefresh = async (url, options) => {
 };
 
 export const register = (email, password, name) => {
-    return request(`${BASE_URL}/auth/register`, {
+    return request('auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password, name }),
       });
-
 };
 
 export const login = (email, password) => {
-    return request(`${BASE_URL}/auth/login`, {
+    return request('auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export const login = (email, password) => {
 };
 
 export function forgotPassword(email) {
-    return request(`${BASE_URL}/password-reset`, {
+    return request('password-reset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export function forgotPassword(email) {
 };
   
 export function resetPassword(password, token) {
-    return request(`${BASE_URL}/password-reset/reset`, {
+    return request('password-reset/reset', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,8 @@ export function resetPassword(password, token) {
 };
 
 export function getUserInfo() {
-    return fetchWithRefresh(`${BASE_URL}/auth/user`, {
+    console.log("localStorage.getItem('accessToken')", localStorage.getItem('accessToken'))
+    return fetchWithRefresh('auth/user', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ export function getUserInfo() {
   }
   
 export function updateUserInfo(email, password, name) {
-    return fetchWithRefresh(`${BASE_URL}/auth/user`, {
+    return fetchWithRefresh('auth/user', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ export function updateUserInfo(email, password, name) {
 };
   
   export function logout() {
-    return fetchWithRefresh(`${BASE_URL}/auth/logout`, {
+    return fetchWithRefresh('auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

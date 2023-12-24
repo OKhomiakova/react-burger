@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './profile.module.css';  
 import { Input, Button, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link } from 'react-router-dom';
  
 const ProfilePage = () => {
     const [value, setValue] = React.useState('value')
@@ -13,9 +14,9 @@ const ProfilePage = () => {
         <section className={`${styles.page} mt-40`}>
             <div className='mr-15'>
                 <div className={`${styles.textWrapper} mb-20`}>
-                    <p className="text text_type_main-large"><a href='/profile'>Профиль</a></p>
-                    <p className="text text_type_main-large"><a href='/profile/orders'>История заказов</a></p>
-                    <p className="text text_type_main-large"><a>Выход</a></p>
+                    <p className="text text_type_main-large"><Link to={'/profile'}>Профиль</Link></p>
+                    <p className="text text_type_main-large"><Link to={'/profile/orders'}>История заказов</Link></p>
+                    <p className="text text_type_main-large"><Link>Выход</Link></p>
                 </div>
                 <p className={`${styles.textInfo} text text_type_main-default text_color_inactive`}>В этом разделе вы можете <br/>изменить свои персональные данные</p>
             </div>

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './register.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { register } from '../../services/actions/user';
+import { useDispatch } from 'react-redux';
+//import { useNavigate } from 'react-router-dom';
  
 const RegisterPage = () => {
-    const [value, setValue] = React.useState('value')
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+
+    const dispatch = useDispatch();
+
+    const handleRegister = async () => {
+        try {
+            dispatch(register(email, password, name));
+        } catch (error) {
+            console.error('Registration failed:', error);
     }
+  };
+
     return (
         <section className={`${styles.page} mt-40`}>
             <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
@@ -16,12 +27,9 @@ const RegisterPage = () => {
                 <Input 
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => setName(e.target.value)}
                     name={'name'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
-                    errorText={'Некорректный e-mail'}
                     size={'default'}
                     extraClass="ml-1"
                 />
@@ -30,12 +38,9 @@ const RegisterPage = () => {
                 <Input 
                     type={'email'}
                     placeholder={'E-mail'}
-                    onChange={e => setValue(e.target.value)}
-                    name={'name'}
+                    onChange={e => setEmail(e.target.value)}
+                    name={'email'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
-                    errorText={'Некорректный e-mail'}
                     size={'default'}
                     extraClass="ml-1"
                 />
@@ -44,19 +49,16 @@ const RegisterPage = () => {
                 <Input
                     type={'password'}
                     placeholder={'Password'}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => setPassword(e.target.value)}
                     icon={'ShowIcon'}
-                    name={'name'}
+                    name={'password'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
-                    errorText={'Неверный пароль'}
                     size={'default'}
                     extraClass="ml-1"
                 />
             </div>
             <div className='mb-20'>
-                <Button htmlType="button" type="primary" size="large">
+                <Button htmlType="button" type="primary" size="large" onClick={handleRegister}>
                     Зарегистрироваться
                 </Button>
             </div>

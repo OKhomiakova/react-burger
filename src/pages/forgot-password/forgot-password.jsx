@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import styles from './forgot-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { forgotPassword } from '../../utils/api';
  
 const ForgotPasswordPage = () => {
-    const [value, setValue] = React.useState('value')
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate(); 
+
+    const handleForgotPassword = async () => {
+        try {
+            const response = await forgotPassword(email);
+            console.log('Successful:', response);
+            navigate('/reset-password');
+        } catch (error) {
+            console.error('Failed:', error);
     }
+};
+
     return (
         <section className={`${styles.page} mt-40`}>
             <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
@@ -16,18 +25,15 @@ const ForgotPasswordPage = () => {
                 <Input 
                     type={'email'}
                     placeholder={'Укажите e-mail'}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => setEmail(e.target.value)}
                     name={'name'}
                     error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
-                    errorText={'Некорректный e-mail'}
                     size={'default'}
                     extraClass="ml-1"
                 />
             </div>
             <div className='mb-20'>
-                <Button htmlType="button" type="primary" size="large">
+                <Button htmlType="button" type="primary" size="large" onClick={handleForgotPassword}>
                     Восстановить
                 </Button>
             </div>

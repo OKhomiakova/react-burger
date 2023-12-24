@@ -1,14 +1,22 @@
-import React from 'react';
+import { useState } from 'react';
 import styles from './login.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { login } from '../../services/actions/user';
+import { useDispatch } from 'react-redux';
  
 const LoginPage = () => {
-    const [value, setValue] = React.useState('value')
-    const inputRef = React.useRef(null)
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+
+    const handleLogin = () => {
+        try {
+            dispatch(login(email, password));
+        } catch (error) {
+            console.error('Login failed:', error);
     }
+};
     return (
         <section className={`${styles.page} mt-40`}>
             <h1 className="text text_type_main-medium mb-6">Вход</h1>
@@ -16,12 +24,8 @@ const LoginPage = () => {
                 <Input 
                     type={'email'}
                     placeholder={'E-mail'}
-                    onChange={e => setValue(e.target.value)}
-                    name={'name'}
-                    error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
-                    errorText={'Некорректный e-mail'}
+                    onChange={e => setEmail(e.target.value)}
+                    name={'email'}
                     size={'default'}
                     extraClass="ml-1"
                 />
@@ -30,19 +34,15 @@ const LoginPage = () => {
                 <Input
                     type={'password'}
                     placeholder={'Password'}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => setPassword(e.target.value)}
                     icon={'ShowIcon'}
-                    name={'name'}
-                    error={false}
-                    ref={inputRef}
-                    onIconClick={onIconClick}
-                    errorText={'Неверный пароль'}
+                    name={'password'}
                     size={'default'}
                     extraClass="ml-1"
                 />
             </div>
             <div className='mb-20'>
-                <Button htmlType="button" type="primary" size="large">
+                <Button htmlType="button" type="primary" size="large" onClick={handleLogin}>
                     Войти
                 </Button>
             </div>
