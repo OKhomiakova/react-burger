@@ -75,7 +75,6 @@ export function resetPassword(password, token) {
 };
 
 export function getUserInfo() {
-    console.log("localStorage.getItem('accessToken')", localStorage.getItem('accessToken'))
     return fetchWithRefresh('auth/user', {
       method: 'GET',
       headers: {
