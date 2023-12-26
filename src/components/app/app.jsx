@@ -19,7 +19,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   const [passwordRecoveryInitiated, setPasswordRecoveryInitiated] = useState(false);
-  console.log("passwordRecoveryInitiated", passwordRecoveryInitiated);
 
   useEffect(() => {
     dispatch(checkUserAuth());
