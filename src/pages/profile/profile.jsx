@@ -1,22 +1,71 @@
-import React from 'react';
+import { useState } from 'react';
 import styles from './profile.module.css';  
 import { Input, Button, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, updateUserInfo } from '../../services/actions/user';
  
-const ProfilePage = () => {
-    const [value, setValue] = React.useState('value')
-    const inputRef = React.useRef(null)
+const ProfilePage = () => {    
+    const user = useSelector((state) => state.user.user);
+    const [email, setEmail] = useState(user.email);
+    const [password, setPassword] = useState(user.password);
+    const [name, setName] = useState(user.name);
+    const [disabled, setDisabled] = useState(true);
+    const [isModified, setIsModified] = useState(false);
+
+    const location = useLocation();
+
+    const dispatch = useDispatch();
+    
     const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
-    }
+        setDisabled(false);
+    };
+
+    const handleProfileUpdate = async () => {
+        try {
+            dispatch(updateUserInfo(email, password, name));
+            setDisabled(true);
+            setIsModified(false);
+        } catch (error) {
+            console.error('Profile update failed:', error);
+        }
+    };
+
+    const handleCancel = async () => {
+        try {
+            setEmail(user.email);
+            setPassword(user.password);
+            setName(user.name);
+            setDisabled(true);
+            setIsModified(false); // Reset modification state
+        } catch (error) {
+            console.error('Profile update failed:', error);
+        }
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+    };
+
+    const handleInputChange = (value, setState) => {
+        setState(value);
+        setIsModified(true); // Set modification state to true
+      };
+
     return (
         <section className={`${styles.page} mt-40`}>
             <div className='mr-15'>
                 <div className={`${styles.textWrapper} mb-20`}>
-                    <p className="text text_type_main-large"><Link to={'/profile'}>Профиль</Link></p>
-                    <p className="text text_type_main-large"><Link to={'/profile/orders'}>История заказов</Link></p>
-                    <p className="text text_type_main-large"><Link>Выход</Link></p>
+                    <p className={`${location.pathname !== '/profile' && 'text_color_inactive'} text text_type_main-large`}><Link to={'/profile'}>Профиль</Link></p>
+                    <p className="text text_type_main-large">
+                        <NavLink to={'/profile/orders'}>
+                            {({ isActive }) => (
+                                <span className={`${!isActive && 'text_color_inactive'}`}>История заказов</span>
+                            )}
+                        </NavLink>
+                    </p>
+                    
+                    <p className="text text_type_main-large text_color_inactive"><Link onClick={handleLogout}>Выход</Link></p>
                 </div>
                 <p className={`${styles.textInfo} text text_type_main-default text_color_inactive`}>В этом разделе вы можете <br/>изменить свои персональные данные</p>
             </div>
@@ -25,14 +74,12 @@ const ProfilePage = () => {
                     <Input 
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => setValue(e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.value, setName)}
+                        value={name}
                         icon={'EditIcon'}
-                        disabled={true}
+                        disabled={disabled}
                         name={'name'}
-                        error={false}
-                        ref={inputRef}
                         onIconClick={onIconClick}
-                        errorText={'Некорректный e-mail'}
                         size={'default'}
                         extraClass="ml-1"
                     />
@@ -41,14 +88,12 @@ const ProfilePage = () => {
                     <Input 
                         type={'email'}
                         placeholder={'E-mail'}
-                        onChange={e => setValue(e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.value, setEmail)}
+                        value={email}
                         icon={'EditIcon'}
-                        disabled={true}
+                        disabled={disabled}
                         name={'name'}
-                        error={false}
-                        ref={inputRef}
                         onIconClick={onIconClick}
-                        errorText={'Некорректный e-mail'}
                         size={'default'}
                         extraClass="ml-1"
                     />
@@ -57,12 +102,11 @@ const ProfilePage = () => {
                     <Input
                         type={'password'}
                         placeholder={'Password'}
-                        onChange={e => setValue(e.target.value)}
+                        onChange={(e) => handleInputChange(e.target.value, setPassword)}
+                        value={password}
                         icon={'EditIcon'}
-                        disabled={true}
-                        name={'name'}
-                        error={false}
-                        ref={inputRef}
+                        disabled={disabled}
+                        name={'password'}
                         onIconClick={onIconClick}
                         errorText={'Неверный пароль'}
                         size={'default'}
@@ -70,12 +114,16 @@ const ProfilePage = () => {
                     />
                 </div>
                 <div className={styles.buttonWrapper}>
-                    <Button htmlType="button" type="secondary" size="medium">
-                        Отмена
-                    </Button>
-                    <Button htmlType="button" type="primary" size="medium">
-                        Сохранить
-                    </Button>
+                    {isModified && (
+                        <>
+                            <Button htmlType="button" type="secondary" size="medium" onClick={handleCancel}>
+                                Отмена
+                            </Button>
+                            <Button htmlType="button" type="primary" size="medium" onClick={handleProfileUpdate}>
+                                Сохранить
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
             <div className={styles.placeholder}></div>

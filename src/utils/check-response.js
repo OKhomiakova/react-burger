@@ -6,6 +6,9 @@ export const checkResponse = (response) => {
     console.log('checkResponse response', response)
     if (response.ok) {
         return response.json();
-    }
-    return Promise.reject(`Ошибка ${response.status}`);
+    } else if (response.success) {
+        return response;
+    } else {
+        return Promise.reject(`Ошибка ${response.status}`);
+    } 
 };

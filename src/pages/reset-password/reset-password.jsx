@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './reset-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../utils/api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
  
 const ResetPasswordPage = () => {
     const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ const ResetPasswordPage = () => {
 
     const handleResetPassword = async () => {
         try {
-             const response = await resetPassword(password, token);
+            const response = await resetPassword(password, token);
             console.log('Password reset successful:', response);
             navigate('/');
         } catch (error) {
@@ -47,7 +47,7 @@ const ResetPasswordPage = () => {
                     Сохранить
                 </Button>
             </div>
-            <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <a href="/login">Войти</a></p>
+            <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to={"/login"}>Войти</Link></p>
         </section>
     );
 }

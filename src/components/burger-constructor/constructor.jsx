@@ -14,7 +14,7 @@ const Constructor = ({ data, type, position }) => {
   const showDragIcon = !isTopOrBottom;
   const showAppendix = type === 'top' ? data.name + " (верх)" : type === 'bottom' ? data.name + " (низ)" : data.name;
   const isLocked = type === 'top' ? true : type === 'bottom' ? true : false;
-  
+
   const handleClose = useCallback(
     () => {
       dispatch(deleteBurgerIngredient(position));

@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; 
 import styles from './forgot-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { forgotPassword } from '../../utils/api';
  
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage = ({onForgotPassword}) => {
     const [email, setEmail] = useState('');
+
     const navigate = useNavigate(); 
 
     const handleForgotPassword = async () => {
         try {
             const response = await forgotPassword(email);
             console.log('Successful:', response);
-            navigate('/reset-password');
+            if (onForgotPassword) {
+                onForgotPassword();
+                navigate('/reset-password');
+            }
         } catch (error) {
             console.error('Failed:', error);
     }
@@ -37,7 +41,7 @@ const ForgotPasswordPage = () => {
                     Восстановить
                 </Button>
             </div>
-            <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <a href="/login">Войти</a></p>
+            <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to={"/login"}>Войти</Link></p>
         </section>
     );
 }

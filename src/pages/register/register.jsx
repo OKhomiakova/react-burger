@@ -3,8 +3,8 @@ import styles from './register.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { register } from '../../services/actions/user';
 import { useDispatch } from 'react-redux';
-//import { useNavigate } from 'react-router-dom';
- 
+import { Link } from 'react-router-dom';
+
 const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -62,7 +62,7 @@ const RegisterPage = () => {
                     Зарегистрироваться
                 </Button>
             </div>
-            <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <a href="/login">Войти</a></p>
+            <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link to={"/login"}>Войти</Link></p>
         </section>
     );
 }

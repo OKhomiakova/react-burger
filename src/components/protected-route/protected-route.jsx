@@ -7,20 +7,18 @@ const Protected = ({onlyUnAuth = false, component}) => {
     const user = useSelector(store => store.user.user);
     const location = useLocation();
 
-    console.log("onlyUnAuth", onlyUnAuth);
-    console.log("user", user);
-
-
     if (!isAuthChecked) {
         return null;
     }
 
     if (onlyUnAuth && user) {
+        console.log("location.state", location.state);
         const { from } = location.state || { from: { pathname: "/" }};
         return <Navigate to={from}/>;
     }
 
     if (!onlyUnAuth && !user) {
+        console.log('location', location);
         return <Navigate to="/login" state={{from: location}} />;
     }
 

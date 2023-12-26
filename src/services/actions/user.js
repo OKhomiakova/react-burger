@@ -45,6 +45,15 @@ export const register = (name, email, password) => {
     }
 }
 
+export const logout = () => {
+    return(dispatch) => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        dispatch(setUser(null));
+    }
+}
+
+
 export const checkUserAuth = () => {
     return(dispatch) => {
         console.log('localStorage.getItem("accessToken")', localStorage.getItem("accessToken"));
@@ -61,5 +70,14 @@ export const checkUserAuth = () => {
        } else {
         dispatch(setIsAuthChecked(true))
        }
+    }
+}
+
+export const updateUserInfo = (name, email, password) => {
+    return(dispatch) => {
+        return api.updateUserInfo(name, email, password).then((res) => {
+            dispatch(setUser(res.user));
+            dispatch(setIsAuthChecked(true));
+        })
     }
 }

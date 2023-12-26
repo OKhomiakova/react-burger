@@ -6,11 +6,13 @@ export const CLEAR_ORDER = 'CLEAR_ORDER';
 export const CLEAR_BURGER_CONSTRUCTOR = 'CLEAR_BURGER_CONSTRUCTOR';
 
 export const createOrder = (data) => (dispatch) => {
+    const accessToken = localStorage.getItem('accessToken');
     dispatch({
       type: CLEAR_ORDER,
     });
     request('orders', { method: 'POST', body: JSON.stringify(data), headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${accessToken}`,
     }})
       .then(response => {
         dispatch({
