@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './register.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { register } from '../../services/actions/user';
@@ -25,6 +25,7 @@ const RegisterPage = () => {
             <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
             <div className='mb-6'>
                 <Input 
+                    value={name}
                     type={'text'}
                     placeholder={'Имя'}
                     onChange={e => setName(e.target.value)}
@@ -35,7 +36,8 @@ const RegisterPage = () => {
                 />
             </div>
             <div className='mb-6'>
-                <Input 
+                <Input
+                    value={email}
                     type={'email'}
                     placeholder={'E-mail'}
                     onChange={e => setEmail(e.target.value)}
@@ -47,6 +49,7 @@ const RegisterPage = () => {
             </div>
             <div className='mb-6'>
                 <Input
+                    value={password}
                     type={'password'}
                     placeholder={'Password'}
                     onChange={e => setPassword(e.target.value)}

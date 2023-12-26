@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './reset-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../utils/api';
@@ -24,6 +24,7 @@ const ResetPasswordPage = () => {
             <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
             <div className='mb-6'>
                 <Input 
+                    value={password} 
                     type={'password'}
                     placeholder={'Введите новый пароль'}
                     onChange={e => setPassword(e.target.value)}
@@ -34,6 +35,7 @@ const ResetPasswordPage = () => {
             </div>
             <div className='mb-6'>
                 <Input 
+                    value={token} 
                     type={'text'}
                     placeholder={'Введите код из письма'}
                     onChange={e => setToken(e.target.value)}

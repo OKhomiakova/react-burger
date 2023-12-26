@@ -24,6 +24,7 @@ const LoginPage = () => {
             <h1 className="text text_type_main-medium mb-6">Вход</h1>
             <div className='mb-6'>
                 <Input 
+                    value={email}
                     type={'email'}
                     placeholder={'E-mail'}
                     onChange={e => setEmail(e.target.value)}
@@ -34,6 +35,7 @@ const LoginPage = () => {
             </div>
             <div className='mb-6'>
                 <Input
+                    value={password}
                     type={'password'}
                     placeholder={'Password'}
                     onChange={e => setPassword(e.target.value)}

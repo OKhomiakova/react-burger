@@ -63,4 +63,5 @@ export default Constructor;
 Constructor.propTypes = {
   type: PropTypes.string,
   data: ingredientType,
+  index: PropTypes.number,
 }; 

@@ -72,10 +72,10 @@ const ProfilePage = () => {
             <div>
                 <div className='mb-6'>
                     <Input 
+                        value={name}
                         type={'text'}
                         placeholder={'Имя'}
                         onChange={(e) => handleInputChange(e.target.value, setName)}
-                        value={name}
                         icon={'EditIcon'}
                         disabled={disabled}
                         name={'name'}
@@ -86,10 +86,10 @@ const ProfilePage = () => {
                 </div>
                 <div className='mb-6'>
                     <Input 
+                        value={email}
                         type={'email'}
                         placeholder={'E-mail'}
                         onChange={(e) => handleInputChange(e.target.value, setEmail)}
-                        value={email}
                         icon={'EditIcon'}
                         disabled={disabled}
                         name={'name'}
@@ -100,10 +100,10 @@ const ProfilePage = () => {
                 </div>
                 <div className='mb-6'>
                     <Input
+                        value={password}
                         type={'password'}
                         placeholder={'Password'}
                         onChange={(e) => handleInputChange(e.target.value, setPassword)}
-                        value={password}
                         icon={'EditIcon'}
                         disabled={disabled}
                         name={'password'}

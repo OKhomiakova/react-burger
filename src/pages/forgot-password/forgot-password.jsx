@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './forgot-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { forgotPassword } from '../../utils/api';
+import PropTypes from 'prop-types';
  
 const ForgotPasswordPage = ({onForgotPassword}) => {
     const [email, setEmail] = useState('');
@@ -26,7 +27,8 @@ const ForgotPasswordPage = ({onForgotPassword}) => {
         <section className={`${styles.page} mt-40`}>
             <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
             <div className='mb-6'>
-                <Input 
+                <Input
+                    value={email} 
                     type={'email'}
                     placeholder={'Укажите e-mail'}
                     onChange={e => setEmail(e.target.value)}
@@ -47,3 +49,7 @@ const ForgotPasswordPage = ({onForgotPassword}) => {
 }
 
 export default ForgotPasswordPage;
+
+ForgotPasswordPage.propTypes = {
+    onForgotPassword: PropTypes.func,
+}; 
