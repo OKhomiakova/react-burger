@@ -1,12 +1,15 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import styles from './forgot-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { forgotPassword } from '../../utils/api';
 import PropTypes from 'prop-types';
+import { useForm } from '../../hooks/useForm';
  
 const ForgotPasswordPage = ({onForgotPassword}) => {
-    const [email, setEmail] = useState('');
+    const { values, handleChange } = useForm({
+        email: '',
+        
+    });
 
     const navigate = useNavigate(); 
 
@@ -14,7 +17,7 @@ const ForgotPasswordPage = ({onForgotPassword}) => {
         e.preventDefault(); // Prevent the default form submission
     
         try {
-          const response = await forgotPassword(email);
+          const response = await forgotPassword(values.email);
           console.log('Successful:', response);
     
           if (onForgotPassword) {
@@ -32,11 +35,11 @@ const ForgotPasswordPage = ({onForgotPassword}) => {
                 <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
                 <div className='mb-6'>
                     <Input
-                        value={email} 
+                        value={values.email} 
                         type={'email'}
                         placeholder={'Укажите e-mail'}
-                        onChange={e => setEmail(e.target.value)}
-                        name={'name'}
+                        onChange={handleChange}
+                        name={'email'}
                         error={false}
                         size={'default'}
                         extraClass="ml-1"

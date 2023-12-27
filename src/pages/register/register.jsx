@@ -1,14 +1,17 @@
-import { useState } from 'react';
 import styles from './register.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { register } from '../../services/actions/user';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
 
 const RegisterPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    
+    const { values, handleChange } = useForm({
+        email: '',
+        password: '',
+        name: ''
+    });
 
     const dispatch = useDispatch();
 
@@ -16,7 +19,7 @@ const RegisterPage = () => {
         e.preventDefault();
     
         try {
-          dispatch(register(email, password, name));
+          dispatch(register(values.email, values.password, values.name));
         } catch (error) {
           console.error('Registration failed:', error);
         }
@@ -28,10 +31,10 @@ const RegisterPage = () => {
                 <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
                 <div className='mb-6'>
                     <Input 
-                        value={name}
+                        value={values.name}
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => setName(e.target.value)}
+                        onChange={handleChange}
                         name={'name'}
                         error={false}
                         size={'default'}
@@ -40,10 +43,10 @@ const RegisterPage = () => {
                 </div>
                 <div className='mb-6'>
                     <Input
-                        value={email}
+                        value={values.email}
                         type={'email'}
                         placeholder={'E-mail'}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={handleChange}
                         name={'email'}
                         error={false}
                         size={'default'}
@@ -52,10 +55,10 @@ const RegisterPage = () => {
                 </div>
                 <div className='mb-6'>
                     <Input
-                        value={password}
+                        value={values.password}
                         type={'password'}
                         placeholder={'Password'}
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={handleChange}
                         icon={'ShowIcon'}
                         name={'password'}
                         error={false}

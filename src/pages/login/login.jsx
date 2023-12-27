@@ -1,13 +1,17 @@
-import { useState } from 'react';
 import styles from './login.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { login } from '../../services/actions/user';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
  
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    
+    const { values, handleChange } = useForm({
+        email: '',
+        password: '',
+    });
+    
     const location = useLocation();
 
     const dispatch = useDispatch();
@@ -16,7 +20,7 @@ const LoginPage = () => {
         e.preventDefault(); // Prevent the default form submission
     
         try {
-          dispatch(login(email, password));
+          dispatch(login(values.email, values.password));
         } catch (error) {
           console.error('Login failed:', error);
         }
@@ -28,10 +32,10 @@ const LoginPage = () => {
                 <h1 className="text text_type_main-medium mb-6">Вход</h1>
                 <div className='mb-6'>
                     <Input 
-                        value={email}
+                        value={values.email}
                         type={'email'}
                         placeholder={'E-mail'}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={handleChange}
                         name={'email'}
                         size={'default'}
                         extraClass="ml-1"
@@ -39,10 +43,10 @@ const LoginPage = () => {
                 </div>
                 <div className='mb-6'>
                     <Input
-                        value={password}
+                        value={values.password}
                         type={'password'}
                         placeholder={'Password'}
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={handleChange}
                         icon={'ShowIcon'}
                         name={'password'}
                         size={'default'}

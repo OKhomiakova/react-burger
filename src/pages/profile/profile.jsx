@@ -4,12 +4,17 @@ import { Input, Button, EditIcon } from '@ya.praktikum/react-developer-burger-ui
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUserInfo } from '../../services/actions/user';
+import { useForm } from '../../hooks/useForm';
  
 const ProfilePage = () => {    
     const user = useSelector((state) => state.user.user);
-    const [email, setEmail] = useState(user.email || '');
-    const [password, setPassword] = useState(user.password || '');
-    const [name, setName] = useState(user.name || '');
+    
+    const { values, handleChange, resetForm } = useForm({
+        email: user.email || '',
+        password: user.password || '',
+        name: user.name || '',
+    });
+    
     const [disabled, setDisabled] = useState(true);
     const [isModified, setIsModified] = useState(false);
 
@@ -28,9 +33,7 @@ const ProfilePage = () => {
 
     const handleReset = () => {
         try {
-            setEmail(user.email);
-            setPassword(user.password);
-            setName(user.name);
+            resetForm();
             setDisabled(true);
             setIsModified(false); // Reset modification state
         } catch (error) {
@@ -40,7 +43,7 @@ const ProfilePage = () => {
 
     const handleProfileUpdate = async () => {
         try {
-            dispatch(updateUserInfo(email, password, name));
+            dispatch(updateUserInfo(values.email, values.password, values.name));
             setDisabled(true);
             setIsModified(false);
         } catch (error) {
@@ -52,10 +55,10 @@ const ProfilePage = () => {
         dispatch(logout());
     };
 
-    const handleInputChange = (value, setState) => {
-        setState(value);
-        setIsModified(true); // Set modification state to true
-      };
+    const handleInputChange = (value, name) => {
+        handleChange({ target: { value, name } });
+        setIsModified(true);
+    };
 
     return (
         <section className={`${styles.page} mt-40`}>
@@ -78,10 +81,10 @@ const ProfilePage = () => {
                 <form onSubmit={handleSubmit} onReset={handleReset}>
                     <div className='mb-6'>
                         <Input 
-                            value={name}
+                            value={values.name}
                             type={'text'}
                             placeholder={'Имя'}
-                            onChange={(e) => handleInputChange(e.target.value, setName)}
+                            onChange={(e) => handleInputChange(e.target.value, 'name')}
                             icon={'EditIcon'}
                             disabled={disabled}
                             name={'name'}
@@ -92,13 +95,13 @@ const ProfilePage = () => {
                     </div>
                     <div className='mb-6'>
                         <Input 
-                            value={email}
+                            value={values.email}
                             type={'email'}
                             placeholder={'E-mail'}
-                            onChange={(e) => handleInputChange(e.target.value, setEmail)}
+                            onChange={(e) => handleInputChange(e.target.value, 'email')}
                             icon={'EditIcon'}
                             disabled={disabled}
-                            name={'name'}
+                            name={'email'}
                             onIconClick={onIconClick}
                             size={'default'}
                             extraClass="ml-1"
@@ -106,10 +109,10 @@ const ProfilePage = () => {
                     </div>
                     <div className='mb-6'>
                         <Input
-                            value={password}
+                            value={values.password}
                             type={'password'}
                             placeholder={'Password'}
-                            onChange={(e) => handleInputChange(e.target.value, setPassword)}
+                            onChange={(e) => handleInputChange(e.target.value, 'password')}
                             icon={'EditIcon'}
                             disabled={disabled}
                             name={'password'}

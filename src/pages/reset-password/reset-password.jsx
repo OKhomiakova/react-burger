@@ -1,12 +1,15 @@
-import { useState } from 'react';
 import styles from './reset-password.module.css';  
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../utils/api';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
  
 const ResetPasswordPage = () => {
-    const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
+    
+    const { values, handleChange } = useForm({
+        password: '',
+        token: ''
+    });
 
     const navigate = useNavigate();
 
@@ -14,7 +17,7 @@ const ResetPasswordPage = () => {
         e.preventDefault();
 
         try {
-            const response = await resetPassword(password, token);
+            const response = await resetPassword(values.password, values.token);
             console.log('Password reset successful:', response);
             navigate('/');
         } catch (error) {
@@ -28,10 +31,10 @@ const ResetPasswordPage = () => {
                 <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
                 <div className='mb-6'>
                     <Input 
-                        value={password} 
+                        value={values.password} 
                         type={'password'}
                         placeholder={'Введите новый пароль'}
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={handleChange}
                         name={'password'}
                         size={'default'}
                         extraClass="ml-1"
@@ -39,10 +42,10 @@ const ResetPasswordPage = () => {
                 </div>
                 <div className='mb-6'>
                     <Input 
-                        value={token} 
+                        value={values.token} 
                         type={'text'}
                         placeholder={'Введите код из письма'}
-                        onChange={e => setToken(e.target.value)}
+                        onChange={handleChange}
                         name={'token'}
                         size={'default'}
                         extraClass="ml-1"
