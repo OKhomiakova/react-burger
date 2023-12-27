@@ -12,61 +12,65 @@ const RegisterPage = () => {
 
     const dispatch = useDispatch();
 
-    const handleRegister = async () => {
+    const handleRegister = async (e) => {
+        e.preventDefault();
+    
         try {
-            dispatch(register(email, password, name));
+          dispatch(register(email, password, name));
         } catch (error) {
-            console.error('Registration failed:', error);
-    }
-  };
+          console.error('Registration failed:', error);
+        }
+    };
 
     return (
-        <section className={`${styles.page} mt-40`}>
-            <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
-            <div className='mb-6'>
-                <Input 
-                    value={name}
-                    type={'text'}
-                    placeholder={'Имя'}
-                    onChange={e => setName(e.target.value)}
-                    name={'name'}
-                    error={false}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-6'>
-                <Input
-                    value={email}
-                    type={'email'}
-                    placeholder={'E-mail'}
-                    onChange={e => setEmail(e.target.value)}
-                    name={'email'}
-                    error={false}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-6'>
-                <Input
-                    value={password}
-                    type={'password'}
-                    placeholder={'Password'}
-                    onChange={e => setPassword(e.target.value)}
-                    icon={'ShowIcon'}
-                    name={'password'}
-                    error={false}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-20'>
-                <Button htmlType="button" type="primary" size="large" onClick={handleRegister}>
-                    Зарегистрироваться
-                </Button>
-            </div>
-            <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link to={"/login"}>Войти</Link></p>
-        </section>
+        <form onSubmit={handleRegister}>
+            <section className={`${styles.page} mt-40`}>
+                <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
+                <div className='mb-6'>
+                    <Input 
+                        value={name}
+                        type={'text'}
+                        placeholder={'Имя'}
+                        onChange={e => setName(e.target.value)}
+                        name={'name'}
+                        error={false}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-6'>
+                    <Input
+                        value={email}
+                        type={'email'}
+                        placeholder={'E-mail'}
+                        onChange={e => setEmail(e.target.value)}
+                        name={'email'}
+                        error={false}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-6'>
+                    <Input
+                        value={password}
+                        type={'password'}
+                        placeholder={'Password'}
+                        onChange={e => setPassword(e.target.value)}
+                        icon={'ShowIcon'}
+                        name={'password'}
+                        error={false}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-20'>
+                    <Button htmlType="submit" type="primary" size="large">
+                        Зарегистрироваться
+                    </Button>
+                </div>
+                <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы? <Link to={"/login"}>Войти</Link></p>
+            </section>
+        </form>
     );
 }
 

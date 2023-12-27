@@ -21,23 +21,28 @@ const ProfilePage = () => {
         setDisabled(false);
     };
 
-    const handleProfileUpdate = async () => {
-        try {
-            dispatch(updateUserInfo(email, password, name));
-            setDisabled(true);
-            setIsModified(false);
-        } catch (error) {
-            console.error('Profile update failed:', error);
-        }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleProfileUpdate();
     };
 
-    const handleCancel = async () => {
+    const handleReset = () => {
         try {
             setEmail(user.email);
             setPassword(user.password);
             setName(user.name);
             setDisabled(true);
             setIsModified(false); // Reset modification state
+        } catch (error) {
+            console.error('Profile update failed:', error);
+        }
+      };
+
+    const handleProfileUpdate = async () => {
+        try {
+            dispatch(updateUserInfo(email, password, name));
+            setDisabled(true);
+            setIsModified(false);
         } catch (error) {
             console.error('Profile update failed:', error);
         }
@@ -70,61 +75,63 @@ const ProfilePage = () => {
                 <p className={`${styles.textInfo} text text_type_main-default text_color_inactive`}>В этом разделе вы можете <br/>изменить свои персональные данные</p>
             </div>
             <div>
-                <div className='mb-6'>
-                    <Input 
-                        value={name}
-                        type={'text'}
-                        placeholder={'Имя'}
-                        onChange={(e) => handleInputChange(e.target.value, setName)}
-                        icon={'EditIcon'}
-                        disabled={disabled}
-                        name={'name'}
-                        onIconClick={onIconClick}
-                        size={'default'}
-                        extraClass="ml-1"
-                    />
-                </div>
-                <div className='mb-6'>
-                    <Input 
-                        value={email}
-                        type={'email'}
-                        placeholder={'E-mail'}
-                        onChange={(e) => handleInputChange(e.target.value, setEmail)}
-                        icon={'EditIcon'}
-                        disabled={disabled}
-                        name={'name'}
-                        onIconClick={onIconClick}
-                        size={'default'}
-                        extraClass="ml-1"
-                    />
-                </div>
-                <div className='mb-6'>
-                    <Input
-                        value={password}
-                        type={'password'}
-                        placeholder={'Password'}
-                        onChange={(e) => handleInputChange(e.target.value, setPassword)}
-                        icon={'EditIcon'}
-                        disabled={disabled}
-                        name={'password'}
-                        onIconClick={onIconClick}
-                        errorText={'Неверный пароль'}
-                        size={'default'}
-                        extraClass="ml-1"
-                    />
-                </div>
-                <div className={styles.buttonWrapper}>
-                    {isModified && (
-                        <>
-                            <Button htmlType="button" type="secondary" size="medium" onClick={handleCancel}>
-                                Отмена
-                            </Button>
-                            <Button htmlType="button" type="primary" size="medium" onClick={handleProfileUpdate}>
-                                Сохранить
-                            </Button>
-                        </>
-                    )}
-                </div>
+                <form onSubmit={handleSubmit} onReset={handleReset}>
+                    <div className='mb-6'>
+                        <Input 
+                            value={name}
+                            type={'text'}
+                            placeholder={'Имя'}
+                            onChange={(e) => handleInputChange(e.target.value, setName)}
+                            icon={'EditIcon'}
+                            disabled={disabled}
+                            name={'name'}
+                            onIconClick={onIconClick}
+                            size={'default'}
+                            extraClass="ml-1"
+                        />
+                    </div>
+                    <div className='mb-6'>
+                        <Input 
+                            value={email}
+                            type={'email'}
+                            placeholder={'E-mail'}
+                            onChange={(e) => handleInputChange(e.target.value, setEmail)}
+                            icon={'EditIcon'}
+                            disabled={disabled}
+                            name={'name'}
+                            onIconClick={onIconClick}
+                            size={'default'}
+                            extraClass="ml-1"
+                        />
+                    </div>
+                    <div className='mb-6'>
+                        <Input
+                            value={password}
+                            type={'password'}
+                            placeholder={'Password'}
+                            onChange={(e) => handleInputChange(e.target.value, setPassword)}
+                            icon={'EditIcon'}
+                            disabled={disabled}
+                            name={'password'}
+                            onIconClick={onIconClick}
+                            errorText={'Неверный пароль'}
+                            size={'default'}
+                            extraClass="ml-1"
+                        />
+                    </div>
+                    <div className={styles.buttonWrapper}>
+                        {isModified && (
+                            <>
+                                <Button htmlType="reset" type="secondary" size="medium">
+                                    Отмена
+                                </Button>
+                                <Button htmlType="submit" type="primary" size="medium">
+                                    Сохранить
+                                </Button>
+                            </>
+                        )}
+                    </div>
+                </form>
             </div>
             <div className={styles.placeholder}></div>
         </section>

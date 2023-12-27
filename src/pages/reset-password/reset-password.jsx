@@ -10,47 +10,52 @@ const ResetPasswordPage = () => {
 
     const navigate = useNavigate();
 
-    const handleResetPassword = async () => {
+    const handleResetPassword = async (e) => {
+        e.preventDefault();
+
         try {
             const response = await resetPassword(password, token);
             console.log('Password reset successful:', response);
             navigate('/');
         } catch (error) {
             console.error('Password reset failed:', error);
-    }
-  };
+        }
+    };
+
     return (
-        <section className={`${styles.page} mt-40`}>
-            <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
-            <div className='mb-6'>
-                <Input 
-                    value={password} 
-                    type={'password'}
-                    placeholder={'Введите новый пароль'}
-                    onChange={e => setPassword(e.target.value)}
-                    name={'password'}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-6'>
-                <Input 
-                    value={token} 
-                    type={'text'}
-                    placeholder={'Введите код из письма'}
-                    onChange={e => setToken(e.target.value)}
-                    name={'token'}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-20'>
-                <Button htmlType="button" type="primary" size="large" onClick={handleResetPassword}>
-                    Сохранить
-                </Button>
-            </div>
-            <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to={"/login"}>Войти</Link></p>
-        </section>
+        <form onSubmit={handleResetPassword}>
+            <section className={`${styles.page} mt-40`}>
+                <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
+                <div className='mb-6'>
+                    <Input 
+                        value={password} 
+                        type={'password'}
+                        placeholder={'Введите новый пароль'}
+                        onChange={e => setPassword(e.target.value)}
+                        name={'password'}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-6'>
+                    <Input 
+                        value={token} 
+                        type={'text'}
+                        placeholder={'Введите код из письма'}
+                        onChange={e => setToken(e.target.value)}
+                        name={'token'}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-20'>
+                    <Button htmlType="submit" type="primary" size="large">
+                        Сохранить
+                    </Button>
+                </div>
+                <p className="text text_type_main-default text_color_inactive">Вспомнили пароль? <Link to={"/login"}>Войти</Link></p>
+            </section>
+        </form>
     );
 }
 

@@ -12,47 +12,52 @@ const LoginPage = () => {
 
     const dispatch = useDispatch();
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault(); // Prevent the default form submission
+    
         try {
-            dispatch(login(email, password));
+          dispatch(login(email, password));
         } catch (error) {
-            console.error('Login failed:', error);
-    }
-};
+          console.error('Login failed:', error);
+        }
+    };
+    
     return (
-        <section className={`${styles.page} mt-40`}>
-            <h1 className="text text_type_main-medium mb-6">Вход</h1>
-            <div className='mb-6'>
-                <Input 
-                    value={email}
-                    type={'email'}
-                    placeholder={'E-mail'}
-                    onChange={e => setEmail(e.target.value)}
-                    name={'email'}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-6'>
-                <Input
-                    value={password}
-                    type={'password'}
-                    placeholder={'Password'}
-                    onChange={e => setPassword(e.target.value)}
-                    icon={'ShowIcon'}
-                    name={'password'}
-                    size={'default'}
-                    extraClass="ml-1"
-                />
-            </div>
-            <div className='mb-20'>
-                <Button htmlType="button" type="primary" size="large" onClick={handleLogin}>
-                    Войти
-                </Button>
-            </div>
-            <p className="text text_type_main-default text_color_inactive mb-4">Вы — новый пользователь? <Link to={'/register'} state={location.state}>Зарегистрироваться</Link></p>
-            <p className="text text_type_main-default text_color_inactive">Забыли пароль? <Link to={'/forgot-password'} state={location.state}>Восстановить пароль</Link></p>
-        </section>
+        <form onSubmit={handleLogin}>
+            <section className={`${styles.page} mt-40`}>
+                <h1 className="text text_type_main-medium mb-6">Вход</h1>
+                <div className='mb-6'>
+                    <Input 
+                        value={email}
+                        type={'email'}
+                        placeholder={'E-mail'}
+                        onChange={e => setEmail(e.target.value)}
+                        name={'email'}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-6'>
+                    <Input
+                        value={password}
+                        type={'password'}
+                        placeholder={'Password'}
+                        onChange={e => setPassword(e.target.value)}
+                        icon={'ShowIcon'}
+                        name={'password'}
+                        size={'default'}
+                        extraClass="ml-1"
+                    />
+                </div>
+                <div className='mb-20'>
+                    <Button htmlType="submit" type="primary" size="large">
+                        Войти
+                    </Button>
+                </div>
+                <p className="text text_type_main-default text_color_inactive mb-4">Вы — новый пользователь? <Link to={'/register'} state={location.state}>Зарегистрироваться</Link></p>
+                <p className="text text_type_main-default text_color_inactive">Забыли пароль? <Link to={'/forgot-password'} state={location.state}>Восстановить пароль</Link></p>
+            </section>
+        </form>
     );
 }
 
