@@ -7,9 +7,9 @@ import { logout, updateUserInfo } from '../../services/actions/user';
  
 const ProfilePage = () => {    
     const user = useSelector((state) => state.user.user);
-    const [email, setEmail] = useState(user.email);
-    const [password, setPassword] = useState(user.password);
-    const [name, setName] = useState(user.name);
+    const [email, setEmail] = useState(user.email || '');
+    const [password, setPassword] = useState(user.password || '');
+    const [name, setName] = useState(user.name || '');
     const [disabled, setDisabled] = useState(true);
     const [isModified, setIsModified] = useState(false);
 
