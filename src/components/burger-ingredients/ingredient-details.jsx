@@ -1,9 +1,20 @@
+import { useParams } from 'react-router-dom';
 import styles from './burger-ingredients.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { setAllIngredients } from '../../services/actions/all-ingredients';
 
 const IngredientDetails = () => {
+    const dispatch = useDispatch();
 
-    const ingredient = useSelector((state) => state.selectedIngredient);
+    const { id } = useParams();
+
+    const allIngredients = useSelector(state => state.allIngredients);
+    const ingredient = allIngredients.find(ingredient => ingredient._id === id);
+
+    useEffect(() => {
+        dispatch(setAllIngredients());
+    }, [dispatch]);
 
     if (!ingredient) {
         return (

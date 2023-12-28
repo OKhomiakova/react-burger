@@ -1,0 +1,12 @@
+.page {
+    display: grid;
+    grid-template-columns: auto ;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+a {
+    color: #4C4CFF;
+    text-decoration: none;
+}

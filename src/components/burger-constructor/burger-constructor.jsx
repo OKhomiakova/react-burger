@@ -9,12 +9,16 @@ import { addBurgerIngredient } from '../../services/actions/burger-constructor-i
 import { createOrder } from '../../services/actions/created-order';
 import { useEffect, useState, useCallback } from 'react';
 import { useDrop } from 'react-dnd';
+import { useNavigate } from 'react-router-dom';
 
 const BurgerConstructor = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.burgerIngredients.notBun);
   const bun = useSelector((state) => state.burgerIngredients.bun);
+  const user = useSelector((state) => state.user.user);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const newTotalPrice = ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0) + 2 * (bun?.price ?? 0);
@@ -27,12 +31,16 @@ const BurgerConstructor = () => {
 
   const onCLick = useCallback(
     () => {
-      const allIngredientsIds = ingredients.map(x => x._id);
-      if (bun) allIngredientsIds.push(bun._id);
-      dispatch(createOrder({ ingredients: allIngredientsIds }));
-      openModal();
+      if (user) {
+        const allIngredientsIds = ingredients.map(x => x._id);
+        if (bun) allIngredientsIds.push(bun._id);
+        dispatch(createOrder({ ingredients: allIngredientsIds }));
+        openModal();
+      } else {
+        navigate('/login');
+      }
     }
-  , [dispatch, openModal, ingredients, bun]);
+  , [ingredients, bun, dispatch, openModal, navigate, user]);
 
   const [, drop] = useDrop({
     accept: 'INGREDIENT',

@@ -1,5 +1,6 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
+import PropTypes from 'prop-types';
 
 const IngredientsTabs = ({ currentTab }) => {
     return (
@@ -18,3 +19,7 @@ const IngredientsTabs = ({ currentTab }) => {
 }
 
 export default IngredientsTabs;
+
+IngredientsTabs.propTypes = {
+    currentTab: PropTypes.number,
+}; 

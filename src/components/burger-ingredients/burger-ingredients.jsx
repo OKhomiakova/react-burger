@@ -4,10 +4,6 @@ import IngredientsList from './ingredient-list';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllIngredients } from '../../services/actions/all-ingredients';
-import IngredientDetails from './ingredient-details';
-import { deleteIngredientDetails } from '../../services/actions/selected-ingredient';
-import Modal from '../modal/modal';
-import useModal from '../../hooks/useModal';
 
 const BurgerIngredients = () => {
 
@@ -51,12 +47,6 @@ const BurgerIngredients = () => {
     };
   }, []);
 
-  const { isModalOpen, openModal, closeModal } = useModal();
-  const handleOnClose = () => {
-    dispatch(deleteIngredientDetails());
-    closeModal();
-  }
-
   return (
     <section className={`${styles.column} pr-10`}>
       <div className={`${styles.heading} text text_type_main-medium pt-10 pb-5`}>
@@ -64,12 +54,8 @@ const BurgerIngredients = () => {
       </div>
       <IngredientsTabs currentTab={currentTab}/>
       <div className={styles.ingredients} ref={burgerIngredientsRef}>
-        <IngredientsList ingredients={ingredients} openModal={openModal}/>
+        <IngredientsList ingredients={ingredients}/>
       </div>
-      {isModalOpen && 
-        <Modal title="Детали ингредиента" onClose={handleOnClose}>
-          <IngredientDetails />
-        </Modal>}
     </section>
   )
 };
