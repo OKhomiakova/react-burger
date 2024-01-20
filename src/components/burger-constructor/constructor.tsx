@@ -2,10 +2,10 @@ import React, { useCallback, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
 import TIngredientType from '../../utils/types';
-import { useDispatch } from 'react-redux';
 import { deleteBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
 import { useDrop, useDrag } from 'react-dnd';
 import { changeOrder } from '../../services/actions/burger-constructor-ingredients';
+import { useAppDispatch } from '../../utils/redux-hooks';
 
 type TConstructorProps = {
   data: TIngredientType;
@@ -14,7 +14,7 @@ type TConstructorProps = {
 };
 
 const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data, type, position }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isTopOrBottom = type === 'top' || type === 'bottom';
   const showDragIcon = !isTopOrBottom;
   const showAppendix =

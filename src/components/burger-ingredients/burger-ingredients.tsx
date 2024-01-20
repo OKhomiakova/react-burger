@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { setAllIngredients } from '../../services/actions/all-ingredients';
 import styles from './burger-ingredients.module.css';
 import IngredientsTabs from './ingredients-tabs';
 import IngredientsList from './ingredient-list';
+import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 
 const BurgerIngredients: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     // @ts-ignore
     dispatch(setAllIngredients());
   }, [dispatch]);
 
-  const ingredients = useSelector((state: any) => state.allIngredients);
+  const ingredients = useAppSelector((state) => state.allIngredients);
 
   const [currentTab, setCurrentTab] = useState<number>(0);
   const burgerIngredientsRef = useRef<HTMLDivElement>(null);

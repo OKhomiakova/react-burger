@@ -10,13 +10,13 @@ import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password/reset-password';
 import ProfilePage from '../../pages/profile/profile';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
-import { useDispatch } from 'react-redux';
 import { checkUserAuth } from '../../services/actions/user';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import HomePage from '../../pages/home/home';
+import { useAppDispatch } from '../../utils/redux-hooks';
 
 const App: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [passwordRecoveryInitiated, setPasswordRecoveryInitiated] = useState(false);
 

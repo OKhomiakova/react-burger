@@ -2,12 +2,12 @@ import React, { ChangeEvent, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import styles from './profile.module.css';
 import { Input, Button, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUserInfo } from '../../services/actions/user';
 import { useForm } from '../../hooks/useForm';
+import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 
 const ProfilePage: React.FC = () => {
-  const user = useSelector((state: any) => state.user.user);
+  const user = useAppSelector((state) => state.user.user);
 
   const { values, handleChange, resetForm } = useForm({
     email: user.email || '',
@@ -19,7 +19,7 @@ const ProfilePage: React.FC = () => {
   const [isModified, setIsModified] = useState(false);
 
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onIconClick = () => {
     setDisabled(false);

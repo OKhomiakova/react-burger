@@ -1,10 +1,10 @@
 import React from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { login } from '../../services/actions/user';
-import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import styles from './login.module.css';
+import { useAppDispatch } from '../../utils/redux-hooks';
 
 const LoginPage: React.FC = () => {
   const { values, handleChange } = useForm({
@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
   });
 
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent the default form submission

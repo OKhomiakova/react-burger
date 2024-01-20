@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './burger-ingredients.module.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { setAllIngredients } from '../../services/actions/all-ingredients';
 import TIngredientType from '../../utils/types';
+import { useAppDispatch,  } from '../../utils/redux-hooks';
 
 const IngredientDetails: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   // @ts-ignore
-  const allIngredients = useSelector((state) => state.allIngredients);
+  const allIngredients = useAppSelector((state) => state.allIngredients);
   const ingredient = allIngredients.find((ingredient: TIngredientType) => ingredient._id === id);
 
   useEffect(() => {

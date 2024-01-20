@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from './register.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { register } from '../../services/actions/user';
 import { useForm } from '../../hooks/useForm';
+import { useAppDispatch } from '../../utils/redux-hooks';
 
 const RegisterPage: React.FC = () => {
   const { values, handleChange } = useForm({
@@ -13,7 +13,7 @@ const RegisterPage: React.FC = () => {
     name: ''
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
