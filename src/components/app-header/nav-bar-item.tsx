@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './app-header.module.css';
 
-interface NavBarItemProps {
+type TNavBarItemProps = {
   text: string;
   isActive: boolean;
-}
+};
 
-const NavBarItem: React.FC<NavBarItemProps> = ({ text, isActive }) => (
+const NavBarItem: React.FC<TNavBarItemProps> = ({ text, isActive }) => (
   <button
     type='button'
     className={`${isActive && styles.textColor} ${styles.text} ${
