@@ -1,14 +1,14 @@
 import React from 'react';
 import IngredientGroup from './ingredient-group';
-import ingredientType from '../../utils/types';
+import TIngredientType from '../../utils/types';
 
 type TIngredientsListProps = {
-  ingredients: ingredientType[];
+  ingredients: TIngredientType[];
 };
 
 const IngredientsList: React.FC<TIngredientsListProps> = ({ ingredients }) => {
-  const groupedIngredients: Record<string, ingredientType[]> = ingredients.reduce(
-    (groups, ingredient) => {
+  const groupedIngredients: Record<string, TIngredientType[]> = ingredients.reduce(
+    (groups: Record<string, TIngredientType[]>, ingredient: TIngredientType) => {
       const type = ingredient.type;
       if (!groups[type]) {
         groups[type] = [];

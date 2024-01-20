@@ -4,16 +4,16 @@ import { setAllIngredients } from '../../services/actions/all-ingredients';
 import styles from './burger-ingredients.module.css';
 import IngredientsTabs from './ingredients-tabs';
 import IngredientsList from './ingredient-list';
-import { RootState } from '../../store';
 
 const BurgerIngredients: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(setAllIngredients());
   }, [dispatch]);
 
-  const ingredients = useSelector((state: RootState) => state.allIngredients);
+  const ingredients = useSelector((state: any) => state.allIngredients);
 
   const [currentTab, setCurrentTab] = useState<number>(0);
   const burgerIngredientsRef = useRef<HTMLDivElement>(null);
@@ -22,8 +22,8 @@ const BurgerIngredients: React.FC = () => {
     const handleScroll = () => {
       const sectionsNodeList = document.querySelectorAll('.ingredient-group');
       const sectionsHeights = [...sectionsNodeList].slice(0, 2).reduce((acc, val) => {
-        if (acc.length === 0) return [val.offsetHeight];
-        return [...acc, acc[acc.length - 1] + val.offsetHeight];
+        if (acc.length === 0) return [(val as HTMLElement).offsetHeight];
+        return [...acc, acc[acc.length - 1] + (val as HTMLElement).offsetHeight];
       }, [0]);
       const currentScroll = burgerIngredientsRef.current?.scrollTop || 0;
       let minDistance = Number.MAX_VALUE;
@@ -36,7 +36,7 @@ const BurgerIngredients: React.FC = () => {
           closestTab = index;
         }
       });
-      setCurrentTab(closestTab);
+      setCurrentTab(closestTab !== undefined ? closestTab : 1);
     };
 
     const scrollContainer = burgerIngredientsRef.current;
