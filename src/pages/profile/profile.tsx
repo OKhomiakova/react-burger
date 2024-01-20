@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import styles from './profile.module.css';
 import { Input, Button, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -57,7 +57,14 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleInputChange = (value: string, name: string) => {
-    handleChange({ target: { value, name } });
+    const customEvent = {
+      target: {
+        value,
+        name,
+      },
+    } as ChangeEvent<HTMLInputElement>;
+
+    handleChange(customEvent);
     setIsModified(true);
   };
 
