@@ -32,7 +32,7 @@ const BurgerConstructor: React.FC = () => {
 
   const onClick = useCallback(() => {
     if (user) {
-      const allIngredientsIds = ingredients.map((x: TIngredientType) => x.id);
+      const allIngredientsIds = ingredients.map((x: TIngredientType) => x._id);
       if (bun) allIngredientsIds.push(bun._id);
       // @ts-ignore
       dispatch(createOrder({ ingredients: allIngredientsIds }));

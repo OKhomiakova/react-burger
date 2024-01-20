@@ -14,7 +14,7 @@ const IngredientGroup: React.FC<TIngredientGroupProps> = ({ title, data }) => {
       <h2 className={`text text_type_main-medium mt-10 mb-6`}>{title}</h2>
       <div className={`${styles.group} mr-4 ml-4`}>
         {data.map((ingredient) => (
-          <IngredientCard ingredient={ingredient} key={ingredient.id} />
+          <IngredientCard ingredient={ingredient} key={ingredient._id} />
         ))}
       </div>
     </div>

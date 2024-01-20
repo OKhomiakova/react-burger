@@ -26,7 +26,7 @@ const IngredientCard: React.FC<TIngredientCardProps> = ({ ingredient }) => {
   });
 
   const location = useLocation();
-  const ingredientId = ingredient.id;
+  const ingredientId = ingredient._id;
 
   return (
     <Link key={ingredientId} to={`/ingredients/${ingredientId}`} state={{ background: location }} className={styles.link}>

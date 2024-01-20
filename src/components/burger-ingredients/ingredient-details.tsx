@@ -10,7 +10,7 @@ const IngredientDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   // @ts-ignore
   const allIngredients = useSelector((state) => state.allIngredients);
-  const ingredient = allIngredients.find((ingredient: TIngredientType) => ingredient.id === id);
+  const ingredient = allIngredients.find((ingredient: TIngredientType) => ingredient._id === id);
 
   useEffect(() => {
     // @ts-ignore
