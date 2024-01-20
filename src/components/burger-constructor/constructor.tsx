@@ -1,19 +1,19 @@
 import React, { useCallback, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
-import ingredientType from '../../utils/types';
+import TIngredientType from '../../utils/types';
 import { useDispatch } from 'react-redux';
 import { deleteBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
 import { useDrop, useDrag } from 'react-dnd';
 import { changeOrder } from '../../services/actions/burger-constructor-ingredients';
 
 type TConstructorProps = {
-  data: ingredientType;
-  type: string;
-  position: number;
+  data: TIngredientType;
+  type: "top" | "bottom" | undefined;
+  position?: number;
 };
 
-const Constructor: React.FC<TConstructorProps> = ({ data, type, position }) => {
+const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data, type, position }) => {
   const dispatch = useDispatch();
   const isTopOrBottom = type === 'top' || type === 'bottom';
   const showDragIcon = !isTopOrBottom;
@@ -29,6 +29,7 @@ const Constructor: React.FC<TConstructorProps> = ({ data, type, position }) => {
   const [, drop] = useDrop({
     accept: 'orderItems',
     drop: (item) => {
+      // @ts-ignore
       dispatch(changeOrder(item.position, position));
     },
   });
@@ -50,7 +51,7 @@ const Constructor: React.FC<TConstructorProps> = ({ data, type, position }) => {
     >
       {showDragIcon && (
         <div className={styles.icon}>
-          <DragIcon />
+          <DragIcon type='primary' />
         </div>
       )}
       <ConstructorElement

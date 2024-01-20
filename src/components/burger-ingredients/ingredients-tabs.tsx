@@ -9,13 +9,13 @@ type TIngredientsTabsProps = {
 const IngredientsTabs: React.FC<TIngredientsTabsProps> = ({ currentTab }) => {
   return (
     <div className={styles.tab}>
-      <Tab value="one" active={currentTab === 0}>
+      <Tab value="one" active={currentTab === 0} >
         Булки
       </Tab>
-      <Tab value="two" active={currentTab === 1}>
+      <Tab value="two" active={currentTab === 1} onClick={}>
         Соусы
       </Tab>
-      <Tab value="three" active={currentTab === 2}>
+      <Tab value="three" active={currentTab === 2} onClick={}>
         Начинки
       </Tab>
     </div>

@@ -10,6 +10,7 @@ import Modal from '../modal/modal';
 import OrderDetails from './order-details';
 import useModal from '../../hooks/useModal';
 import styles from './burger-constructor.module.css';
+import TIngredientType from '../../utils/types';
 
 const BurgerConstructor: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -21,7 +22,7 @@ const BurgerConstructor: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const newTotalPrice = ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0) + 2 * (bun?.price ?? 0);
+    const newTotalPrice = ingredients.reduce((sum: number, ingredient: TIngredientType) => sum + ingredient.price, 0) + 2 * (bun?.price ?? 0);
     setTotalPrice(newTotalPrice);
   }, [ingredients, bun?.price]);
 
@@ -31,7 +32,7 @@ const BurgerConstructor: React.FC = () => {
 
   const onClick = useCallback(() => {
     if (user) {
-      const allIngredientsIds = ingredients.map((x) => x._id);
+      const allIngredientsIds = ingredients.map((x: TIngredientType) => x.id);
       if (bun) allIngredientsIds.push(bun._id);
       // @ts-ignore
       dispatch(createOrder({ ingredients: allIngredientsIds }));
@@ -51,11 +52,11 @@ const BurgerConstructor: React.FC = () => {
   return (
     <section className={`${styles.column} pt-25`} ref={drop}>
       {bun && <Constructor data={bun} type='top' className={styles.edge} />}
-      <div className={styles.constructor}>
+      <div className={styles.constructorWrapper}>
         {ingredients
           .filter((ingredient: any) => ingredient.type !== 'bun')
           .map((ingredient: any, index: number) => (
-            <Constructor key={ingredient.uniqueId} data={ingredient} position={index} />
+            <Constructor key={ingredient.uniqueId} data={ingredient} position={index} type={undefined}/>
           ))}
       </div>
       {bun && <Constructor data={bun} type='bottom' className={styles.edge} />}
@@ -63,7 +64,7 @@ const BurgerConstructor: React.FC = () => {
         <div className={`${styles.total} pr-10`}>
           <p className={`text text_type_digits-medium`}>{totalPrice}</p>
           <div className={styles.icon}>
-            <CurrencyIcon />
+            <CurrencyIcon type='primary'/>
           </div>
         </div>
         <div className={styles.buttonWrapper}>

@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import styles from './burger-ingredients.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllIngredients } from '../../services/actions/all-ingredients';
-import { RootState } from '../../store';
+import TIngredientType from '../../utils/types';
 
 const IngredientDetails: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  
-  const allIngredients = useSelector((state: RootState) => state.allIngredients);
-  const ingredient = allIngredients.find((ingredient) => ingredient._id === id);
+  // @ts-ignore
+  const allIngredients = useSelector((state) => state.allIngredients);
+  const ingredient = allIngredients.find((ingredient: TIngredientType) => ingredient.id === id);
 
   useEffect(() => {
     // @ts-ignore
