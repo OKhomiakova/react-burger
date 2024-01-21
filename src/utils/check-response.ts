@@ -1,14 +1,15 @@
 import { BASE_URL } from "../constants";
 
-export const request = (endpoint: string, options?: RequestInit): Promise<any> =>
-  fetch(`${BASE_URL}${endpoint}`, options).then(checkResponse);
+type TRequest = {
+  endpoint: string;
+  options?: RequestInit;
+};
 
-export const checkResponse = (response: Response): Promise<any> => {
-  if (response.ok) {
-    return response.json();
-  } else if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response);
-  } else {
-    return Promise.reject(`Ошибка ${response.status}`);
-  }
+export const request = ({ endpoint, options }: TRequest): Promise<any> => {
+  return fetch(`${BASE_URL}${endpoint}`, options).then(checkResponse); 
+}
+
+export const checkResponse = <T>(response: Response): Promise<T> => {
+  console.log(response);
+  return response.ok ? response.json() : response.json().then((error) => Promise.reject(error));
 };

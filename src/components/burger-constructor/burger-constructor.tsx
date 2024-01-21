@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrop } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
 import { createOrder } from '../../services/actions/created-order';
@@ -11,13 +10,14 @@ import OrderDetails from './order-details';
 import useModal from '../../hooks/useModal';
 import styles from './burger-constructor.module.css';
 import TIngredientType from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 
 const BurgerConstructor: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const dispatch = useDispatch();
-  const ingredients = useSelector((state: any) => state.burgerIngredients.notBun);
-  const bun = useSelector((state: any) => state.burgerIngredients.bun);
-  const user = useSelector((state: any) => state.user.user);
+  const dispatch = useAppDispatch();
+  const ingredients = useAppSelector((state) => state.burgerIngredients.notBun);
+  const bun = useAppSelector((state) => state.burgerIngredients.bun);
+  const user = useAppSelector((state) => state.user.user);
 
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const BurgerConstructor: React.FC = () => {
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  const orderId = useSelector((state: any) => state.createdOrder);
+  const orderId = useAppSelector((state) => state.createdOrder);
 
   const onClick = useCallback(() => {
     if (user) {
