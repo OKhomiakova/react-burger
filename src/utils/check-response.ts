@@ -10,6 +10,5 @@ export const request = ({ endpoint, options }: TRequest): Promise<any> => {
 }
 
 export const checkResponse = <T>(response: Response): Promise<T> => {
-  console.log(response);
   return response.ok ? response.json() : response.json().then((error) => Promise.reject(error));
 };

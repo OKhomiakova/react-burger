@@ -4,8 +4,15 @@ import { request } from "../../utils/check-response";
 export const SET_ALL_INGREDIENTS = 'SET_ALL_INGREDIENTS';
 
 export const setAllIngredients = () => (dispatch) => {
-  request('ingredients')
-    .then(response => {
+  request({
+    endpoint: 'ingredients',
+    options: {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  }).then(response => {
       dispatch({
         type: SET_ALL_INGREDIENTS,
           ingredients: response.data,

@@ -14,7 +14,7 @@ type TFetchWithRefresh = {
 };
 
 export const refreshToken = async (): Promise<TRefreshToken> => {
-  const response = await fetch(`${BASE_URL}/auth/token`, {
+  const response = await fetch(`${BASE_URL}auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

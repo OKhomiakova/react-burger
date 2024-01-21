@@ -10,11 +10,17 @@ export const createOrder = (data) => (dispatch) => {
     dispatch({
       type: CLEAR_ORDER,
     });
-    fetchWithRefresh('orders', { method: 'POST', body: JSON.stringify(data), headers: {
-      "Content-Type": "application/json",
-      "Authorization": `${accessToken}`,
-    }})
-      .then(response => {
+    fetchWithRefresh({
+      endpoint: 'orders',
+      options: {
+        method: 'POST', 
+        body: JSON.stringify(data), 
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${accessToken}`,
+        }
+      }
+    }).then(response => {
         dispatch({
           type: CREATE_ORDER,
           orderId: response.order.number,
