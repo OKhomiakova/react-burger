@@ -2,7 +2,7 @@ body {
     overflow:hidden;
 }
 
-.constructor {
+.constructorWrapper {
     overflow-y: scroll;  
     height:36vh;
 }

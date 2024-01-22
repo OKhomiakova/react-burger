@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as api from '../../../src/utils/api';
 
 export const SET_USER = 'SET_USER';
