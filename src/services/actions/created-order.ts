@@ -1,35 +1,31 @@
 import { Dispatch } from 'redux';
 import { SOMETHING_FAILED } from "../middleware/logger";
-import { fetchWithRefresh, ApiResponse } from "../../utils/api";
+import { fetchWithRefresh } from "../../utils/api";
 import { CREATE_ORDER, 
-         CLEAR_ORDER, 
+         CLEAR_ORDER,
          CLEAR_BURGER_CONSTRUCTOR } from "../../constants";
+import { TIngredientType } from '../../utils/types';
+import { IClearBurgerConstructorAction } from './burger-constructor-ingredients';
 
 interface Data {
-    // Define the structure of your data object
-    // Add necessary properties here
+    ingredients: TIngredientType[];
 }
 
-interface CreateOrderAction {
+interface ICreateOrderAction {
     type: typeof CREATE_ORDER;
     orderId: string;
 }
 
-interface ClearOrderAction {
+interface IClearOrderAction {
     type: typeof CLEAR_ORDER;
 }
 
-interface ClearBurgerConstructorAction {
-    type: typeof CLEAR_BURGER_CONSTRUCTOR;
-}
-
-type ActionTypes =
-    | CreateOrderAction
-    | ClearOrderAction
-    | ClearBurgerConstructorAction
+export type TCreateOrderActionTypes =
+    | ICreateOrderAction
+    | IClearOrderAction
     | { type: typeof SOMETHING_FAILED; error: Error };
 
-export const createOrder = (data: Data) => (dispatch: Dispatch<ActionTypes>) => {
+export const createOrder = (data: Data) => (dispatch: Dispatch<TCreateOrderActionTypes | IClearBurgerConstructorAction>) => {
     const accessToken = localStorage.getItem('accessToken');
     dispatch({
         type: CLEAR_ORDER,
@@ -44,7 +40,7 @@ export const createOrder = (data: Data) => (dispatch: Dispatch<ActionTypes>) => 
                 "Authorization": `${accessToken}`,
             }
         }
-    }).then((response: ApiResponse<{ order: { number: string } }>) => {
+    }).then((response: { data: { order: { number: string } } }) => {
         dispatch({
             type: CREATE_ORDER,
             orderId: response.data.order.number,

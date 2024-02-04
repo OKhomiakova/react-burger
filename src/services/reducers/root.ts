@@ -1,19 +1,10 @@
-import { combineReducers, Reducer } from 'redux';
-import allIngredients, { AllIngredientsState } from './all-ingredients';
-import burgerIngredients, { BurgerIngredientsState } from './burger-constructor-ingredients';
-import createdOrder, { CreatedOrderState } from './created-order';
-import user, { UserState } from './user';
+import { combineReducers } from 'redux';
+import allIngredients from './all-ingredients';
+import burgerIngredients from './burger-constructor-ingredients';
+import createdOrder from './created-order';
+import user from './user';
 
-// Define the shape of the root state
-export interface RootState {
-    allIngredients: AllIngredientsState;
-    burgerIngredients: BurgerIngredientsState;
-    createdOrder: CreatedOrderState;
-    user: UserState;
-}
-
-// Combine reducers with RootState
-const rootReducer: Reducer<RootState> = combineReducers({
+const rootReducer = combineReducers({
     allIngredients,
     burgerIngredients,
     createdOrder,

@@ -1,14 +1,15 @@
-import { CREATE_ORDER, CLEAR_ORDER, OrderActionTypes } from "../actions/created-order";
+import { CREATE_ORDER, CLEAR_ORDER } from "../../constants";
+import { TCreateOrderActionTypes } from "../actions/created-order";
 
-interface State {
+export type TCreatedOrderState = {
   orderId: string | null;
 }
 
-const initialState: State = {
+const initialState: TCreatedOrderState = {
   orderId: null
 };
   
-const createdOrder = (state: State = initialState, action: OrderActionTypes): State => {
+const createdOrder = (state: TCreatedOrderState = initialState, action: TCreateOrderActionTypes): TCreatedOrderState => {
   switch (action.type) {
     case CREATE_ORDER:
       return { ...state, orderId: action.orderId };

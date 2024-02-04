@@ -1,4 +1,4 @@
-type TIngredientType = {
+export type TIngredientType = {
     _id: string,
     name: string,
     type: string,
@@ -14,4 +14,6 @@ type TIngredientType = {
     uniqueId: string,
 }; 
 
-export default TIngredientType;
+export interface IIngredient {
+    ingredient: TIngredientType;
+}

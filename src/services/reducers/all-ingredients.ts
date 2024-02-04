@@ -1,8 +1,12 @@
-import { SET_ALL_INGREDIENTS, AllIngredientsActionTypes } from "../actions/all-ingredients";
+import { SET_ALL_INGREDIENTS } from "../../constants";
+import type { TAllIngredientsActionTypes } from "../actions/all-ingredients";
+import { TIngredientType } from "../../utils/types";
 
-const initialState: string[] = []; // Change string[] to the type of your ingredients
+export type TAllIngredientsState = TIngredientType[];
 
-const allIngredients = (state = initialState, action: AllIngredientsActionTypes): string[] => {
+const initialState: TAllIngredientsState = [];
+
+const allIngredients = (state = initialState, action: TAllIngredientsActionTypes): TIngredientType[] => {
     switch (action.type) {
         case SET_ALL_INGREDIENTS:
             return action.ingredients;

@@ -2,21 +2,17 @@ import { Dispatch } from 'redux';
 import { SOMETHING_FAILED } from "../middleware/logger";
 import { request } from "../../utils/check-response";
 import { SET_ALL_INGREDIENTS } from "../../constants";
-import { TIngredientType } from "../../utils/types"
-
-export interface IIngredient {
-  ingredient: TIngredientType;
-}
+import { TIngredientType} from "../../utils/types";
 
 export interface ISetAllIngredientsAction {
   type: typeof SET_ALL_INGREDIENTS;
-  ingredients: IIngredient[];
+  ingredients: TIngredientType[];
 }
 
-export type TActionTypes = ISetAllIngredientsAction | { type: typeof SOMETHING_FAILED; error: Error };
+export type TAllIngredientsActionTypes = ISetAllIngredientsAction | { type: typeof SOMETHING_FAILED; error: Error };
 
 // Action creator to set all ingredients
-export const setAllIngredients = () => (dispatch: Dispatch<TActionTypes>) => {
+export const setAllIngredients = () => (dispatch: Dispatch<TAllIngredientsActionTypes>) => {
   request({
     endpoint: 'ingredients',
     options: {
@@ -25,7 +21,7 @@ export const setAllIngredients = () => (dispatch: Dispatch<TActionTypes>) => {
         'Content-Type': 'application/json',
       },
     }
-  }).then((response: response<{ data: IIngredient[] }>) => {
+  }).then((response: { data: TIngredientType[] }) => {
     dispatch({
       type: SET_ALL_INGREDIENTS,
       ingredients: response.data,

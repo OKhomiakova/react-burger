@@ -1,30 +1,50 @@
-import { v4 as uuid4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import { 
+    ADD_BURGER_INGREDIENT,
+    DELETE_BURGER_INGREDIENT,
+    CHANGE_ORDER,
+    CLEAR_BURGER_CONSTRUCTOR } from '../../constants';
+import { TIngredientType} from "../../utils/types";
 
-export const ADD_BURGER_INGREDIENT = 'ADD_BURGER_INGREDIENT';
-export const DELETE_BURGER_INGREDIENT = 'DELETE_BURGER_INGREDIENT';
-export const UPDATE_BURGER_INGREDIENTS_ORDER = 'UPDATE_BURGER_INGREDIENTS_ORDER';
-export const CHANGE_ORDER = 'CHANGE_ORDER';
+interface IAddBurgerIngredientAction {
+    type: typeof ADD_BURGER_INGREDIENT;
+    ingredient: TIngredientType & { uniqueId: string };
+}
 
+interface IDeleteBurgerIngredientAction {
+    type: typeof DELETE_BURGER_INGREDIENT;
+    position: number;
+}
 
-export const addBurgerIngredient = (ingredient) => ({
+interface IChangeOrderAction {
+    type: typeof CHANGE_ORDER;
+    payload: { prevPos: number; newPos: number };
+}
+
+export interface IClearBurgerConstructorAction {
+    type: typeof CLEAR_BURGER_CONSTRUCTOR;
+}
+
+export type TBurgerIngredientsActionTypes =
+    | IAddBurgerIngredientAction
+    | IDeleteBurgerIngredientAction
+    | IChangeOrderAction
+    | IClearBurgerConstructorAction;
+
+export const addBurgerIngredient = (ingredient: TIngredientType): IAddBurgerIngredientAction => ({
     type: ADD_BURGER_INGREDIENT,
     ingredient: {
-        ...ingredient, // используем `spread`, чтобы поменять ссылку на объект. Таким образом `redux` обновит его в хранилище
-       uniqueId: uuid4()  // и добавляем в объект новое поле, которое потом будет использовано в `key`
+        ...ingredient,
+        uniqueId: uuidv4()
     }
 });
 
-export const deleteBurgerIngredient = (position) => ({
+export const deleteBurgerIngredient = (position: number): IDeleteBurgerIngredientAction => ({
     type: DELETE_BURGER_INGREDIENT,
     position,
 });
 
-export const updateBurgerIngredient = () => ({
-    type: UPDATE_BURGER_INGREDIENTS_ORDER,
-});
-
-
-export const changeOrder = (prevPos, newPos) => ({
+export const changeOrder = (prevPos: number, newPos: number): IChangeOrderAction => ({
     type: CHANGE_ORDER,
     payload: { prevPos, newPos },
 });

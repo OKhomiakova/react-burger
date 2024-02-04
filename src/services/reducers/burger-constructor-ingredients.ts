@@ -1,28 +1,23 @@
 import { 
   ADD_BURGER_INGREDIENT, 
   DELETE_BURGER_INGREDIENT, 
-  UPDATE_BURGER_INGREDIENTS_ORDER, 
-  CHANGE_ORDER 
-} from "../actions/burger-constructor-ingredients";
-import { CLEAR_BURGER_CONSTRUCTOR } from "../actions/created-order";
-import { BurgerIngredientsActionTypes } from "../actions/burger-constructor-ingredients";
+  CHANGE_ORDER,
+  CLEAR_BURGER_CONSTRUCTOR 
+} from "../../constants";
+import { TBurgerIngredientsActionTypes } from "../actions/burger-constructor-ingredients";
+import { TIngredientType} from "../../utils/types";
 
-interface Ingredient {
-  type: string; // Type of the ingredient
-  // Define other properties of your ingredient
+export type TBurgerIngredientsState = {
+  bun?: TIngredientType,
+  notBun: TIngredientType[],
 }
 
-interface State {
-  bun?: Ingredient;
-  notBun: Ingredient[];
-}
-
-const initialState: State = {
+const initialState: TBurgerIngredientsState = {
   bun: undefined,
   notBun: [],
 }; 
 
-const burgerIngredients = (state: State = initialState, action: BurgerIngredientsActionTypes): State => {
+const burgerIngredients = (state: TBurgerIngredientsState = initialState, action: TBurgerIngredientsActionTypes): State => {
   switch (action.type) {
     case ADD_BURGER_INGREDIENT:
       if (action.ingredient.type === 'bun') {
@@ -42,11 +37,6 @@ const burgerIngredients = (state: State = initialState, action: BurgerIngredient
           ...state.notBun.slice(0, action.position),
           ...state.notBun.slice(action.position + 1)
         ],
-      };
-    case UPDATE_BURGER_INGREDIENTS_ORDER:
-      return {
-        bun: state.bun,
-        notBun: action.newNotBun,
       };
     case CHANGE_ORDER:
       const { prevPos, newPos } = action.payload;

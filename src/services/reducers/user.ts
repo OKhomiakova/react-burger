@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
-import { SET_IS_AUTH_CHECKED, SET_USER, UserActionTypes } from '../actions/user';
+import { SET_IS_AUTH_CHECKED, SET_USER } from "../../constants";
+import { TUserActionTypes } from '../actions/user';
 
 // Define the shape of the User state
 export interface UserState {
@@ -14,7 +15,7 @@ const initialState: UserState = {
 };
 
 // Define the user reducer
-const userReducer: Reducer<UserState, UserActionTypes> = (state = initialState, action) => {
+const userReducer: Reducer<UserState, TUserActionTypes> = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER:
             return {
