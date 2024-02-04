@@ -1,6 +1,6 @@
 import { compose, createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers/root.js';
-import { actionLogger, errorLogger } from './middleware/logger.js';
+import rootReducer from './reducers/root';
+import { actionLogger, errorLogger } from './middleware/logger';
 import { thunk } from 'redux-thunk';
 
 const composeEnhancers =
