@@ -17,7 +17,7 @@ const initialState: TBurgerIngredientsState = {
   notBun: [],
 }; 
 
-const burgerIngredients = (state: TBurgerIngredientsState = initialState, action: TBurgerIngredientsActionTypes): State => {
+const burgerIngredients = (state: TBurgerIngredientsState = initialState, action: TBurgerIngredientsActionTypes): TBurgerIngredientsState => {
   switch (action.type) {
     case ADD_BURGER_INGREDIENT:
       if (action.ingredient.type === 'bun') {

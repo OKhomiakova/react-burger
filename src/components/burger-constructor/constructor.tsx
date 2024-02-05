@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
-import TIngredientType from '../../utils/types';
+import { TIngredientType } from '../../utils/types';
 import { deleteBurgerIngredient } from '../../services/actions/burger-constructor-ingredients';
 import { useDrop, useDrag } from 'react-dnd';
 import { changeOrder } from '../../services/actions/burger-constructor-ingredients';
@@ -22,7 +22,9 @@ const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data
   const isLocked = type === 'top' ? true : type === 'bottom' ? true : false;
 
   const handleClose = useCallback(() => {
-    dispatch(deleteBurgerIngredient(position));
+    if (position) {
+      dispatch(deleteBurgerIngredient(position));
+    }
   }, [dispatch, position]);
 
   const ref = useRef(null);

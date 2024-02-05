@@ -40,10 +40,11 @@ export const createOrder = (data: Data) => (dispatch: Dispatch<TCreateOrderActio
                 "Authorization": `${accessToken}`,
             }
         }
-    }).then((response: { data: { order: { number: string } } }) => {
+    }).then((response: { order: { number: string } }) => {
+        console.log('createOrder', response);
         dispatch({
             type: CREATE_ORDER,
-            orderId: response.data.order.number,
+            orderId: response.order.number,
         });
         dispatch({
             type: CLEAR_BURGER_CONSTRUCTOR,

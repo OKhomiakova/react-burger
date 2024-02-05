@@ -44,8 +44,8 @@ export const setIsAuthChecked = (value: boolean) => ({
 export const getUser = () => {
     return (dispatch: Dispatch<any>) => {
         return api.getUserInfo()
-            .then((response: { data: UserInfo }) => {
-                dispatch(setUser(response.data.user));
+            .then((response: UserInfo) => {
+                dispatch(setUser(response.user));
             })
             .catch((error: Error) => {
                 console.error("Get user info failed:", error);
@@ -56,10 +56,10 @@ export const getUser = () => {
 export const login = (email: string, password: string) => {
     return (dispatch: Dispatch<any>) => {
         return api.login(email, password)
-            .then((response: { data: UserInfo }) => {
-                localStorage.setItem("accessToken", response.data.accessToken);
-                localStorage.setItem("refreshToken", response.data.refreshToken);
-                dispatch(setUser(response.data.user));
+            .then((response: UserInfo) => {
+                localStorage.setItem("accessToken", response.accessToken);
+                localStorage.setItem("refreshToken", response.refreshToken);
+                dispatch(setUser(response.user));
                 dispatch(setIsAuthChecked(true));
             })
             .catch((error: Error) => {
@@ -71,10 +71,10 @@ export const login = (email: string, password: string) => {
 export const register = (name: string, email: string, password: string) => {
     return (dispatch: Dispatch<any>) => {
         return api.register(name, email, password)
-            .then((res: { data: UserInfo }) => {
-                localStorage.setItem("accessToken", res.data.accessToken);
-                localStorage.setItem("refreshToken", res.data.refreshToken);
-                dispatch(setUser(res.data.user));
+            .then((response: UserInfo) => {
+                localStorage.setItem("accessToken", response.accessToken);
+                localStorage.setItem("refreshToken", response.refreshToken);
+                dispatch(setUser(response.user));
                 dispatch(setIsAuthChecked(true));
             })
             .catch((error: Error) => {
@@ -113,8 +113,8 @@ export const checkUserAuth = () => {
 export const updateUserInfo = (name: string, email: string, password: string) => {
     return (dispatch: Dispatch<any>) => {
         return api.updateUserInfo(name, email, password)
-            .then((response: { data: UserInfo }) => {
-                dispatch(setUser(response.data.user));
+            .then((response: UserInfo) => {
+                dispatch(setUser(response.user));
                 dispatch(setIsAuthChecked(true));
             })
             .catch((error: Error) => {

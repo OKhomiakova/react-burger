@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './burger-ingredients.module.css';
 import { setAllIngredients } from '../../services/actions/all-ingredients';
-import TIngredientType from '../../utils/types';
+import { TIngredientType } from '../../utils/types';
 import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 
 const IngredientDetails: React.FC = () => {
