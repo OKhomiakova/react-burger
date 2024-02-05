@@ -1,0 +1,19 @@
+.ingredientsWrapper {
+    max-height: (64*4)px;
+    overflow-y: auto;
+  }
+  
+.ingredientList {
+    display: flex;
+    flex-direction: column;
+    padding: 0 32px 0 0;
+    margin: 0;
+    gap: 16px;
+    list-style-type: none;
+}
+  
+.ingredientRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
