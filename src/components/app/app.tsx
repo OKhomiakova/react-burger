@@ -14,6 +14,7 @@ import { checkUserAuth } from '../../services/actions/user';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import HomePage from '../../pages/home/home';
 import { useAppDispatch } from '../../utils/redux-hooks';
+import OrderFeed from '../../pages/order-feed/order-feed';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ const App: React.FC = () => {
   const [passwordRecoveryInitiated, setPasswordRecoveryInitiated] = useState(false);
 
   useEffect(() => {
-    // @ts-ignore
+    //@ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 
@@ -50,6 +51,7 @@ const App: React.FC = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profile/orders" element={<></>} />
         </Route>
+        <Route path="/feed" element={<OrderFeed />} />
         <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
