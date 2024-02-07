@@ -6,7 +6,6 @@ type TOrderStats = {
 };
 
 const OrderStats: React.FC<TOrderStats & { className?: string}> = ({totalOrders, totalTodayOrders}) => {
-
   return (
     <div className="ml-15">
       <OrderBoard />

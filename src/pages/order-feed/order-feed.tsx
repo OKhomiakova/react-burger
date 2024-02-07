@@ -16,8 +16,8 @@ const OrderFeedPage = () => {
     };
   }, [dispatch]);
 
-  const totalOrdersSelector = (state: RootState) => state.wsReducer.messages.total;
-  const totalTodayOrdersSelector = (state: RootState) => state.wsReducer.messages.totalToday;
+  const totalOrdersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0].total;
+  const totalTodayOrdersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0].totalToday;
 
   const totalOrders = useAppSelector(totalOrdersSelector);
   const totalTodayOrders = useAppSelector(totalTodayOrdersSelector);
