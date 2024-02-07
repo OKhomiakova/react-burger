@@ -27,15 +27,6 @@ const App: React.FC = () => {
     dispatch(checkUserAuth());
   }, [dispatch]);
   
-  const user = useAppSelector((state) => state.user.user);
-
-  useEffect(
-    () => {
-      dispatch({ type: WS_CONNECTION_START });
-    },
-    [user] // eslint-disable-line react-hooks/exhaustive-deps
-  );
-
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;

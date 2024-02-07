@@ -8,8 +8,9 @@ import {
   WS_SEND_MESSAGE
 } from '../types/wsActionTypes';
 
-export const wsConnectionStart = () => ({
+export const wsConnectionStart = (url: string) => ({
   type: WS_CONNECTION_START,
+  payload: url,
 });
 
 export const wsConnectionSuccess = (event: Event) => ({
@@ -22,9 +23,8 @@ export const wsConnectionError = (event: Event) => ({
   payload: event,
 });
 
-export const wsConnectionClosed = (event: Event) => ({
+export const wsConnectionClosed = () => ({
   type: WS_CONNECTION_CLOSED,
-  payload: event,
 });
 
 export const wsGetMessage = (message: TMessageType) => ({
@@ -39,6 +39,7 @@ export const wsSendMessage = (message: Event) => ({
 
 interface IWSConnectionStart {
   type: typeof WS_CONNECTION_START;
+  payload: string;
 }
       
 interface IWSConnectionSuccess {
@@ -53,7 +54,6 @@ interface IWSConnectionError {
       
 interface IWSConnectionClosed {
   type: typeof WS_CONNECTION_CLOSED;
-  payload: Event,
 }
 
 interface IWSConnectionGetMessage {

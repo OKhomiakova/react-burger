@@ -1,4 +1,5 @@
 export const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const WS_API_URL = 'wss://norma.nomoreparties.space/orders';
 
 export const SET_ALL_INGREDIENTS: 'SET_ALL_INGREDIENTS' = 'SET_ALL_INGREDIENTS';
 

@@ -34,8 +34,8 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
           dispatch(wsGetMessage(JSON.parse(data)));
         };
         // функция, которая вызывается при закрытии соединения
-        socket.onclose = event => {
-          dispatch(wsConnectionClosed(event));
+        socket.onclose = () => {
+          dispatch(wsConnectionClosed());
         };
 
         if (type === 'WS_SEND_MESSAGE') {
