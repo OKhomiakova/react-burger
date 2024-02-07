@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth
+}
+
 .orderList {
     display: flex;
     flex-direction: column;
@@ -5,4 +9,6 @@
     margin: 0;
     gap: 16px;
     list-style-type: none;
+    overflow-y: scroll;
+    max-height: 60vh;
 }

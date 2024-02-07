@@ -7,6 +7,21 @@ const OrderList = () => {
         <li>
           <OrderCard/>
         </li>
+        <li>
+          <OrderCard/>
+        </li>
+        <li>
+          <OrderCard/>
+        </li>
+        <li>
+          <OrderCard/>
+        </li>
+        <li>
+          <OrderCard/>
+        </li>
+        <li>
+          <OrderCard/>
+        </li>
     </ul>
   );
 };

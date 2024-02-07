@@ -1,7 +1,5 @@
 .orderContainer {
     flex: 1;
-    max-height: 60vh;
-    overflow-y: auto;
 }
   
 .statsContainer {
@@ -16,5 +14,9 @@
 .content {
     display: flex;
     justify-content: space-between;
-    grid-template-columns: minmax(320px, 600px) minmax(320px, 584px);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border-radius: 3px;
 }
