@@ -17,6 +17,8 @@ import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 import OrderFeedPage from '../../pages/order-feed/order-feed';
 import OrderFeedDetails from '../order-feed-details/order-feed-details';
 import { WS_CONNECTION_START } from '../../services/types/wsActionTypes';
+import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
+import { WS_API_URL } from '../../constants';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +40,13 @@ const App: React.FC = () => {
   const handleForgotPassword = () => {
     setPasswordRecoveryInitiated(true);
   };
+
+  useEffect(() => {
+    dispatch(wsConnectionStart(`${WS_API_URL}/all`));
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch]);
 
   return (
     <>

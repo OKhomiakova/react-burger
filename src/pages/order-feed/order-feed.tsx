@@ -1,21 +1,10 @@
 import styles from './order-feed.module.css';
 import OrderStats from './order-stats/order-stats';
 import OrderList from '../../components/order-list/order-list';
-import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
-import { useEffect } from 'react';
-import { WS_API_URL } from '../../constants';
-import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
+import { useAppSelector } from '../../utils/redux-hooks';
 import { RootState } from '../../services/types';
 
 const OrderFeedPage = () => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(wsConnectionStart(`${WS_API_URL}/all`));
-    return () => {
-      dispatch(wsConnectionClosed());
-    };
-  }, [dispatch]);
-
   const totalOrdersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0].total;
   const totalTodayOrdersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0].totalToday;
 
