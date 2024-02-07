@@ -4,7 +4,7 @@ import styles from './order-board.module.css';
 
 const OrderBoard = () => {
 
-  const ordersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0].orders;
+  const ordersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0]?.orders ?? [];
 
   const ordersDone = useAppSelector(ordersSelector)
     ?.filter((item) => item.status === 'done')
