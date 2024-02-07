@@ -13,8 +13,10 @@ import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-det
 import { checkUserAuth } from '../../services/actions/user';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import HomePage from '../../pages/home/home';
-import { useAppDispatch } from '../../utils/redux-hooks';
-import OrderFeed from '../../pages/order-feed/order-feed';
+import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
+import OrderFeedPage from '../../pages/order-feed/order-feed';
+import OrderFeedDetails from '../order-feed-details/order-feed-details';
+import { WS_CONNECTION_START } from '../../services/types/wsActionTypes';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +26,17 @@ const App: React.FC = () => {
   useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch]);
+  
+  const user = useAppSelector((state) => state.user.user);
+
+  useEffect(
+    () => {
+      if (user) {
+        dispatch({ type: WS_CONNECTION_START });
+      }
+    },
+    [user] // eslint-disable-line react-hooks/exhaustive-deps
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,7 +63,8 @@ const App: React.FC = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profile/orders" element={<></>} />
         </Route>
-        <Route path="/feed" element={<OrderFeed />} />
+        <Route path="/feed" element={<OrderFeedPage />} />
+        <Route path="/order" element={<OrderFeedDetails />} />
         <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>

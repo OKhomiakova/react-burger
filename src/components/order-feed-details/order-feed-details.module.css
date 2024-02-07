@@ -1,3 +1,9 @@
+.orderWrapper {
+    display: grid;
+    margin: auto auto;
+    width: 640px;
+}
+
 .status {
     display: block;
 }

@@ -1,7 +1,11 @@
+html {
+    scroll-behavior: smooth
+}
+
 .ingredientsWrapper {
-    max-height: (64*4)px;
-    overflow-y: auto;
-  }
+    max-height: 320px;
+    overflow-y: scroll;
+}
   
 .ingredientList {
     display: flex;
@@ -11,9 +15,8 @@
     gap: 16px;
     list-style-type: none;
 }
-  
-.ingredientRow {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border-radius: 3px;
 }

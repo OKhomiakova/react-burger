@@ -17,7 +17,7 @@ const OrderCard = () => {
         </span>
       </div>
       <div className={`${styles.ingredients} ml-6`}>
-        {/* <ImageList /> */}
+        {/* <IngredientImagemageList /> */}
         <div className={styles.price}>
           <span className="text text_type_digits-default">480</span>
           <CurrencyIcon type="primary" />
