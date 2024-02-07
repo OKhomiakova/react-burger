@@ -13,3 +13,20 @@ export type TIngredientType = {
     __v: number,
     uniqueId: string,
 }; 
+
+export type TOrderType = {
+    createdAt: string,
+    ingredients: Array<string>,
+    name: string,
+    number: number,
+    status: string,
+    updatedAt: string,
+    _id: string,
+};
+
+export type TMessageType = {
+    orders: Array<TOrderType>,
+    success: boolean,
+    total: number,
+    totalToday: number
+}

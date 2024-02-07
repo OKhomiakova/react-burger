@@ -1,3 +1,5 @@
+import { Reducer } from 'redux';
+import { TMessageType } from '../../utils/types';
 import { TWSActions } from '../actions/ws';
 import {
   WS_CONNECTION_SUCCESS,
@@ -6,13 +8,19 @@ import {
   WS_GET_MESSAGE
 } from '../types/wsActionTypes';
 
-const initialState = {
+type TWSState = {
+  wsConnected: boolean,
+  messages: Array<TMessageType>,
+  error?: Event;
+}
+
+const initialState: TWSState = {
   wsConnected: false,
   messages: []
 };
 
 // Создадим редьюсер для WebSocket
-export const wsReducer = (state = initialState, action: TWSActions) => {
+export const wsReducer: Reducer<TWSState, TWSActions> = (state = initialState, action: TWSActions) => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true

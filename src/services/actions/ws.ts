@@ -1,3 +1,4 @@
+import { TMessageType } from '../../utils/types';
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS,
@@ -26,12 +27,12 @@ export const wsConnectionClosed = (event: Event) => ({
   payload: event,
 });
 
-export const wsGetMessage = (message: string) => ({
+export const wsGetMessage = (message: TMessageType) => ({
   type: WS_GET_MESSAGE,
   payload: message,
 });
 
-export const wsSendMessage = (message: string) => ({
+export const wsSendMessage = (message: Event) => ({
   type: WS_SEND_MESSAGE,
   payload: message,
 });
@@ -57,12 +58,12 @@ interface IWSConnectionClosed {
 
 interface IWSConnectionGetMessage {
   type: typeof WS_GET_MESSAGE;
-  payload: String,
+  payload: TMessageType,
 }
       
 interface IWSConnectionSendMessage {
   type: typeof WS_SEND_MESSAGE;
-  payload: String,
+  payload: string,
 }
 
 export type TWSActions =

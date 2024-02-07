@@ -31,9 +31,7 @@ const App: React.FC = () => {
 
   useEffect(
     () => {
-      if (user) {
-        dispatch({ type: WS_CONNECTION_START });
-      }
+      dispatch({ type: WS_CONNECTION_START });
     },
     [user] // eslint-disable-line react-hooks/exhaustive-deps
   );
