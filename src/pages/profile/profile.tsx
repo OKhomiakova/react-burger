@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import styles from './profile.module.css';
-import { Input, Button, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { logout, updateUserInfo } from '../../services/actions/user';
 import { useForm } from '../../hooks/useForm';
 import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
@@ -42,7 +42,6 @@ const ProfilePage: React.FC = () => {
 
   const handleProfileUpdate = async () => {
     try {
-      // @ts-ignore
       dispatch(updateUserInfo(values.email, values.password, values.name));
       setDisabled(true);
       setIsModified(false);
@@ -52,7 +51,6 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleLogout = () => {
-    // @ts-ignore
     dispatch(logout());
   };
 

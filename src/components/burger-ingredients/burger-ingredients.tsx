@@ -9,7 +9,6 @@ const BurgerIngredients: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(setAllIngredients());
   }, [dispatch]);
 

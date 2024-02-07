@@ -3,6 +3,7 @@ import { SOMETHING_FAILED } from "../middleware/logger";
 import { request } from "../../utils/check-response";
 import { SET_ALL_INGREDIENTS } from "../../constants";
 import { TIngredientType} from "../../utils/types";
+import { AppThunk } from '../types';
 
 export interface ISetAllIngredientsAction {
   type: typeof SET_ALL_INGREDIENTS;
@@ -12,7 +13,7 @@ export interface ISetAllIngredientsAction {
 export type TAllIngredientsActionTypes = ISetAllIngredientsAction | { type: typeof SOMETHING_FAILED; error: Error };
 
 // Action creator to set all ingredients
-export const setAllIngredients = () => (dispatch: Dispatch<TAllIngredientsActionTypes>) => {
+export const setAllIngredients: AppThunk = () => (dispatch: Dispatch<TAllIngredientsActionTypes>) => {
   request({
     endpoint: 'ingredients',
     options: {

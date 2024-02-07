@@ -30,9 +30,10 @@ const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: 'orderItems',
-    drop: (item) => {
-      // @ts-ignore
-      dispatch(changeOrder(item.position, position));
+    drop: (item: { position: number }) => {
+      if (position) {
+        dispatch(changeOrder(item.position, position));
+      }
     },
   });
 

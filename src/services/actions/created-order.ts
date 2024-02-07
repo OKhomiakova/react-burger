@@ -1,14 +1,12 @@
-import { Dispatch } from 'redux';
 import { SOMETHING_FAILED } from "../middleware/logger";
 import { fetchWithRefresh } from "../../utils/api";
 import { CREATE_ORDER, 
          CLEAR_ORDER,
          CLEAR_BURGER_CONSTRUCTOR } from "../../constants";
-import { TIngredientType } from '../../utils/types';
-import { IClearBurgerConstructorAction } from './burger-constructor-ingredients';
+import { AppDispatch, AppThunk } from '../types';
 
 interface Data {
-    ingredients: TIngredientType[];
+    ingredients: string[];
 }
 
 interface ICreateOrderAction {
@@ -25,7 +23,7 @@ export type TCreateOrderActionTypes =
     | IClearOrderAction
     | { type: typeof SOMETHING_FAILED; error: Error };
 
-export const createOrder = (data: Data) => (dispatch: Dispatch<TCreateOrderActionTypes | IClearBurgerConstructorAction>) => {
+export const createOrder: AppThunk = (data: Data) => (dispatch: AppDispatch) => {
     const accessToken = localStorage.getItem('accessToken');
     dispatch({
         type: CLEAR_ORDER,

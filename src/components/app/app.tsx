@@ -22,7 +22,6 @@ const App: React.FC = () => {
   const [passwordRecoveryInitiated, setPasswordRecoveryInitiated] = useState(false);
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 

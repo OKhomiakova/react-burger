@@ -34,7 +34,6 @@ const BurgerConstructor: React.FC = () => {
     if (user) {
       const allIngredientsIds = ingredients.map((x: TIngredientType) => x._id);
       if (bun) allIngredientsIds.push(bun._id);
-      // @ts-ignore
       dispatch(createOrder({ ingredients: allIngredientsIds }));
       openModal();
     } else {

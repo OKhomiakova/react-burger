@@ -13,7 +13,3 @@ export type TIngredientType = {
     __v: number,
     uniqueId: string,
 }; 
-
-export interface IIngredient {
-    ingredient: TIngredientType;
-}
