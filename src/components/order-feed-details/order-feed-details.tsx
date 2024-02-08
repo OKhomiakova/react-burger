@@ -24,10 +24,19 @@ const OrderFeedDetails = () => {
   if (!orderData) return <Navigate to="/404" />;
 
   console.log(orderData, allIngerdients);
-
+  
   const price = orderData.ingredients.reduce((acc, id) => {
     const ingredient = allIngerdients.find((item) => item._id === id);
-    return acc + (ingredient ? ingredient.price : 0);
+    
+    if (ingredient) {
+      if (ingredient.type === 'bun') {
+        return acc + (ingredient.price * 2);
+      } else {
+        return acc + ingredient.price;
+      }
+    } else {
+      return acc;
+    }
   }, 0);
 
   return (

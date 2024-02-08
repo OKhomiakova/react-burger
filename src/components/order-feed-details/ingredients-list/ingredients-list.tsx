@@ -1,10 +1,22 @@
+import { useAppSelector } from '../../../utils/redux-hooks';
 import Ingredient from './ingredient/ingredient';
 import styles from './ingredients-list.module.css';
 
 const IngredientsList = ({ ingredients }: { ingredients: string[] }) => {
-  // group ingredients by id
+
+  const allIngerdients = useAppSelector(state => state.allIngredients);
+
   const groupedIngredients = ingredients.reduce((acc: { [key: string]: number }, id) => {
-    acc[id] = acc[id] ? acc[id] + 1 : 1;
+    const ingredient = allIngerdients.find((item) => item._id === id);
+    if (ingredient) {
+      // Check if the ingredient is a bun
+      if (ingredient.type === 'bun') {
+        // Increase the count for bun ingredients by 2
+        acc[id] = acc[id] ? acc[id] + 2 : 2;
+      } else {
+        acc[id] = acc[id] ? acc[id] + 1 : 1;
+      }
+    }
     return acc;
   }, {});
 
