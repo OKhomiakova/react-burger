@@ -18,6 +18,7 @@ import OrderFeedPage from '../../pages/order-feed/order-feed';
 import OrderFeedDetails from '../order-feed-details/order-feed-details';
 import OrderList from '../order-list/order-list';
 import ProfileForm from '../profile-form/profile-form';
+import OrderDetailsPage from '../../pages/order-details/order-details';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,7 @@ const App: React.FC = () => {
         <Route path="/feed" element={<OrderFeedPage />} />
         <Route path="/order" element={<OrderFeedDetails />} />
         <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+        <Route path="/profile/orders/:number" element={<OrderDetailsPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
