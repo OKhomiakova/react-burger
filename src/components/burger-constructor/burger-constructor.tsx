@@ -22,7 +22,7 @@ const BurgerConstructor: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const newTotalPrice = ingredients.reduce((sum: number, ingredient: TIngredientType) => sum + ingredient.price, 0) + 2 * (bun?.price ?? 0);
+    const newTotalPrice = ingredients.reduce((sum, ingredient) => sum + ingredient.price, 0) + 2 * (bun?.price ?? 0);
     setTotalPrice(newTotalPrice);
   }, [ingredients, bun?.price]);
 
@@ -32,7 +32,7 @@ const BurgerConstructor: React.FC = () => {
 
   const onClick = useCallback(() => {
     if (user) {
-      const allIngredientsIds = ingredients.map((x: TIngredientType) => x._id);
+      const allIngredientsIds = ingredients.map((x) => x._id);
       if (bun) allIngredientsIds.push(bun._id);
       dispatch(createOrder({ ingredients: allIngredientsIds }));
       openModal();
@@ -53,8 +53,8 @@ const BurgerConstructor: React.FC = () => {
       {bun && <Constructor data={bun} type='top' className={styles.edge} />}
       <div className={styles.constructorWrapper}>
         {ingredients
-          .filter((ingredient: any) => ingredient.type !== 'bun')
-          .map((ingredient: any, index: number) => (
+          .filter((ingredient) => ingredient.type !== 'bun')
+          .map((ingredient, index) => (
             <Constructor key={ingredient.uniqueId} data={ingredient} position={index} type={undefined}/>
           ))}
       </div>

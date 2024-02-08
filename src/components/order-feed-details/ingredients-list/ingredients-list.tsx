@@ -1,4 +1,3 @@
-import { TIngredientType } from '../../../utils/types';
 import Ingredient from './ingredient/ingredient';
 import styles from './ingredients-list.module.css';
 
