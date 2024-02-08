@@ -55,7 +55,7 @@ const App: React.FC = () => {
           <Route path="/profile/orders" element={<OrderList />} />
         </Route>
         <Route path="/feed" element={<OrderFeedPage />} />
-        <Route path="/order" element={<OrderFeedDetails />} />
+        <Route path='/feed/:id' element={<OrderDetailsPage />} />
         <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
         <Route path="/profile/orders/:number" element={<OrderDetailsPage />} />
         <Route path="*" element={<NotFound404 />} />
