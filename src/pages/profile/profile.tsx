@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 import styles from './profile.module.css';
 import { logout } from '../../services/actions/user';
-import { useAppDispatch } from '../../utils/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
+import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
+import { WS_API_URL } from '../../constants';
 
 const ProfilePage: React.FC = () => {
   const location = useLocation();
@@ -13,6 +15,18 @@ const ProfilePage: React.FC = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const user = useAppSelector(state => state.user.user);
+  useEffect(() => {
+    if (user) {
+      dispatch(wsConnectionStart(WS_API_URL));
+    }
+    dispatch(wsConnectionStart(`${WS_API_URL}/all`));
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch, user]);
+
   return (
     <section className={`${styles.page} mt-40`}>
       <div className='mr-15'>

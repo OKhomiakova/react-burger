@@ -1,8 +1,11 @@
 import styles from './order-feed.module.css';
 import OrderStats from './order-stats/order-stats';
 import OrderList from '../../components/order-list/order-list';
-import { useAppSelector } from '../../utils/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 import { RootState } from '../../services/types';
+import { useEffect } from 'react';
+import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
+import { WS_API_URL } from '../../constants';
 
 const OrderFeedPage = () => {
   const totalOrdersSelector = (state: RootState) => state.wsReducer.allOrders?.total ?? 0;
@@ -10,6 +13,19 @@ const OrderFeedPage = () => {
 
   const totalOrders = useAppSelector(totalOrdersSelector);
   const totalTodayOrders = useAppSelector(totalTodayOrdersSelector);
+
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector(state => state.user.user);
+  useEffect(() => {
+    if (user) {
+      dispatch(wsConnectionStart(WS_API_URL));
+    }
+    dispatch(wsConnectionStart(`${WS_API_URL}/all`));
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch, user]);
 
   return (
     <main className={`pl-5 pr-5 ${styles.main}`}>

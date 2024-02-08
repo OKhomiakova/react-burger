@@ -13,11 +13,9 @@ import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-det
 import { checkUserAuth } from '../../services/actions/user';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import HomePage from '../../pages/home/home';
-import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
+import { useAppDispatch } from '../../utils/redux-hooks';
 import OrderFeedPage from '../../pages/order-feed/order-feed';
 import OrderFeedDetails from '../order-feed-details/order-feed-details';
-import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
-import { WS_API_URL } from '../../constants';
 import OrderList from '../order-list/order-list';
 import ProfileForm from '../profile-form/profile-form';
 
@@ -41,17 +39,6 @@ const App: React.FC = () => {
   const handleForgotPassword = () => {
     setPasswordRecoveryInitiated(true);
   };
-
-  const user = useAppSelector(state => state.user.user);
-  useEffect(() => {
-    if (user) {
-      dispatch(wsConnectionStart(WS_API_URL));
-    }
-    dispatch(wsConnectionStart(`${WS_API_URL}/all`));
-    return () => {
-      dispatch(wsConnectionClosed());
-    };
-  }, [dispatch, user]);
 
   return (
     <>
