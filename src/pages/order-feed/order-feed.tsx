@@ -3,24 +3,23 @@ import OrderStats from './order-stats/order-stats';
 import OrderList from '../../components/order-list/order-list';
 import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 import { useEffect } from 'react';
-import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
 import { WS_API_URL } from '../../constants';
+import { wsConnectionCloseAllOrders, wsConnectionStartAllOrders } from '../../services/actions/ws-all-orders';
 
 const OrderFeedPage = () => {
   
-  const totalOrders = useAppSelector((state) => state.wsReducer.allOrders?.total ?? 0);
-  const totalTodayOrders = useAppSelector((state) => state.wsReducer.allOrders?.totalToday ?? 0);
+  const totalOrders = useAppSelector((state) => state.wsAllOrdersReducer.lastMessage?.total ?? 0);
+  const totalTodayOrders = useAppSelector((state) => state.wsAllOrdersReducer.lastMessage?.totalToday ?? 0);
 
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(state => state.user.user);
   useEffect(() => {
     if (user) {
-      dispatch(wsConnectionStart(WS_API_URL));
+      dispatch(wsConnectionStartAllOrders(`${WS_API_URL}/all`));
     }
-    dispatch(wsConnectionStart(`${WS_API_URL}/all`));
     return () => {
-      dispatch(wsConnectionClosed());
+      dispatch(wsConnectionCloseAllOrders());
     };
   }, [dispatch, user]);
 

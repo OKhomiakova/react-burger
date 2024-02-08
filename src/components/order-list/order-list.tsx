@@ -9,7 +9,7 @@ const OrderList = () => {
 
   const isProfileOrders = location.pathname === '/profile/orders';
 
-  const orders = useAppSelector(state => isProfileOrders ? state.wsReducer.myOrders?.orders : state.wsReducer.allOrders?.orders);
+  const orders = useAppSelector(state => isProfileOrders ? state.wsMyOrdersReducer.lastMessage?.orders : state.wsAllOrdersReducer.lastMessage?.orders);
 
   return (
     <ul className={styles.orderList}>

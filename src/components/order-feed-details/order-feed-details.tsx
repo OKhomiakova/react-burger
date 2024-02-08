@@ -14,7 +14,7 @@ const OrderFeedDetails = () => {
 
   const isProfileOrders = locationPathname === `/profile/orders/${orderNumber}`;
 
-  const orders = useAppSelector(state => isProfileOrders ? state.wsReducer.myOrders?.orders : state.wsReducer.allOrders?.orders);
+  const orders = useAppSelector(state => isProfileOrders ? state.wsMyOrdersReducer.lastMessage?.orders : state.wsAllOrdersReducer.lastMessage?.orders);
   const allIngerdients = useAppSelector(state => state.allIngredients);
 
   if (!orderNumber) return <Navigate to="/404" />;

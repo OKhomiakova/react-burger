@@ -3,7 +3,7 @@ import { useAppSelector } from '../../../utils/redux-hooks';
 import styles from './order-board.module.css';
 
 const OrderBoard = () => {
-  const ordersSelector = (state: RootState) => state.wsReducer.allOrders?.orders ?? [];
+  const ordersSelector = (state: RootState) => state.wsAllOrdersReducer.lastMessage?.orders ?? [];
 
   const ordersDone = useAppSelector(ordersSelector)
     ?.filter((item) => item.status === 'done')

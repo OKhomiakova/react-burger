@@ -11,7 +11,7 @@ const OrderCard = ({ id }: { id: string }) => {
 
   const isProfileOrders = locationPathname === '/profile/orders';
 
-  const orders = useAppSelector(state => isProfileOrders ? state.wsReducer.myOrders?.orders : state.wsReducer.allOrders?.orders);
+  const orders = useAppSelector(state => isProfileOrders ? state.wsMyOrdersReducer.lastMessage?.orders : state.wsAllOrdersReducer.lastMessage?.orders);
   const order = useMemo(() => orders?.find((order) => order._id === id), [id, orders]);
 
   const allIngerdients = useAppSelector(state => state.allIngredients);
