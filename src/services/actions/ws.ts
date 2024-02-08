@@ -4,8 +4,9 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE,
-  WS_SEND_MESSAGE
+  WS_SEND_MESSAGE,
+  WS_GET_MY_ORDERS,
+  WS_GET_ALL_ORDERS
 } from '../types/wsActionTypes';
 
 export const wsConnectionStart = (url: string) => ({
@@ -27,8 +28,13 @@ export const wsConnectionClosed = () => ({
   type: WS_CONNECTION_CLOSED,
 });
 
-export const wsGetMessage = (message: TMessageType) => ({
-  type: WS_GET_MESSAGE,
+export const wsGetMyOrders = (message: TMessageType) => ({
+  type: WS_GET_MY_ORDERS,
+  payload: message,
+});
+
+export const wsGetAllOrders = (message: TMessageType) => ({
+  type: WS_GET_ALL_ORDERS,
   payload: message,
 });
 
@@ -56,8 +62,13 @@ interface IWSConnectionClosed {
   type: typeof WS_CONNECTION_CLOSED;
 }
 
-interface IWSConnectionGetMessage {
-  type: typeof WS_GET_MESSAGE;
+interface IWSConnectionGetAlllOrders {
+  type: typeof WS_GET_ALL_ORDERS;
+  payload: TMessageType,
+}
+
+interface IWSConnectionGetMyOrders {
+  type: typeof WS_GET_MY_ORDERS;
   payload: TMessageType,
 }
       
@@ -71,5 +82,6 @@ export type TWSActions =
           | IWSConnectionSuccess
           | IWSConnectionError
           | IWSConnectionClosed
-          | IWSConnectionGetMessage
+          | IWSConnectionGetMyOrders
+          | IWSConnectionGetAlllOrders
           | IWSConnectionSendMessage;

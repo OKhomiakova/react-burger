@@ -5,18 +5,21 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE
+  WS_GET_ALL_ORDERS,
+  WS_GET_MY_ORDERS,
 } from '../types/wsActionTypes';
 
 type TWSState = {
   wsConnected: boolean,
-  messages: Array<TMessageType>,
+  allOrders: TMessageType | null,
+  myOrders: TMessageType | null,
   error?: Event;
 }
 
 const initialState: TWSState = {
   wsConnected: false,
-  messages: []
+  allOrders: null,
+  myOrders: null,
 };
 
 // Создадим редьюсер для WebSocket
@@ -52,11 +55,19 @@ export const wsReducer: Reducer<TWSState, TWSActions> = (state = initialState, a
     // Опишем обработку экшена с типом WS_GET_MESSAGE
     // Обработка происходит, когда с сервера возвращаются данные
     // В messages передадим данные, которые пришли с сервера
-    case WS_GET_MESSAGE:
+    case WS_GET_ALL_ORDERS:
+      console.log("WS_GET_ALL_ORDERS", action.payload);
       return {
         ...state,
         error: undefined,
-        messages: [...state.messages, action.payload]
+        allOrders: action.payload,
+      };
+    case WS_GET_MY_ORDERS:
+      console.log("WS_GET_MY_ORDERS", action.payload);
+      return {
+        ...state,
+        error: undefined,
+        myOrders: action.payload,
       };
     default:
       return state;

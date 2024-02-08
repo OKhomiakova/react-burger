@@ -16,9 +16,10 @@ import HomePage from '../../pages/home/home';
 import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 import OrderFeedPage from '../../pages/order-feed/order-feed';
 import OrderFeedDetails from '../order-feed-details/order-feed-details';
-import { WS_CONNECTION_START } from '../../services/types/wsActionTypes';
 import { wsConnectionClosed, wsConnectionStart } from '../../services/actions/ws';
 import { WS_API_URL } from '../../constants';
+import OrderList from '../order-list/order-list';
+import ProfileForm from '../profile-form/profile-form';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,12 +42,16 @@ const App: React.FC = () => {
     setPasswordRecoveryInitiated(true);
   };
 
+  const user = useAppSelector(state => state.user.user);
   useEffect(() => {
+    if (user) {
+      dispatch(wsConnectionStart(WS_API_URL));
+    }
     dispatch(wsConnectionStart(`${WS_API_URL}/all`));
     return () => {
       dispatch(wsConnectionClosed());
     };
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return (
     <>
@@ -58,8 +63,8 @@ const App: React.FC = () => {
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage onForgotPassword={handleForgotPassword} />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={passwordRecoveryInitiated ? (<ResetPasswordPage />) : (<Navigate to="/forgot-password" />)} />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}>
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/profile/orders" element={<></>} />
+          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/profile/orders" element={<OrderList />} />
         </Route>
         <Route path="/feed" element={<OrderFeedPage />} />
         <Route path="/order" element={<OrderFeedDetails />} />
@@ -73,6 +78,22 @@ const App: React.FC = () => {
             element={
               <Modal title="Детали ингредиента" onClose={handleModalClose}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderFeedDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderFeedDetails />
               </Modal>
             }
           />

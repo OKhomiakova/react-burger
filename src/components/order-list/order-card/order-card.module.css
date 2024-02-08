@@ -9,10 +9,12 @@
     text-align: start;
     text-decoration: none;
 }
-  
+
 .ingredients {
     display: flex;
     justify-content: space-between;
+    width: 640px;
+    max-width: 640px;
 }
   
 .orderNumber {
@@ -28,7 +30,12 @@
 .status {
     display: block;
 }
-  
-  .status_accent {
+
+.statusDone {
+    display: block;
+    color: #00CCCC;
+}
+
+.status_accent {
     color: var(--colors-interface-success);
-  }
+}

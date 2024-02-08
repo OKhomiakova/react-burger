@@ -28,6 +28,7 @@ export const createOrder: AppThunk = (data: Data) => (dispatch: AppDispatch) => 
     dispatch({
         type: CLEAR_ORDER,
     });
+    console.log('createOrder data', data);
     fetchWithRefresh({
         endpoint: 'orders',
         options: {
@@ -39,7 +40,7 @@ export const createOrder: AppThunk = (data: Data) => (dispatch: AppDispatch) => 
             }
         }
     }).then((response: { order: { number: string } }) => {
-        console.log('createOrder', response);
+        console.log('createOrder response', response);
         dispatch({
             type: CREATE_ORDER,
             orderId: response.order.number,

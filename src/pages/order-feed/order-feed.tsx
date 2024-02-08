@@ -5,8 +5,8 @@ import { useAppSelector } from '../../utils/redux-hooks';
 import { RootState } from '../../services/types';
 
 const OrderFeedPage = () => {
-  const totalOrdersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0]?.total ?? 0;
-  const totalTodayOrdersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0]?.totalToday ?? 0;
+  const totalOrdersSelector = (state: RootState) => state.wsReducer.allOrders?.total ?? 0;
+  const totalTodayOrdersSelector = (state: RootState) => state.wsReducer.allOrders?.totalToday ?? 0;
 
   const totalOrders = useAppSelector(totalOrdersSelector);
   const totalTodayOrders = useAppSelector(totalTodayOrdersSelector);

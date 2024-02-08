@@ -2,6 +2,8 @@
     display: grid;
     margin: auto auto;
     width: 640px;
+    max-width: 640px;
+    padding: 40px
 }
 
 .status {
@@ -20,4 +22,13 @@
 .price {
     display: flex;
     align-items: center;
+}
+
+.status {
+    display: block;
+}
+
+.statusDone {
+    display: block;
+    color: #00CCCC;
 }

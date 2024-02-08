@@ -11,4 +11,5 @@ html {
     list-style-type: none;
     overflow-y: scroll;
     max-height: 60vh;
+    max-width: 700px;
 }

@@ -28,7 +28,7 @@ const BurgerConstructor: React.FC = () => {
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  const orderId = useAppSelector((state) => state.createdOrder);
+  const orderId = useAppSelector((state) => state.createdOrder.orderId);
 
   const onClick = useCallback(() => {
     if (user) {

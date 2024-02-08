@@ -3,18 +3,17 @@ import { useAppSelector } from '../../../utils/redux-hooks';
 import styles from './order-board.module.css';
 
 const OrderBoard = () => {
-
-  const ordersSelector = (state: RootState) => state.wsReducer.messages.slice(-1)[0]?.orders ?? [];
+  const ordersSelector = (state: RootState) => state.wsReducer.allOrders?.orders ?? [];
 
   const ordersDone = useAppSelector(ordersSelector)
     ?.filter((item) => item.status === 'done')
     .slice(0, 5);
   
-    const ordersPending = useAppSelector(ordersSelector)
+  const ordersPending = useAppSelector(ordersSelector)
     ?.filter((item) => item.status === 'pending')
     .slice(0, 5);
   
-    return (
+  return (
     <div className={styles.boardWrapper}>
       <div>
         <h2 className="mb-6 text text_type_main-medium">Готовы:</h2>

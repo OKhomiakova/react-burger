@@ -7,7 +7,13 @@ import { socketMiddleware } from '../services/middleware/socketMiddleware';
 const composeEnhancers =
   typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk, actionLogger, errorLogger, (socketMiddleware('wss://norma.nomoreparties.space/orders/all'))));
+const enhancer = composeEnhancers(
+  applyMiddleware(
+    thunk,
+    actionLogger,
+    errorLogger,
+    socketMiddleware(),
+  ));
 
 const store = createStore(rootReducer, enhancer);
 
