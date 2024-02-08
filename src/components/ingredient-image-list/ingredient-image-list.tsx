@@ -17,7 +17,7 @@ const IngredientImageList = ({ ingredients }: { ingredients: Array<TIngredientTy
   return (
     <div className={styles.row}>
       {ingredientLeft > 0 && (
-        <div className={styles.ingredient}>
+        <div className={styles.ingredient} key={firstIngredientAfterFive?._id} >
           <img src={firstIngredientAfterFive?.image} alt={firstIngredientAfterFive?.name} className={`${styles.blurredImage}`}/>
           <span className={styles.ingredientLeftText}>
             {`+${ingredientLeft}`}
@@ -25,7 +25,7 @@ const IngredientImageList = ({ ingredients }: { ingredients: Array<TIngredientTy
         </div>
       )}
       {firstFiveIngredients.map(ingredient => ingredient && (
-        <Ingredient key={ingredient.uniqueId} data={ingredient} />
+        <Ingredient key={ingredient._id} data={ingredient} />
       ))}
     </div>
   );

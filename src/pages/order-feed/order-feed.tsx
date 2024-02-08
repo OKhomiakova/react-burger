@@ -13,15 +13,12 @@ const OrderFeedPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(state => state.user.user);
   useEffect(() => {
-    if (user) {
-      dispatch(wsConnectionStartAllOrders(`${WS_API_URL}/all`));
-    }
+    dispatch(wsConnectionStartAllOrders(`${WS_API_URL}/all`));
     return () => {
       dispatch(wsConnectionCloseAllOrders());
     };
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   return (
     <main className={`pl-5 pr-5 ${styles.main}`}>

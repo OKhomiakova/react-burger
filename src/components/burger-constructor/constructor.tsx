@@ -31,7 +31,7 @@ const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data
   const [, drop] = useDrop({
     accept: 'orderItems',
     drop: (item: { position: number }) => {
-      if (position) {
+      if (typeof position === 'number') {
         dispatch(changeOrder(item.position, position));
       }
     },

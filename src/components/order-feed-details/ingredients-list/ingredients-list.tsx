@@ -20,10 +20,23 @@ const IngredientsList = ({ ingredients }: { ingredients: string[] }) => {
     return acc;
   }, {});
 
+  const sortFunc = (a: [string, number], b: [string, number]) => {
+    const aIngredient = allIngerdients.find((item) => item._id === a[0]);
+    const bIngredient = allIngerdients.find((item) => item._id === b[0]);
+    // bun should always be first
+    if (aIngredient && bIngredient) {
+      if (aIngredient.type === 'bun' && bIngredient.type !== 'bun') return -1;
+      if (aIngredient.type !== 'bun' && bIngredient.type === 'bun') return 1;
+      return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
+    } else {
+      return 0;
+    }
+  };
+
   return (
     <div className={`${styles.ingredientsWrapper} mr-6`}>
       <ul className={styles.ingredientList}>
-        {Object.entries(groupedIngredients).map(([id, count]) => (
+        {Object.entries(groupedIngredients).sort(sortFunc).map(([id, count]) => (
           <li key={id} className={styles.ingredientRow}>
             <Ingredient id={id} count={count} />
           </li>

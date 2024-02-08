@@ -9,7 +9,6 @@ import Modal from '../modal/modal';
 import OrderDetails from './order-details';
 import useModal from '../../hooks/useModal';
 import styles from './burger-constructor.module.css';
-import { TIngredientType } from '../../utils/types';
 import { useAppDispatch, useAppSelector } from '../../utils/redux-hooks';
 
 const BurgerConstructor: React.FC = () => {
