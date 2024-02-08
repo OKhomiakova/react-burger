@@ -13,7 +13,7 @@ export interface ISetAllIngredientsAction {
 export type TAllIngredientsActionTypes = ISetAllIngredientsAction | { type: typeof SOMETHING_FAILED; error: Error };
 
 // Action creator to set all ingredients
-export const setAllIngredients: AppThunk = () => (dispatch: Dispatch<TAllIngredientsActionTypes>) => {
+export const setAllIngredients: AppThunk = () => (dispatch) => {
   request({
     endpoint: 'ingredients',
     options: {
