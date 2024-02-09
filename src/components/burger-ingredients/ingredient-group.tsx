@@ -1,7 +1,7 @@
 import React from 'react';
 import IngredientCard from './ingredient-card';
 import styles from './burger-ingredients.module.css';
-import TIngredientType from '../../utils/types';
+import { TIngredientType } from '../../utils/types';
 
 type TIngredientGroupProps = {
   title: string;

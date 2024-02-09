@@ -1,0 +1,22 @@
+.orderContainer {
+    flex: 1;
+}
+  
+.statsContainer {
+    flex: 1;
+}
+  
+.main {
+    display: grid;
+    justify-content: center;
+}
+  
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border-radius: 3px;
+}

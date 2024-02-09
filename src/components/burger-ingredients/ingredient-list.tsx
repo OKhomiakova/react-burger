@@ -1,6 +1,6 @@
 import React from 'react';
 import IngredientGroup from './ingredient-group';
-import TIngredientType from '../../utils/types';
+import { TIngredientType } from '../../utils/types';
 
 type TIngredientsListProps = {
   ingredients: TIngredientType[];

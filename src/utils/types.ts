@@ -1,4 +1,4 @@
-type TIngredientType = {
+export type TIngredientType = {
     _id: string,
     name: string,
     type: string,
@@ -14,4 +14,19 @@ type TIngredientType = {
     uniqueId: string,
 }; 
 
-export default TIngredientType;
+export type TOrderType = {
+    createdAt: string,
+    ingredients: Array<string>,
+    name: string,
+    number: number,
+    status: string,
+    updatedAt: string,
+    _id: string,
+};
+
+export type TMessageType = {
+    orders: Array<TOrderType>,
+    success: boolean,
+    total: number,
+    totalToday: number
+}

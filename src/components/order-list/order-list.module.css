@@ -1,0 +1,15 @@
+html {
+    scroll-behavior: smooth
+}
+
+.orderList {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px 0 0;
+    margin: 0;
+    gap: 16px;
+    list-style-type: none;
+    overflow-y: scroll;
+    max-height: 65vh;
+    max-width: 700px;
+}

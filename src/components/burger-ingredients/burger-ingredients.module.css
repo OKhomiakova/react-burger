@@ -3,8 +3,7 @@ html {
 }
 
 body {
-    overflow:hidden;
-
+    overflow: hidden;
 }
 
 h1 {
@@ -22,7 +21,7 @@ h1 {
 
 .ingredients {
     overflow-y: scroll; 
-    height:60vh; 
+    height: 60vh; 
 }
 
 .card{

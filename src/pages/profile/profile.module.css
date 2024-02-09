@@ -1,7 +1,6 @@
 .page {
     display: grid;
     grid-template-columns: auto auto auto;
-    align-items: center;
     justify-content: center;
     text-align: left;
 }

@@ -22,7 +22,7 @@ const AppHeader: React.FC = () => (
         </>
       )}
     </NavLink>
-    <NavLink className={styles.link} to={'/profile/orders'}>
+    <NavLink className={styles.link} to={'/feed'}>
       {({ isActive }: { isActive: boolean }) => (
         <>
           <div className={`${styles.icon} pl-5 pr-2`}>

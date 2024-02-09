@@ -14,6 +14,11 @@ import { checkUserAuth } from '../../services/actions/user';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route/protected-route';
 import HomePage from '../../pages/home/home';
 import { useAppDispatch } from '../../utils/redux-hooks';
+import OrderFeedPage from '../../pages/order-feed/order-feed';
+import OrderFeedDetails from '../order-feed-details/order-feed-details';
+import OrderList from '../order-list/order-list';
+import ProfileForm from '../profile-form/profile-form';
+import OrderDetailsPage from '../../pages/order-details/order-details';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,10 +26,9 @@ const App: React.FC = () => {
   const [passwordRecoveryInitiated, setPasswordRecoveryInitiated] = useState(false);
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
-
+  
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
@@ -47,10 +51,13 @@ const App: React.FC = () => {
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage onForgotPassword={handleForgotPassword} />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={passwordRecoveryInitiated ? (<ResetPasswordPage />) : (<Navigate to="/forgot-password" />)} />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}>
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/profile/orders" element={<></>} />
+          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/profile/orders" element={<OrderList />} />
         </Route>
+        <Route path="/feed" element={<OrderFeedPage />} />
+        <Route path='/feed/:id' element={<OrderDetailsPage />} />
         <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+        <Route path="/profile/orders/:number" element={<OrderDetailsPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
@@ -60,6 +67,22 @@ const App: React.FC = () => {
             element={
               <Modal title="Детали ингредиента" onClose={handleModalClose}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderFeedDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderFeedDetails />
               </Modal>
             }
           />

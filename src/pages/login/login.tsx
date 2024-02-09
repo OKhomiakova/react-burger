@@ -19,7 +19,6 @@ const LoginPage: React.FC = () => {
     e.preventDefault(); // Prevent the default form submission
 
     try {
-      // @ts-ignore
       dispatch(login(values.email, values.password));
     } catch (error) {
       console.error('Login failed:', error);

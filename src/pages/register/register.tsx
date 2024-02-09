@@ -19,7 +19,6 @@ const RegisterPage: React.FC = () => {
     e.preventDefault();
 
     try {
-      // @ts-ignore
       dispatch(register(values.email, values.password, values.name));
     } catch (error) {
       console.error('Registration failed:', error);

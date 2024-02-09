@@ -1,0 +1,57 @@
+import { Reducer } from 'redux';
+import { TMessageType } from '../../utils/types';
+import { TWSAllOrdersActions } from '../actions/ws-all-orders';
+import {
+  WS_CONNECTION_START_ALL_ORDERS,
+  WS_ON_ERROR_ALL_ORDERS,
+  WS_CONNECTION_CLOSE_ALL_ORDERS,
+  WS_ON_MESSAGE_ALL_ORDERS,
+} from '../types/wsActionTypes';
+
+type TWSAllOrdersState = {
+  wsConnected: boolean,
+  lastMessage: TMessageType | null,
+  error: string | undefined;
+}
+
+const initialState: TWSAllOrdersState = {
+  wsConnected: false,
+  lastMessage: null,
+  error: undefined,
+};
+
+const wsAllOrdersReducer: Reducer<TWSAllOrdersState, TWSAllOrdersActions> = (state = initialState, action: TWSAllOrdersActions) => {
+  switch (action.type) {
+    case WS_CONNECTION_START_ALL_ORDERS:
+      return {
+        ...state,
+        error: undefined,
+        wsConnected: true
+      };
+
+    case WS_ON_ERROR_ALL_ORDERS:
+      return {
+        ...state,
+        error: action.payload,
+        wsConnected: false
+      };
+
+    case WS_CONNECTION_CLOSE_ALL_ORDERS:
+      return {
+        ...state,
+        error: undefined,
+        wsConnected: false
+      };
+
+    case WS_ON_MESSAGE_ALL_ORDERS:
+      return {
+        ...state,
+        error: undefined,
+        lastMessage: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default wsAllOrdersReducer;

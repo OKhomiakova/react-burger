@@ -26,7 +26,7 @@ export const refreshToken = async (): Promise<TRefreshToken> => {
   return checkResponse(response);
 };
 
-export const fetchWithRefresh = async <T>({ endpoint, options }: TFetchWithRefresh): Promise<T> => {
+export const fetchWithRefresh = async ({ endpoint, options }: TFetchWithRefresh): Promise<any> => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, options);
     return await checkResponse(response);

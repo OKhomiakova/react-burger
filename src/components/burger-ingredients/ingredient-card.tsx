@@ -1,10 +1,10 @@
 import React from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
-import TIngredientType from '../../utils/types';
-import { useSelector } from 'react-redux';
+import { TIngredientType } from '../../utils/types';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../utils/redux-hooks';
 
 type TIngredientCardProps = {
   ingredient: TIngredientType;
@@ -16,12 +16,10 @@ const IngredientCard: React.FC<TIngredientCardProps> = ({ ingredient }) => {
     item: { ingredient },
   });
 
-  const ingredientCount = useSelector((state) => {
+  const ingredientCount = useAppSelector((state) => {
     if (ingredient.type === 'bun') {
-      // @ts-ignore
       return state.burgerIngredients.bun?._id === ingredient._id ? 1 : 0;
     }
-    // @ts-ignore
     return state.burgerIngredients.notBun.filter((x) => x._id === ingredient._id).length;
   });
 

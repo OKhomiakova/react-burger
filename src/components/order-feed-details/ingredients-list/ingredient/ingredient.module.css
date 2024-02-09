@@ -1,0 +1,30 @@
+.ingredient {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.image {
+    width: 64px;
+    height: 64px;
+    box-sizing: border-box;
+    padding: 4px 0;
+    border: 2px solid var(--colors-interface-accent);
+    border-radius: 50%;
+    background-color: var(--background-alt);
+    object-fit: contain;
+}
+  
+.title {
+    flex-grow: 1;
+}
+  
+.count {
+    flex-shrink: 0;
+}
+  
+.price {
+    display: flex;
+    align-items: center;
+}
