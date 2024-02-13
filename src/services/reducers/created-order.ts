@@ -1,5 +1,5 @@
 import { CREATE_ORDER, CLEAR_ORDER } from "../../constants";
-import { TCreateOrderActionTypes } from "../actions/created-order";
+import { TApplicationActions } from "../types";
 
 export type TCreatedOrderState = {
   orderId: string | null;
@@ -9,7 +9,7 @@ const initialState: TCreatedOrderState = {
   orderId: null
 };
   
-const createdOrder = (state: TCreatedOrderState = initialState, action: TCreateOrderActionTypes): TCreatedOrderState => {
+const createdOrder = (state: TCreatedOrderState = initialState, action: TApplicationActions): TCreatedOrderState => {
   switch (action.type) {
     case CREATE_ORDER:
       return { ...state, orderId: action.orderId };

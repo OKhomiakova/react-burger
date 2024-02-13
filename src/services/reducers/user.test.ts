@@ -12,7 +12,10 @@ describe('userReducer', () => {
   it('should handle SET_USER action', () => {
     const action: TUserActionTypes = {
       type: SET_USER,
-      payload: { id: 1, name: 'John Doe' } // Update with actual user data
+      payload: {
+         name: 'Test user',
+         email: 'example@gmail.com',
+         password: '12345' }
     };
 
     const expectedState: UserState = {
@@ -23,7 +26,6 @@ describe('userReducer', () => {
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test cases for SET_IS_AUTH_CHECKED action
   it('should handle SET_IS_AUTH_CHECKED action', () => {
     const action: TUserActionTypes = {
       type: SET_IS_AUTH_CHECKED,
