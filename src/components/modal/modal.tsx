@@ -40,7 +40,7 @@ const Modal: React.FC<TModalProps> = ({ title, onClose, children }) => {
               </div>
             </div>
           ) : (
-            <div className={styles.closeIcon}>
+            <div className={styles.closeIcon} data-cy="close">
               <CloseIcon type="primary" onClick={onClose} />
             </div>
           )}

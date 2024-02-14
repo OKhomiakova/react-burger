@@ -30,7 +30,7 @@ const IngredientCard: React.FC<TIngredientCardProps> = ({ ingredient }) => {
     <Link key={ingredientId} to={`/ingredients/${ingredientId}`} state={{ background: location }} className={styles.link}>
       <div className={styles.cardWrapper} ref={drag}>
         <article className={styles.card}>
-          {ingredientCount > 0 && <Counter count={ingredientCount} size="default" extraClass="m-1" />}
+          {ingredientCount > 0 && <Counter count={ingredientCount} size="default" extraClass="m-1" data-cy="ingredient_counter"/>}
           <img src={ingredient.image} className={`pr-4 pl-4`} alt={ingredient.name} />
           <div className={`${styles.price} pt-1 pb-1`}>
             <p className={`text text_type_digits-default`}>{ingredient.price}</p>

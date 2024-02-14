@@ -20,7 +20,7 @@ const IngredientsList: React.FC<TIngredientsListProps> = ({ ingredients }) => {
   );
 
   return (
-    <div>
+    <div data-cy="ingredients">
       {groupedIngredients.bun && (
         <IngredientGroup title="Булки" data={groupedIngredients.bun} />
       )}

@@ -48,16 +48,16 @@ const BurgerConstructor: React.FC = () => {
   });
 
   return (
-    <section className={`${styles.column} pt-25`} ref={drop}>
-      {bun && <Constructor data={bun} type='top' className={styles.edge} />}
-      <div className={styles.constructorWrapper}>
+    <section className={`${styles.column} pt-25`} ref={drop} data-cy="burger-constructor">
+      {bun && <Constructor data={bun} type='top' className={styles.edge} data-cy="constructor-top-bun"/>}
+      <div className={styles.constructorWrapper} data-cy="constructor-ingredient">
         {ingredients
           .filter((ingredient) => ingredient.type !== 'bun')
           .map((ingredient, index) => (
             <Constructor key={ingredient.uniqueId} data={ingredient} position={index} type={undefined}/>
           ))}
       </div>
-      {bun && <Constructor data={bun} type='bottom' className={styles.edge} />}
+      {bun && <Constructor data={bun} type='bottom' className={styles.edge} data-cy="constructor-bottom-bun"/>}
       <div className={`${styles.checkout} pt-10`}>
         <div className={`${styles.total} pr-10`}>
           <p className={`text text_type_digits-medium`}>{totalPrice}</p>

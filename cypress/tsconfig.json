@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+      "types": ["cypress", "node"]
+    },
+    "include": ["**/*.ts", "e2e/burger-constructor.cy.js"]
+  }
