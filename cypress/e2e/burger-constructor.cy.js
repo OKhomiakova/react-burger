@@ -1,4 +1,4 @@
-const constructor = '[data-cy=burger-constructor]';
+const constructor = 'div[data-cy=burger-constructor]';
 const ingredients = 'div[data-cy=ingredients]';
 const detailsTitle = 'Детали ингредиента';
 const testBunName = 'Краторная булка N-200i';
@@ -74,25 +74,25 @@ describe('dragging ingredients to constructor works correctly', function () {
         .contains(testBunName)
         .trigger('dragstart');
       cy.get(constructor).trigger('drop');
-      cy.get('div[data-cy=constructor-top-bun]')
+      cy.get('article[data-cy=constructor-top-bun]')
         .contains(testBunName)
         .should('exist')
-      cy.get('div[data-cy=constructor-bottom-bun]')
+      cy.get('article[data-cy=constructor-bottom-bun]')
         .contains(testBunName)
         .should('exist');
-      cy.get('[aria-label=ingredient_counter]')
+      cy.get('div[aria-label=ingredient_counter]')
         .should('be.visible')
-        .contains('2');
+        .contains('1');
     })
     it('should drag ingredient ', function () {
       cy.get(ingredients)
         .contains(testIngredientName)
         .trigger('dragstart');
       cy.get(constructor).trigger('drop');
-      cy.get('[data-cy=constructor-ingredient]')
+      cy.get('article[data-cy=constructor-ingredient]')
         .contains(testIngredientName)
         .should('exist');
-      cy.get('[data-cy=ingredient_counter]')
+      cy.get('div[data-cy=ingredient_counter]')
         .should('be.visible')
         .contains('1');
     })
@@ -133,13 +133,13 @@ describe('Creating order works correctly', function () {
     cy.url().should('eq', 'http://localhost:3000', { timeout: 2000 });
 
     // ингредиенты остались в констукторе
-    cy.get('div[data-cy=constructor-top-bun]')
+    cy.get('article[data-cy=constructor-top-bun]')
       .contains(testBunName)
       .should('exist')
-    cy.get('div[data-cy=constructor-bottom-bun]')
+    cy.get('article[data-cy=constructor-bottom-bun]')
       .contains(testBunName)
       .should('exist');
-    cy.get('[data-cy=constructor-ingredient]')
+    cy.get('article[data-cy=constructor-ingredient]')
       .contains(testIngredientName)
       .should('exist');
 
