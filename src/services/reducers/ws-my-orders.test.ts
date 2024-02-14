@@ -1,6 +1,10 @@
-import wsMyOrdersReducer, { TWSMyOrdersState } from './ws-my-orders';
+import wsMyOrdersReducer from './ws-my-orders';
 import { WS_CONNECTION_START_MY_ORDERS, WS_ON_ERROR_MY_ORDERS, WS_CONNECTION_CLOSE_MY_ORDERS, WS_ON_MESSAGE_MY_ORDERS } from '../types/wsActionTypes';
 import { TWSMyOrdersActions } from '../actions/ws-my-orders';
+import { CLEAR_BURGER_CONSTRUCTOR } from '../../constants';
+
+import type { TWSMyOrdersState } from './ws-my-orders';
+import { TApplicationActions } from '../types';
 
 describe('wsMyOrdersReducer', () => {
   const initialState: TWSMyOrdersState = {
@@ -9,10 +13,10 @@ describe('wsMyOrdersReducer', () => {
     error: undefined,
   };
 
-  // Test case for WS_CONNECTION_START_MY_ORDERS action
   it('should handle WS_CONNECTION_START_MY_ORDERS action', () => {
     const action: TWSMyOrdersActions = {
-      type: WS_CONNECTION_START_MY_ORDERS
+      type: WS_CONNECTION_START_MY_ORDERS,
+      payload: 'wss://example.com'
     };
 
     const expectedState: TWSMyOrdersState = {
@@ -23,7 +27,6 @@ describe('wsMyOrdersReducer', () => {
     expect(wsMyOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for WS_ON_ERROR_MY_ORDERS action
   it('should handle WS_ON_ERROR_MY_ORDERS action', () => {
     const errorMessage = 'Connection error';
     const action: TWSMyOrdersActions = {
@@ -40,7 +43,6 @@ describe('wsMyOrdersReducer', () => {
     expect(wsMyOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for WS_CONNECTION_CLOSE_MY_ORDERS action
   it('should handle WS_CONNECTION_CLOSE_MY_ORDERS action', () => {
     const action: TWSMyOrdersActions = {
       type: WS_CONNECTION_CLOSE_MY_ORDERS
@@ -54,9 +56,13 @@ describe('wsMyOrdersReducer', () => {
     expect(wsMyOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for WS_ON_MESSAGE_MY_ORDERS action
   it('should handle WS_ON_MESSAGE_MY_ORDERS action', () => {
-    const message = { id: 1, text: 'New message' };
+    const message = {
+      orders: [],
+      success: true,
+      total: 0,
+      totalToday: 0,
+    };
     const action: TWSMyOrdersActions = {
       type: WS_ON_MESSAGE_MY_ORDERS,
       payload: message
@@ -70,10 +76,9 @@ describe('wsMyOrdersReducer', () => {
     expect(wsMyOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for unknown action
   it('should return the current state for unknown action', () => {
-    const unknownAction: TWSMyOrdersActions = {
-      type: 'UNKNOWN_ACTION'
+    const unknownAction: TApplicationActions = {
+      type: CLEAR_BURGER_CONSTRUCTOR
     };
 
     expect(wsMyOrdersReducer(initialState, unknownAction)).toEqual(initialState);

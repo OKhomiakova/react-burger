@@ -7,7 +7,6 @@ describe('createdOrder reducer', () => {
     orderId: null
   };
 
-  // Test cases for CREATE_ORDER
   it('should handle CREATE_ORDER', () => {
     const action: TCreateOrderActionTypes = {
       type: CREATE_ORDER,
@@ -21,7 +20,6 @@ describe('createdOrder reducer', () => {
     expect(createdOrder(initialState, action)).toEqual(expectedState);
   });
 
-  // Test cases for CLEAR_ORDER
   it('should handle CLEAR_ORDER', () => {
     const currentState = {
       orderId: '12345'
@@ -31,10 +29,6 @@ describe('createdOrder reducer', () => {
       type: CLEAR_ORDER
     };
 
-    const expectedState = {
-      orderId: null
-    };
-
-    expect(createdOrder(currentState, action)).toEqual(expectedState);
+    expect(createdOrder(currentState, action)).toEqual(initialState);
   });
 });

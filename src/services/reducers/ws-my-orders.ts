@@ -1,6 +1,5 @@
 import { Reducer } from 'redux';
 import { TMessageType } from '../../utils/types';
-import { TWSMyOrdersActions } from '../actions/ws-my-orders';
 import {
   WS_CONNECTION_START_MY_ORDERS,
   WS_ON_ERROR_MY_ORDERS,
@@ -8,7 +7,9 @@ import {
   WS_ON_MESSAGE_MY_ORDERS,
 } from '../types/wsActionTypes';
 
-type TWSMyOrdersState = {
+import { TApplicationActions } from '../types';
+
+export type TWSMyOrdersState = {
   wsConnected: boolean,
   lastMessage: TMessageType | null,
   error: string | undefined;
@@ -20,7 +21,7 @@ const initialState: TWSMyOrdersState = {
   error: undefined,
 };
 
-const wsMyOrdersReducer: Reducer<TWSMyOrdersState, TWSMyOrdersActions> = (state = initialState, action: TWSMyOrdersActions) => {
+const wsMyOrdersReducer: Reducer<TWSMyOrdersState, TApplicationActions> = (state = initialState, action: TApplicationActions) => {
   switch (action.type) {
     case WS_CONNECTION_START_MY_ORDERS:
       return {

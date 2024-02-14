@@ -1,21 +1,25 @@
-import wsAllOrdersReducer, { initialState } from './ws-all-orders';
+import wsAllOrdersReducer from './ws-all-orders';
 import { WS_CONNECTION_START_ALL_ORDERS, WS_ON_ERROR_ALL_ORDERS, WS_CONNECTION_CLOSE_ALL_ORDERS, WS_ON_MESSAGE_ALL_ORDERS } from '../types/wsActionTypes';
 import { TWSAllOrdersActions } from '../actions/ws-all-orders';
+import { CLEAR_BURGER_CONSTRUCTOR } from '../../constants';
+import { TApplicationActions } from '../types';
+
+import type { TWSAllOrdersState } from './ws-all-orders';
 
 describe('wsAllOrdersReducer', () => {
-  const initialState: initialState = {
+  const initialState: TWSAllOrdersState = {
     wsConnected: false,
     lastMessage: null,
     error: undefined,
   };
 
-  // Test case for WS_CONNECTION_START_ALL_ORDERS action
   it('should handle WS_CONNECTION_START_ALL_ORDERS action', () => {
     const action: TWSAllOrdersActions = {
-      type: WS_CONNECTION_START_ALL_ORDERS
+      type: WS_CONNECTION_START_ALL_ORDERS,
+      payload: 'wss://example.com'
     };
 
-    const expectedState: initialState = {
+    const expectedState: TWSAllOrdersState = {
       ...initialState,
       wsConnected: true
     };
@@ -23,7 +27,6 @@ describe('wsAllOrdersReducer', () => {
     expect(wsAllOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for WS_ON_ERROR_ALL_ORDERS action
   it('should handle WS_ON_ERROR_ALL_ORDERS action', () => {
     const errorMessage = 'Connection error';
     const action: TWSAllOrdersActions = {
@@ -31,7 +34,7 @@ describe('wsAllOrdersReducer', () => {
       payload: errorMessage
     };
 
-    const expectedState: initialState = {
+    const expectedState: TWSAllOrdersState = {
       ...initialState,
       error: errorMessage,
       wsConnected: false
@@ -40,13 +43,12 @@ describe('wsAllOrdersReducer', () => {
     expect(wsAllOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for WS_CONNECTION_CLOSE_ALL_ORDERS action
   it('should handle WS_CONNECTION_CLOSE_ALL_ORDERS action', () => {
     const action: TWSAllOrdersActions = {
       type: WS_CONNECTION_CLOSE_ALL_ORDERS
     };
 
-    const expectedState: initialState = {
+    const expectedState: TWSAllOrdersState = {
       ...initialState,
       wsConnected: false
     };
@@ -54,15 +56,19 @@ describe('wsAllOrdersReducer', () => {
     expect(wsAllOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for WS_ON_MESSAGE_ALL_ORDERS action
   it('should handle WS_ON_MESSAGE_ALL_ORDERS action', () => {
-    const message = { id: 1, text: 'New message' };
+    const message = {
+      orders: [],
+      success: true,
+      total: 0,
+      totalToday: 0,
+    };
     const action: TWSAllOrdersActions = {
       type: WS_ON_MESSAGE_ALL_ORDERS,
       payload: message
     };
 
-    const expectedState: initialState = {
+    const expectedState: TWSAllOrdersState = {
       ...initialState,
       lastMessage: message
     };
@@ -70,10 +76,9 @@ describe('wsAllOrdersReducer', () => {
     expect(wsAllOrdersReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for unknown action
   it('should return the current state for unknown action', () => {
-    const unknownAction: TWSAllOrdersActions = {
-      type: 'UNKNOWN_ACTION'
+    const unknownAction: TApplicationActions = {
+      type: CLEAR_BURGER_CONSTRUCTOR
     };
 
     expect(wsAllOrdersReducer(initialState, unknownAction)).toEqual(initialState);

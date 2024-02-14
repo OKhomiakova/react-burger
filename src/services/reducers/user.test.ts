@@ -1,6 +1,8 @@
 import userReducer, { UserState } from './user';
-import { SET_IS_AUTH_CHECKED, SET_USER } from '../../constants';
+import { CLEAR_ORDER, SET_IS_AUTH_CHECKED, SET_USER } from '../../constants';
+
 import { TUserActionTypes } from '../actions/user';
+import { TApplicationActions } from '../types';
 
 describe('userReducer', () => {
   const initialState: UserState = {
@@ -8,14 +10,14 @@ describe('userReducer', () => {
     isAuthChecked: false,
   };
 
-  // Test cases for SET_USER action
   it('should handle SET_USER action', () => {
     const action: TUserActionTypes = {
       type: SET_USER,
       payload: {
          name: 'Test user',
          email: 'example@gmail.com',
-         password: '12345' }
+         password: '12345',
+      }
     };
 
     const expectedState: UserState = {
@@ -40,11 +42,9 @@ describe('userReducer', () => {
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Test case for unknown action
   it('should return the current state for unknown action', () => {
-    const unknownAction: TUserActionTypes = {
-      type: 'UNKNOWN_ACTION',
-      payload: null
+    const unknownAction: TApplicationActions = {
+      type: CLEAR_ORDER,
     };
 
     expect(userReducer(initialState, unknownAction)).toEqual(initialState);
