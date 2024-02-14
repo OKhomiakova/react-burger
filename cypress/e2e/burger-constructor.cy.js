@@ -48,7 +48,7 @@ describe('ingredient modal works correctly', function () {
     cy.contains(detailsTitle).should('not.exist');
     cy.contains(testIngredientName).click();
     cy.contains(detailsTitle).should('exist');
-    cy.get('[data-cy=close]').click();
+    cy.get('[aria-label=close]').click();
     cy.contains(detailsTitle).should('not.exist');
   })
 
@@ -80,7 +80,7 @@ describe('dragging ingredients to constructor works correctly', function () {
       cy.get('div[data-cy=constructor-bottom-bun]')
         .contains(testBunName)
         .should('exist');
-      cy.get('[data-cy=ingredient_counter]')
+      cy.get('[aria-label=ingredient_counter]')
         .should('be.visible')
         .contains('2');
     })
@@ -130,7 +130,7 @@ describe('Creating order works correctly', function () {
     cy.get('button[type=submit]').click();
 
     // залогиненого пользователя перебрасывает обратно на бургер конструктор
-    cy.url().should('eq', 'http://localhost:3000');
+    cy.url().should('eq', 'http://localhost:3000', { timeout: 2000 });
 
     // ингредиенты остались в констукторе
     cy.get('div[data-cy=constructor-top-bun]')

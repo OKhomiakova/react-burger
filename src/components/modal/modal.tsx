@@ -35,13 +35,13 @@ const Modal: React.FC<TModalProps> = ({ title, onClose, children }) => {
           {title ? (
             <div className={`${styles.header} mt-10 ml-10 mr-10`}>
               <p className={`text text_type_main-large`}>{title}</p>
-              <div className={styles.icon}>
-                <CloseIcon type="primary" onClick={onClose} />
+              <div className={styles.icon} aria-label="close">
+                <CloseIcon type="primary" onClick={onClose}/>
               </div>
             </div>
           ) : (
-            <div className={styles.closeIcon} data-cy="close">
-              <CloseIcon type="primary" onClick={onClose} />
+            <div className={styles.closeIcon} aria-label="close">
+              <CloseIcon type="primary" onClick={onClose}/>
             </div>
           )}
           {children}
