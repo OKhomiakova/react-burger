@@ -46,7 +46,7 @@ const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data
 
   drag(drop(ref));
 
-  const dataCy = isTopOrBottom ? `constructor-${type}-bun` : undefined;
+  const dataCy = isTopOrBottom ? `constructor-${type}-bun` : 'constructor-ingredient';
 
   return (
     <article
