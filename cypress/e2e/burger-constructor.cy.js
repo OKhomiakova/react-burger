@@ -146,6 +146,6 @@ describe('Creating order works correctly', function () {
     // пользователь успешно оформляет заказ
     cy.contains('Оформить заказ').click();
     cy.contains('Ожидайте...').should('exist');
-    cy.contains('идентификатор заказа', { timeout: 150000 }).should("be.visible");
+    cy.contains('идентификатор заказа', { timeout: 20000 }).should("be.visible");
   })
 });
