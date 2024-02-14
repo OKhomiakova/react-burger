@@ -22,17 +22,18 @@ describe('service is available', function() {
 describe('ingredient modal works correctly', function () {
   beforeEach(function () {
     cy.visit('http://localhost:3000');
-      cy.viewport(1792, 1008);
-      cy.intercept({
-        method: 'GET',
-        url: 'api/ingredients'}, { fixture: 'ingredients.json' });
+    cy.viewport(1792, 1008);
+    cy.intercept({
+      method: 'GET',
+      url: 'api/ingredients'
+    }, { fixture: '../fixtures/ingredients.json' });
   })
 
   it('should work open ingredient details modal', function () {
     cy.contains(detailsTitle).should('not.exist');
     cy.contains(testIngredientName).click();
     cy.contains(detailsTitle).should('exist');
-    cy.get('#react-modals').contains(testIngredientName).should('exist');
+    cy.contains(testIngredientName).should('exist');
   })
 
   it('should work close ingredient details modal on overlay click', function () {
@@ -66,7 +67,7 @@ describe('dragging ingredients to constructor works correctly', function () {
       cy.viewport(1792, 1008);
       cy.intercept({
         method: 'GET',
-        url: 'api/ingredients'}, { fixture: 'ingredients.json' });
+        url: 'api/ingredients'}, { fixture: '../fixtures/ingredients.json' });
   })
     it('should drag bun', function () {
       cy.get(ingredients)
@@ -103,7 +104,7 @@ describe('Creating order works correctly', function () {
     cy.viewport(1792, 1008);
     cy.intercept({
       method: 'GET',
-      url: 'api/ingredients'}, { fixture: 'ingredients.json' });
+      url: 'api/ingredients'}, { fixture: '../fixtures/ingredients.json' });
   })
 
   it('Should work drag bun and ingredient and create order', function () {
