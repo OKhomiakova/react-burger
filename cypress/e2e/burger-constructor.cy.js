@@ -80,7 +80,7 @@ describe('dragging ingredients to constructor works correctly', function () {
       cy.get('article[data-cy=constructor-bottom-bun]')
         .contains(testBunName)
         .should('exist');
-      cy.get('div[aria-label=ingredient_counter]')
+      cy.get('div.counter')
         .should('be.visible')
         .contains('1');
     })
@@ -92,7 +92,7 @@ describe('dragging ingredients to constructor works correctly', function () {
       cy.get('article[data-cy=constructor-ingredient]')
         .contains(testIngredientName)
         .should('exist');
-      cy.get('div[data-cy=ingredient_counter]')
+      cy.get('div.counter')
         .should('be.visible')
         .contains('1');
     })
