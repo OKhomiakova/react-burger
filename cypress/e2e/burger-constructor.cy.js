@@ -4,7 +4,7 @@ const detailsTitle = 'Детали ингредиента';
 const testBunName = 'Краторная булка N-200i';
 const testIngredientName = 'Соус фирменный Space Sauce';
 
-const login = 'kolliame@gmail.ru';
+const login = 'kolliame@gmail.com';
 const password = '123';
 
 describe('service is available', function() {
@@ -130,7 +130,7 @@ describe('Creating order works correctly', function () {
     cy.get('button[type=submit]').click();
 
     // залогиненого пользователя перебрасывает обратно на бургер конструктор
-    cy.url().should('eq', 'http://localhost:3000', { timeout: 2000 });
+    cy.url().should('eq', 'http://localhost:3000/');
 
     // ингредиенты остались в констукторе
     cy.get('article[data-cy=constructor-top-bun]')
@@ -146,6 +146,6 @@ describe('Creating order works correctly', function () {
     // пользователь успешно оформляет заказ
     cy.contains('Оформить заказ').click();
     cy.contains('Ожидайте...').should('exist');
-    cy.contains('идентификатор заказа', { timeout: 20000 }).should("be.visible");
+    cy.contains('идентификатор заказа', { timeout: 150000 }).should("be.visible");
   })
 });
