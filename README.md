@@ -23,4 +23,4 @@
 
 **Технологии**: HTML, CSS, JavaScript, JSX, React.JS, Redux, React-dnd, TypeScript, Websocket, Jest & Cypress.
 
-**[Ссылка на проект](https://okhomiakova.github.io/react-burger/index.html).**
+**[Ссылка на проект](https://okhomiakova.github.io/react-burger).**
