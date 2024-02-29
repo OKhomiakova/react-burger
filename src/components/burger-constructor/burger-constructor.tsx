@@ -49,15 +49,15 @@ const BurgerConstructor: React.FC = () => {
 
   return (
     <section className={`${styles.column} pt-25`} ref={drop}>
-      {bun && <Constructor data={bun} type='top' className={styles.edge} />}
-      <div className={styles.constructorWrapper}>
+      {bun && <Constructor data={bun} type='top' className={styles.edge}/>}
+      <div className={styles.constructorWrapper} data-cy="burger-constructor">
         {ingredients
           .filter((ingredient) => ingredient.type !== 'bun')
           .map((ingredient, index) => (
             <Constructor key={ingredient.uniqueId} data={ingredient} position={index} type={undefined}/>
           ))}
       </div>
-      {bun && <Constructor data={bun} type='bottom' className={styles.edge} />}
+      {bun && <Constructor data={bun} type='bottom' className={styles.edge}/>}
       <div className={`${styles.checkout} pt-10`}>
         <div className={`${styles.total} pr-10`}>
           <p className={`text text_type_digits-medium`}>{totalPrice}</p>

@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { SOMETHING_FAILED } from "../middleware/logger";
 import { request } from "../../utils/check-response";
 import { SET_ALL_INGREDIENTS } from "../../constants";

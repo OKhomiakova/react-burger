@@ -7,7 +7,7 @@ type TModalOverlayProps = {
 };
 
 const ModalOverlay: React.FC<TModalOverlayProps> = ({ children, onClick }) => (
-  <div className={styles.overlay} onClick={onClick}>
+  <div className={styles.overlay} onClick={onClick} data-cy="modal-overlay">
     {children}
   </div>
 );

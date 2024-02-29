@@ -4,8 +4,8 @@ import {
   CHANGE_ORDER,
   CLEAR_BURGER_CONSTRUCTOR 
 } from "../../constants";
-import { TBurgerIngredientsActionTypes } from "../actions/burger-constructor-ingredients";
 import { TIngredientType} from "../../utils/types";
+import { TApplicationActions } from "../types";
 
 export type TBurgerIngredientsState = {
   bun?: TIngredientType,
@@ -17,7 +17,7 @@ const initialState: TBurgerIngredientsState = {
   notBun: [],
 }; 
 
-const burgerIngredients = (state: TBurgerIngredientsState = initialState, action: TBurgerIngredientsActionTypes): TBurgerIngredientsState => {
+const burgerIngredients = (state: TBurgerIngredientsState = initialState, action: TApplicationActions): TBurgerIngredientsState => {
   switch (action.type) {
     case ADD_BURGER_INGREDIENT:
       if (action.ingredient.type === 'bun') {

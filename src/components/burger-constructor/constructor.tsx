@@ -46,11 +46,14 @@ const Constructor: React.FC<TConstructorProps & { className?: string}> = ({ data
 
   drag(drop(ref));
 
+  const dataCy = isTopOrBottom ? `constructor-${type}-bun` : 'constructor-ingredient';
+
   return (
     <article
       ref={ref}
       style={{ paddingLeft: isTopOrBottom ? '32px' : '0', margin: isTopOrBottom ? '0px' : '10px' }}
       className={styles.item}
+      data-cy={dataCy}
     >
       {showDragIcon && (
         <div className={styles.icon}>
